@@ -7,6 +7,7 @@ import 'package:lenovo_hiring/LandingPage/rules.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/footer/footer.dart';
 import 'package:lenovo_hiring/campus_hiring_2025.dart';
+import 'package:lenovo_hiring/register.dart';
 import 'package:lenovo_hiring/smartsprint.dart';
 import 'package:go_router/go_router.dart';
 
@@ -46,6 +47,10 @@ class MyApp extends StatelessWidget {
           path: '/campus-hiring-2025',
           builder: (context, state) => const Campus_Hiring(),
         ),
+        GoRoute(
+          path: '/register',
+          builder: (context, state) => const RegisterPage(),
+        ),
         // GoRoute(
         //   path: '/login',
         //   builder: (context, state) => const LoginPage(),
@@ -66,6 +71,7 @@ class MyApp extends StatelessWidget {
       ),
       routerConfig: _router,
       //home: const MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
 
     
@@ -84,7 +90,13 @@ class MyHomePage extends StatelessWidget{
         decoration: const BoxDecoration(
           gradient: RadialGradient(
             colors: [Color.fromRGBO(222, 6, 191, 1.0), Color.fromRGBO(77, 20, 74, 1.0)]
-            )
+          ),
+          image: DecorationImage(
+            image: AssetImage("assets/images/grid.png"),
+            repeat: ImageRepeat.repeatY,
+            opacity: 0.5,
+            fit: BoxFit.cover,
+          )
         ),
         child: const SingleChildScrollView(
           child: Column(

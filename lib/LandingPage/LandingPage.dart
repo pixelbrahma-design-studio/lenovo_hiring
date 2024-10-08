@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -9,12 +11,12 @@ class LandingPage extends StatelessWidget {
       Transform.translate(
         offset: const Offset(0.0, -90.0),
         child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/grid.png"),
-              fit: BoxFit.cover,
-            )
-          ),
+          // decoration: const BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage("assets/images/grid.png"),
+          //     fit: BoxFit.cover,
+          //   )
+          // ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height, // Full-screen height (100vh)
           child: Column(
@@ -79,10 +81,12 @@ class LandingPage extends StatelessWidget {
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30.0))
                   ),
-                  onPressed: (){},
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                    child: Text(
+                  onPressed: (){
+                    context.go('/register');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    child: const Text(
                       "Register Now",
                       style: TextStyle(
                         color: Color.fromRGBO(28, 10, 103, 1.0),

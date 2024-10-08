@@ -12,7 +12,13 @@ class Campus_Hiring extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: RadialGradient(
             colors: [Color.fromRGBO(222, 6, 191, 1.0), Color.fromRGBO(77, 20, 74, 1.0)]
-            )
+          ),
+          image: DecorationImage(
+            image: AssetImage("assets/images/grid.png"),
+            repeat: ImageRepeat.repeatY,
+            opacity: 0.5,
+            fit: BoxFit.cover,
+          )
         ),
         child: const SingleChildScrollView(
           child: Column(

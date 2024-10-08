@@ -23,14 +23,18 @@ class Navbar extends StatelessWidget{
 
 class DesktopNavbar extends StatelessWidget {
   const DesktopNavbar({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       child: Container(
+        width: screenWidth*0.8,
         child: Row(
-          
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             GestureDetector(
               onTap: () {
