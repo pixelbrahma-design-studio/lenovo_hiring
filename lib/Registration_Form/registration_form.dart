@@ -780,7 +780,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                               ElevatedButton(
                                                   onPressed: () {
                                                     c.pop();
-                                                    context.go('/register');
+                                                    context.go('/login');
                                                     //context.go('/login');
                                                   },
                                                   child: Text("OK"))
