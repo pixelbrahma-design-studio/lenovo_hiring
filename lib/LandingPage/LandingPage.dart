@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -102,9 +103,9 @@ class LandingPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 0.0),
                 child: RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: [
-                      TextSpan(
+                      const TextSpan(
                         text: "Already Registered? ",
                         style: TextStyle(
                           color: Colors.white,
@@ -113,12 +114,18 @@ class LandingPage extends StatelessWidget {
                       ),
                       TextSpan(
                         text: "Login Here.",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           decoration: TextDecoration.underline,
                         ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // Navigate to login page
+                            context.go('/login');
+                          },
                       ),
+
                     ],
                   ),
                 ),

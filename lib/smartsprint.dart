@@ -1,8 +1,9 @@
 //import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
-import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
+//import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
 import 'package:lenovo_hiring/LandingPage/rules.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
+import 'package:lenovo_hiring/Smartsprint/smartsprint_top.dart';
 import 'package:lenovo_hiring/footer/footer.dart';
 
 class Smartsprint extends StatelessWidget{
@@ -27,7 +28,8 @@ class Smartsprint extends StatelessWidget{
           child: Column(
             children: <Widget>[
               Navbar(), 
-              Aboutsmartsprint(),
+              //Aboutsmartsprint(),
+              SmartsprintTop(),
               Rules(),
               Footer(),
             ],
