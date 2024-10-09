@@ -4,13 +4,16 @@ class Footer extends StatelessWidget {
   const Footer({super.key});
 
   List<Widget> pageChildren(BuildContext context){
-
+    
     return <Widget>[
+      
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 0.0),
         child: Container(
+          width: MediaQuery.of(context).size.width,
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 "© 2024 Lenovo. All rights reserved.",

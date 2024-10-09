@@ -5,8 +5,10 @@ import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
 import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
 import 'package:lenovo_hiring/LandingPage/rules.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
+import 'package:lenovo_hiring/count_down.dart';
 import 'package:lenovo_hiring/footer/footer.dart';
 import 'package:lenovo_hiring/campus_hiring_2025.dart';
+import 'package:lenovo_hiring/login.dart';
 import 'package:lenovo_hiring/register.dart';
 import 'package:lenovo_hiring/smartsprint.dart';
 import 'package:go_router/go_router.dart';
@@ -51,10 +53,14 @@ class MyApp extends StatelessWidget {
           path: '/register',
           builder: (context, state) => const RegisterPage(),
         ),
-        // GoRoute(
-        //   path: '/login',
-        //   builder: (context, state) => const LoginPage(),
-        // ),
+        GoRoute(
+          path: '/login',
+          builder: (context, state) => const LoginPage(),
+        ),
+        GoRoute(
+          path: '/count_down',
+          builder: (context, state) => const CountDown(),
+        ),
         // GoRoute(
         //   path: '/about-lenovo',
         //   builder: (context, state) => const AboutLenovoPage(),
