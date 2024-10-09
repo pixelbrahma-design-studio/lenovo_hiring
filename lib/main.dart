@@ -5,6 +5,7 @@ import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
 import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
 import 'package:lenovo_hiring/LandingPage/rules.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
+import 'package:lenovo_hiring/firebase_options.dart';
 import 'package:lenovo_hiring/footer/footer.dart';
 import 'package:lenovo_hiring/campus_hiring_2025.dart';
 import 'package:lenovo_hiring/register.dart';
@@ -13,16 +14,9 @@ import 'package:go_router/go_router.dart';
 
 //import 'smartsprint.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyBY6gejtl26Hso5VAGHOhfZzSBK2lZRxFE",
-      projectId: "lenovo-hiring-f68d6",
-      messagingSenderId: "564140864953",
-      appId: "1:564140864953:web:d8336c5e34f52e32257268",
-    )
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //setupSmartsprint();
   runApp(const MyApp());
 }
@@ -66,21 +60,17 @@ class MyApp extends StatelessWidget {
       title: 'Lenovo Hiring',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        fontFamily:"Gotham",
+        fontFamily: "Gotham",
         useMaterial3: true,
       ),
       routerConfig: _router,
       //home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
-
-    
-
   }
-  
 }
 
-class MyHomePage extends StatelessWidget{
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
@@ -88,29 +78,28 @@ class MyHomePage extends StatelessWidget{
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: RadialGradient(
-            colors: [Color.fromRGBO(222, 6, 191, 1.0), Color.fromRGBO(77, 20, 74, 1.0)]
-          ),
-          image: DecorationImage(
-            image: AssetImage("assets/images/grid.png"),
-            repeat: ImageRepeat.repeatY,
-            opacity: 0.5,
-            fit: BoxFit.cover,
-          )
-        ),
+            gradient: RadialGradient(colors: [
+              Color.fromRGBO(222, 6, 191, 1.0),
+              Color.fromRGBO(77, 20, 74, 1.0)
+            ]),
+            image: DecorationImage(
+              image: AssetImage("assets/images/grid.png"),
+              repeat: ImageRepeat.repeatY,
+              opacity: 0.5,
+              fit: BoxFit.cover,
+            )),
         child: const SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Navbar(), 
+              Navbar(),
               LandingPage(),
               Aboutsmartsprint(),
               Rules(),
               Footer(),
-              ],
+            ],
           ),
         ),
       ),
     );
-    
   }
 }
