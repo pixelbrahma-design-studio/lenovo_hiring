@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -9,12 +10,27 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   String? _selectedCollege; // To store the selected value
+  String? _selectedDegree; // To store the selected value
+  String? _selectedCourseName; // To store the selected value
   String? _selectedYear; // To store selected graduation year
   String? _selectedGender; // To store selected gender
 
   bool _checkbox1 = false;
   bool _checkbox2 = false;
   bool _checkbox3 = false;
+
+  // State variables to store passwords
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  
+  bool _isPasswordHidden = true; // To toggle password visibility
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -67,11 +83,6 @@ class _RegisterFormState extends State<RegisterForm> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   "Name as per Aadhar Card*",
-                          //   style: TextStyle(color: Colors.white),
-                          // ),
-                          // SizedBox(height: 10),
                           TextField(
                             decoration: InputDecoration(
                               hintText: "Name as per Aadhar Card*",
@@ -94,11 +105,6 @@ class _RegisterFormState extends State<RegisterForm> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   "Email ID (College ID Preferred)*",
-                          //   style: TextStyle(color: Colors.white),
-                          // ),
-                          // SizedBox(height: 10),
                           TextField(
                             decoration: InputDecoration(
                               hintText: 'Email ID (College ID Preferred)*',
@@ -119,6 +125,85 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
 
                 SizedBox(height: 30,),
+
+                Row(
+                  children: [
+                    // Password
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Create Password
+                          TextFormField(
+                            controller: _passwordController,
+                            obscureText: _isPasswordHidden, // Hide the password
+                            decoration: InputDecoration(
+                              hintText: "Create Your Password",
+                              hintStyle: TextStyle(color: Colors.white54),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isPasswordHidden ? Icons.visibility : Icons.visibility_off,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isPasswordHidden = !_isPasswordHidden;
+                                  });
+                                },
+                              ),
+                            ),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 50), // Space between the two fields
+                    // Confirm Password
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Confirm Password
+                          TextFormField(
+                            controller: _confirmPasswordController,
+                            obscureText: _isPasswordHidden, // Hide the password
+                            decoration: InputDecoration(
+                              hintText: "Re-enter Your Password",
+                              hintStyle: TextStyle(color: Colors.white54),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isPasswordHidden ? Icons.visibility : Icons.visibility_off,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isPasswordHidden = !_isPasswordHidden;
+                                  });
+                                },
+                              ),
+                            ),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 30,),
+
                 Row(
                   children: [
                     // Contact field
@@ -148,16 +233,11 @@ class _RegisterFormState extends State<RegisterForm> {
                       ),
                     ),
                     SizedBox(width: 50), // Space between the two fields
-                    // Email field
+                    // College Name
                     Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   "College Name*",
-                          //   style: TextStyle(color: Colors.white),
-                          // ),
-                          // SizedBox(height: 10),
                           DropdownButtonFormField<String>(
                             value: _selectedCollege,
                             hint: Text(
@@ -196,20 +276,16 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
 
                 SizedBox(height: 30,),
+
                 Row(
                   children: [
-                    // Contact field
+                    // Degree Field
                     Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   "College Name*",
-                          //   style: TextStyle(color: Colors.white),
-                          // ),
-                          // SizedBox(height: 10),
                           DropdownButtonFormField<String>(
-                            value: _selectedCollege,
+                            value: _selectedDegree,
                             hint: Text(
                               "Degree*", 
                               style: TextStyle(color: Colors.white),
@@ -235,7 +311,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             }).toList(),
                             onChanged: (String? newValue) {
                               setState(() {
-                                _selectedCollege = newValue;
+                                _selectedDegree = newValue;
                               });
                             },
                           ),
@@ -243,18 +319,13 @@ class _RegisterFormState extends State<RegisterForm> {
                       ),
                     ),
                     SizedBox(width: 50), // Space between the two fields
-                    // Email field
+                    // Course Name field
                     Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   "College Name*",
-                          //   style: TextStyle(color: Colors.white),
-                          // ),
-                          // SizedBox(height: 10),
                           DropdownButtonFormField<String>(
-                            value: _selectedCollege,
+                            value: _selectedCourseName,
                             hint: Text(
                               "Course Name*", 
                               style: TextStyle(color: Colors.white),
@@ -280,7 +351,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             }).toList(),
                             onChanged: (String? newValue) {
                               setState(() {
-                                _selectedCollege = newValue;
+                                _selectedCourseName = newValue;
                               });
                             },
                           ),
@@ -291,9 +362,10 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
 
                 SizedBox(height: 30,),
+
                 Row(
                   children: [
-                    // Contact field
+                    // Year of Graduation Field
                     Flexible(
                       child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -362,6 +434,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     ),
                   ),
                   SizedBox(width: 50), // Space between fields
+                  // Gender Field
                    Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -437,6 +510,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
                 Column(
                   children: [
+                    //checkbox1
                     Row(
                       children: [
                         Checkbox(
@@ -454,6 +528,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       ],
                     ),
                     SizedBox(height: 10),
+                    //checkbox1
                     Row(
                       children: [
                         Checkbox(
@@ -471,6 +546,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       ],
                     ),
                     SizedBox(height: 10),
+                    //checkbox1
                     Row(
                       children: [
                         Checkbox(
@@ -489,6 +565,31 @@ class _RegisterFormState extends State<RegisterForm> {
                     ),
                   ],
                 ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15.0),
+                  child: MaterialButton(
+                    color: Colors.white,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0))
+                    ),
+                    onPressed: (){
+                      context.go('/register');
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                      child: const Text(
+                        "Register Now",
+                        style: TextStyle(
+                          color: Color.fromRGBO(28, 10, 103, 1.0),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          letterSpacing: 0.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 
               ],
             ),
@@ -498,3 +599,5 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 }
+
+
