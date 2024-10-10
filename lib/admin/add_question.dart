@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lenovo_hiring/models/question_model/question_model.dart';
 
 import 'package:lenovo_hiring/repository/question/question_repository.dart';
 import 'package:file_picker/file_picker.dart';
@@ -156,6 +157,9 @@ class _AddQuestionState extends State<AddQuestion> {
                                         : null,
                                     onDeleted: () {
                                       setState(() {
+                                        if (index == answerIndex) {
+                                          answerIndex = null;
+                                        }
                                         options.removeAt(index);
                                       });
                                     },
@@ -208,22 +212,24 @@ class _AddQuestionState extends State<AddQuestion> {
                                         setState(() {
                                           loading = true;
                                         });
-                                        // QuestionModel question = QuestionModel(
-                                        //     questionTitle:
-                                        //         titleController.text.trim(),
-                                        //     options: options,
-                                        //     answerIndex: answerIndex!,
-                                        //     explanation:
-                                        //         explanationController.text.trim());
+                                        QuestionModel question = QuestionModel(
+                                            questionTitle:
+                                                titleController.text.trim(),
+                                            options: options,
+                                            answerIndex: answerIndex!,
+                                            explanation: explanationController
+                                                .text
+                                                .trim());
 
-                                        // await questionRepository.CreateQuestion(
-                                        //     question, pickedImage);
+                                        await questionRepository.CreateQuestion(
+                                            question, pickedImage);
                                         setState(() {
                                           loading = false;
                                         });
-                                        clear();
+                                        // clear();
                                         context
                                             .pushReplacement('/add-question');
+                                        print("picked image : $pickedImage");
                                       } catch (e) {
                                         setState(() {
                                           loading = false;
