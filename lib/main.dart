@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 //import 'package:lenovo_hiring/CampusHiring2025.dart';
@@ -34,11 +35,21 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: '/',
           builder: (context, state) => const MyHomePage(),
+          redirect: (context, state) {
+            if (FirebaseAuth.instance.currentUser != null) {
+              return "/count_down";
+            }
+          },
         ),
         GoRoute(
-          path: '/smartsprint',
-          builder: (context, state) => const Smartsprint(),
-        ),
+            path: '/smartsprint',
+            builder: (context, state) => const Smartsprint(),
+            redirect: (context, state) {
+              if (FirebaseAuth.instance.currentUser == null) {
+                return "/count_down";
+              }
+              return null;
+            }),
         GoRoute(
           path: '/campus-hiring-2025',
           builder: (context, state) => const Campus_Hiring(),
@@ -52,9 +63,14 @@ class MyApp extends StatelessWidget {
           builder: (context, state) => const LoginPage(),
         ),
         GoRoute(
-          path: '/count_down',
-          builder: (context, state) => const CountDown(),
-        ),
+            path: '/count_down',
+            builder: (context, state) => const CountDown(),
+            redirect: (context, state) {
+              if (FirebaseAuth.instance.currentUser == null) {
+                return "/count_down";
+              }
+              return null;
+            }),
         // GoRoute(
         //   path: '/about-lenovo',
         //   builder: (context, state) => const AboutLenovoPage(),
