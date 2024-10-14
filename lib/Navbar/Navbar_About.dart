@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lenovo_hiring/constants/nav_items.dart';
 import 'package:go_router/go_router.dart';
 
-class Navbar extends StatelessWidget{
-  const Navbar({super.key});
+class NavbarAbout extends StatelessWidget{
+  const NavbarAbout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class DesktopNavbar extends StatelessWidget {
                   child: 
                     Text(navTitles[i],
                     style: const TextStyle(
-                      color:Colors.white, 
+                      color:Color.fromRGBO(77, 20, 74, 1), 
                       fontSize: 14, 
                       fontWeight: FontWeight.bold,
                     ),
@@ -132,7 +132,7 @@ class MobileNavbar extends StatelessWidget {
                   child: 
                     Text(navTitles[i],
                     style: const TextStyle(
-                      color:Colors.white, 
+                      color:Color.fromRGBO(77, 20, 74, 1), 
                       fontSize: 14, 
                       fontWeight: FontWeight.bold,
                     ),

@@ -7,11 +7,14 @@ import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
 import 'package:lenovo_hiring/LandingPage/rules.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/admin/add_question.dart';
+import 'package:lenovo_hiring/about_lenovo.dart';
 import 'package:lenovo_hiring/firebase_options.dart';
 import 'package:lenovo_hiring/count_down.dart';
 import 'package:lenovo_hiring/footer/footer.dart';
 import 'package:lenovo_hiring/campus_hiring_2025.dart';
 import 'package:lenovo_hiring/login.dart';
+import 'package:lenovo_hiring/quiz.dart';
+import 'package:lenovo_hiring/quiz_result.dart';
 import 'package:lenovo_hiring/register.dart';
 import 'package:lenovo_hiring/smartsprint.dart';
 import 'package:go_router/go_router.dart';
@@ -90,6 +93,18 @@ class MyApp extends StatelessWidget {
         //   path: '/about-lenovo',
         //   builder: (context, state) => const AboutLenovoPage(),
         // ),
+        GoRoute(
+          path: '/quiz',
+          builder: (context, state) => const QuizPage(),
+        ),
+        GoRoute(
+          path: '/quiz_result',
+          builder: (context, state) => const QuizResult(),
+        ),
+        GoRoute(
+          path: '/about_lenovo',
+          builder: (context, state) => const AboutLenovoPage(),
+        ),
       ],
     );
 

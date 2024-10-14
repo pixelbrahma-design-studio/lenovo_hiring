@@ -518,7 +518,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 groupValue: _selectedYear,
                                 fillColor: WidgetStateColor.resolveWith(
                                     (states) =>
-                                        Color.fromRGBO(255, 255, 255, 0.2)),
+                                        Color.fromRGBO(255, 255, 255, 1)),
                                 activeColor: Color.fromRGBO(255, 255, 255,
                                     1), // Change active (selected) color
                                 focusColor: WidgetStateColor.resolveWith(
@@ -540,7 +540,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 groupValue: _selectedYear,
                                 fillColor: WidgetStateColor.resolveWith(
                                     (states) =>
-                                        Color.fromRGBO(255, 255, 255, 0.2)),
+                                        Color.fromRGBO(255, 255, 255, 1)),
                                 activeColor: Color.fromRGBO(255, 255, 255, 1),
                                 focusColor: WidgetStateColor.resolveWith(
                                     (states) =>
@@ -561,7 +561,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 groupValue: _selectedYear,
                                 fillColor: WidgetStateColor.resolveWith(
                                     (states) =>
-                                        Color.fromRGBO(255, 255, 255, 0.2)),
+                                        Color.fromRGBO(255, 255, 255, 1)),
                                 activeColor: Color.fromRGBO(255, 255, 255, 1),
                                 focusColor: WidgetStateColor.resolveWith(
                                     (states) =>
@@ -601,7 +601,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 groupValue: _selectedGender,
                                 fillColor: WidgetStateColor.resolveWith(
                                     (states) =>
-                                        Color.fromRGBO(255, 255, 255, 0.2)),
+                                        Color.fromRGBO(255, 255, 255, 1)),
                                 activeColor: Color.fromRGBO(255, 255, 255, 1),
                                 focusColor: WidgetStateColor.resolveWith(
                                     (states) =>
@@ -622,7 +622,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 groupValue: _selectedGender,
                                 fillColor: WidgetStateColor.resolveWith(
                                     (states) =>
-                                        Color.fromRGBO(255, 255, 255, 0.2)),
+                                        Color.fromRGBO(255, 255, 255, 1)),
                                 activeColor: Color.fromRGBO(255, 255, 255, 1),
                                 focusColor: WidgetStateColor.resolveWith(
                                     (states) =>
@@ -643,7 +643,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 groupValue: _selectedGender,
                                 fillColor: WidgetStateColor.resolveWith(
                                     (states) =>
-                                        Color.fromRGBO(255, 255, 255, 0.2)),
+                                        Color.fromRGBO(255, 255, 255, 1)),
                                 activeColor: Color.fromRGBO(255, 255, 255, 1),
                                 focusColor: WidgetStateColor.resolveWith(
                                     (states) =>
