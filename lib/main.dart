@@ -6,6 +6,7 @@ import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
 import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
 import 'package:lenovo_hiring/LandingPage/rules.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
+import 'package:lenovo_hiring/admin/add_question.dart';
 import 'package:lenovo_hiring/about_lenovo.dart';
 import 'package:lenovo_hiring/firebase_options.dart';
 import 'package:lenovo_hiring/count_down.dart';
@@ -45,14 +46,9 @@ class MyApp extends StatelessWidget {
           },
         ),
         GoRoute(
-            path: '/smartsprint',
-            builder: (context, state) => const Smartsprint(),
-            redirect: (context, state) {
-              if (FirebaseAuth.instance.currentUser == null) {
-                return "/count_down";
-              }
-              return null;
-            }),
+          path: '/smartsprint',
+          builder: (context, state) => const Smartsprint(),
+        ),
         GoRoute(
           path: '/campus-hiring-2025',
           builder: (context, state) => const Campus_Hiring(),
@@ -60,20 +56,43 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: '/register',
           builder: (context, state) => const RegisterPage(),
+          redirect: (context, state) {
+            if (FirebaseAuth.instance.currentUser != null) {
+              return "/count_down";
+            }
+          },
         ),
         GoRoute(
           path: '/login',
           builder: (context, state) => const LoginPage(),
+          redirect: (context, state) {
+            if (FirebaseAuth.instance.currentUser != null) {
+              return "/count_down";
+            }
+          },
         ),
         GoRoute(
-            path: '/count_down',
-            builder: (context, state) => const CountDown(),
-            redirect: (context, state) {
-              if (FirebaseAuth.instance.currentUser == null) {
-                return "/count_down";
-              }
-              return null;
-            }),
+          path: '/count_down',
+          builder: (context, state) => const CountDown(),
+          redirect: (context, state) {
+            if (FirebaseAuth.instance.currentUser == null) {
+              return "/";
+            }
+          },
+        ),
+        GoRoute(
+          path: '/add-question',
+          builder: (context, state) => const AddQuestion(),
+          // redirect: (context, state) {
+          //   if (FirebaseAuth.instance.currentUser == null) {
+          //     return "/";
+          //   }
+          //}
+        ),
+        // GoRoute(
+        //   path: '/about-lenovo',
+        //   builder: (context, state) => const AboutLenovoPage(),
+        // ),
         GoRoute(
           path: '/quiz',
           builder: (context, state) => const QuizPage(),
