@@ -8,6 +8,8 @@ import 'package:lenovo_hiring/LandingPage/rules.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/admin/add_question.dart';
 import 'package:lenovo_hiring/about_lenovo.dart';
+import 'package:lenovo_hiring/admin/add_quiz.dart';
+import 'package:lenovo_hiring/controllers/quiz_controller/quiz_state.dart';
 import 'package:lenovo_hiring/firebase_options.dart';
 import 'package:lenovo_hiring/count_down.dart';
 import 'package:lenovo_hiring/footer/footer.dart';
@@ -18,6 +20,7 @@ import 'package:lenovo_hiring/quiz_result.dart';
 import 'package:lenovo_hiring/register.dart';
 import 'package:lenovo_hiring/smartsprint.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 //import 'smartsprint.dart';
 
@@ -25,7 +28,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //setupSmartsprint();
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => QuizState()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -104,6 +109,10 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: '/about_lenovo',
           builder: (context, state) => const AboutLenovoPage(),
+        ),
+        GoRoute(
+          path: '/add-quiz',
+          builder: (context, state) => AddQuiz(),
         ),
       ],
     );

@@ -7,7 +7,7 @@ class QuestionModel {
   String? questionImage;
   List<String> options;
   int answerIndex;
-  String explanation;
+  String? explanation;
   dynamic createdAt;
   String? createdBy;
   QuestionModel({
@@ -27,9 +27,9 @@ class QuestionModel {
       'uid': uid,
       'questionTitle': questionTitle,
       'questionImage': questionImage,
-      'options': options.map((e) => e.toString()).toList(),
+      'options': options,
       'answerIndex': answerIndex,
-      'explanation': explanation,
+      'explanation': explanation ?? "",
       'createdAt': createdAt,
     };
   }
@@ -40,9 +40,9 @@ class QuestionModel {
       uid: map['uid'] != null ? map['uid'] as String : null,
       questionTitle: map['questionTitle'] as String,
       questionImage: map['questionImage'] ?? null,
-      options: List<String>.from((map['options'] as List<String>)),
+      options: List<String>.from(map['options'] ?? []),
       answerIndex: map['answerIndex'] as int,
-      explanation: map['explanation'] as String,
+      explanation: map['explanation'] ?? "",
       createdAt: map['createdAt'] as dynamic,
     );
   }

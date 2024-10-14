@@ -177,7 +177,7 @@ class _AddQuestionState extends State<AddQuestion> {
                       SizedBox(
                         width: 400,
                         child: TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          //autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: explanationController,
                           decoration: InputDecoration(
                             hintText: "Enter explanation",
@@ -191,9 +191,9 @@ class _AddQuestionState extends State<AddQuestion> {
                           ),
                           style: TextStyle(color: Colors.black),
                           validator: (value) {
-                            if (value == null || value!.trim().isEmpty) {
-                              return "Please Enter Title";
-                            }
+                            // if (value == null || value!.trim().isEmpty) {
+                            //   return "Please Enter Explanation";
+                            // }
                             return null;
                           },
                         ),
@@ -266,41 +266,47 @@ class _AddQuestionState extends State<AddQuestion> {
                     SizedBox(
                       height: 20,
                     ),
-                    // StreamBuilder(
-                    //     stream: questionRepository.listenAllQuestions(),
-                    //     builder: (c, s) {
-                    //       var questions = s.data;
-                    //       if (s.hasError) {
-                    //         return Text("error");
-                    //       }
-                    //       if (s.connectionState == ConnectionState.waiting) {
-                    //         return CircularProgressIndicator();
-                    //       }
-                    //       return ListView.builder(
-                    //           physics: NeverScrollableScrollPhysics(),
-                    //           shrinkWrap: true,
-                    //           itemCount: questions!.length,
-                    //           itemBuilder: (c, i) {
-                    //             var question = questions![i];
-                    //             return Container(
-                    //               child: Column(
-                    //                 children: [
-                    //                   Text(question.questionTitle),
-                    //                   Wrap(
-                    //                     children: question.options
-                    //                         .map((e) => Text(e))
-                    //                         .toList(),
-                    //                   ),
-                    //                   Text(
-                    //                       "Answer : ${question.options[question.answerIndex]}"),
-                    //                   Text(
-                    //                       "Explanation : \n${question.explanation}"),
-                    //                   Divider()
-                    //                 ],
-                    //               ),
-                    //             );
-                    //           });
-                    //     })
+                    StreamBuilder(
+                        stream: questionRepository.listenAllQuestions(),
+                        builder: (c, s) {
+                          var questions = s.data;
+                          if (s.hasError) {
+                            return Text("error");
+                          }
+                          if (s.connectionState == ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          }
+                          return ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: questions!.length,
+                              itemBuilder: (c, i) {
+                                var question = questions![i];
+                                return Container(
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                          "question : ${question.questionTitle}"),
+                                      Row(
+                                        children: [
+                                          Text('options : '),
+                                          Wrap(
+                                            children: question.options
+                                                .map((e) => Text("$e, "))
+                                                .toList(),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                          "Answer : ${question.options[question.answerIndex]}"),
+                                      Text(
+                                          "Explanation : \n${question.explanation}"),
+                                      Divider()
+                                    ],
+                                  ),
+                                );
+                              });
+                        })
                   ]))
             ],
           ),
@@ -316,6 +322,7 @@ class _AddQuestionState extends State<AddQuestion> {
       titleController.clear();
       explanationController.clear();
       answerIndex = null;
+      formKey.currentState?.reset();
     });
   }
 

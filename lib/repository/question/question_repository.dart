@@ -22,7 +22,7 @@ class QuestionRepository {
       question = question.copyWith(
           uid: id,
           createdAt: Timestamp.now(),
-          createdBy: firebaseAuth.currentUser!.uid);
+          createdBy: firebaseAuth.currentUser?.uid);
 
       if (file == null) {
         await _firestore.collection("questions").doc(id).set(question.toMap());
