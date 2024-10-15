@@ -84,11 +84,11 @@ class SmartsprintTop extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 20),
                         Row(
                           children: [
                             Image.asset("assets/images/trophy-smrtpnt.png"),
-                            SizedBox(width: 30,),
+                            SizedBox(width: 30),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -108,40 +108,35 @@ class SmartsprintTop extends StatelessWidget {
                                   ),
                                 ),
                               ],
-                            )
+                            ),
                           ],
                         ),
-                        SizedBox(height: 40,),
+                        SizedBox(height: 40),
                         Row(
                           children: [
                             Image.asset("assets/images/certfcte-smrtsprnt.png"),
-                            SizedBox(width: 30,),
+                            SizedBox(width: 30),
                             Text(
                               "Digital Participation Certificates for all who attend the quiz on all 4 days",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                               ),
-                            )
+                            ),
                           ],
-                        )
+                        ),
                       ],
                     ),
-                    
-              
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Image.asset("assets/images/gift-box.png",
-                      //width: 620,
-                      //height: 600,
-                      ),
+                    Image.asset(
+                      "assets/images/gift-box.png",
+                      //width: 100, // Specify width/height to maintain proportions
                     ),
                   ],
                 ),
               ),
             ],
           ),
+
 
           
 
