@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
 import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
 import 'package:lenovo_hiring/LandingPage/rules.dart';
+import 'package:lenovo_hiring/LandingPage/why-participate.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/admin/add_question.dart';
 import 'package:lenovo_hiring/about_lenovo.dart';
@@ -146,6 +147,7 @@ class MyHomePage extends StatelessWidget {
               Navbar(),
               LandingPage(),
               Aboutsmartsprint(),
+              Whyparticipate(),
               Rules(),
               Footer(),
             ],

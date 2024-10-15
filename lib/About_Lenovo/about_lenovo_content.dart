@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+//import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'dart:ui' as ui;  // Import the UI library and prefix it with 'ui'
+import 'dart:html';  // Already needed for IFrameElement
 
 class AboutLenovoContent extends StatefulWidget {
   const AboutLenovoContent({super.key});
@@ -15,53 +17,90 @@ class GridItem {
   GridItem({required this.title, required this.description, required this.imageUrl});
 }
 class _AboutLenovoContentState extends State<AboutLenovoContent> {
-  late YoutubePlayerController _controller1;
-  late YoutubePlayerController _controller2;
-  late YoutubePlayerController _controller3;
+  // late YoutubePlayerController _controller1;
+  // late YoutubePlayerController _controller2;
+  // late YoutubePlayerController _controller3;
 
   
 final List<GridItem> gridItems = [
-  GridItem(title: 'Recognition and Rewards', description: 'Around here, our work is also our reward. This is a place where ideas grow, initiative wins, achievements are celebrated, and we love the work we get to do.', imageUrl: 'assets/images/recognition.png'),
-  GridItem(title: 'Learning and Development', description: "At Lenovo, you're setting the stage for growth in every corner of the globe - including your own. In addition to our exciting and rewarding work, Grow@Lenovo offers you tens of thousands of free resources including: books, courses, videos, boot-camps, and in-person training. You can also find free professional exam certification training paths and tools to guide, develop and prepare you for the future.", imageUrl: 'assets/images/learning.png'),
-  GridItem(title: 'Our Offices', description: "No matter where you sit, you're working with - and impacting - the rest of us, worldwide. With locations across the globe, we strive to provide dynamic and colorful workplaces that promote creativity and collaboration.", imageUrl: 'assets/images/office.png'),
+  GridItem(
+    title: 'Recognition and Rewards', 
+    description: 'Around here, our work is also our reward. This is a place where ideas grow, initiative wins, achievements are celebrated, and we love the work we get to do.', 
+    imageUrl: 'assets/images/recognition.png'
+  ),
+  GridItem(
+    title: 'Learning and Development', 
+    description: "At Lenovo, you're setting the stage for growth in every corner of the globe - including your own. In addition to our exciting and rewarding work, Grow@Lenovo offers you tens of thousands of free resources including: books, courses, videos, boot-camps, and in-person training. You can also find free professional exam certification training paths and tools to guide, develop and prepare you for the future.", 
+    imageUrl: 'assets/images/learning.png'
+  ),
+  GridItem(
+    title: 'Our Offices', 
+    description: "No matter where you sit, you're working with - and impacting - the rest of us, worldwide. With locations across the globe, we strive to provide dynamic and colorful workplaces that promote creativity and collaboration.", 
+    imageUrl: 'assets/images/office.png'
+  ),
 ];
 
 
   @override
   void initState() {
     super.initState();
-    _controller1 = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId('https://youtu.be/evHhO5naYco')!,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
+    // _controller1 = YoutubePlayerController(
+    //   // initialVideoId: 'evHhO5naYco',
+    //   // flags: YoutubePlayerFlags(
+    //   //   autoPlay: false,
+    //   //   mute: true,
+    //   params: YoutubePlayerParams(
+    //     mute: false,
+    //     showControls: true,
+    //     showFullscreenButton: true,
+    //   ),
+    // );
+    // _controller1 = YoutubePlayerController.fromVideoId(videoId: 'evHhO5naYco');
+
+    //  _controller2 = YoutubePlayerController(
+    //   params: YoutubePlayerParams(
+    //     mute: false,
+    //     showControls: true,
+    //     showFullscreenButton: true,
+    //   ),
+    // );
+    //   _controller2 = YoutubePlayerController.fromVideoId(videoId: 'JV6i5YsDI7o');
+
+    // _controller3 = YoutubePlayerController(
+    //   params: YoutubePlayerParams(
+    //     mute: false,
+    //     showControls: true,
+    //     showFullscreenButton: true,
+    //   ),
+    // );
+    // _controller3 = YoutubePlayerController.fromVideoId(videoId: 'c3jsG6JrXCw');
+
+    // Register the HTML iframe elements for the YouTube videos.
+    // You can register multiple views here for each video
+  }
+  void registerYoutubeIframes(){
+    ui.platformViewRegistry.registerViewFactory(
+      'youtube-iframe-1',
+      (int viewId) => IFrameElement()
+        ..src = 'https://www.youtube.com/embed/evHhO5naYco'
+        ..style.border = 'none',
     );
 
-    _controller2 = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId('https://youtu.be/JV6i5YsDI7o')!,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-
-    _controller3 = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId('https://youtu.be/c3jsG6JrXCw')!,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
+    ui.platformViewRegistry.registerViewFactory(
+      'youtube-iframe-2',
+      (int viewId) => IFrameElement()
+        ..src = 'https://www.youtube.com/embed/JV6i5YsDI7o'
+        ..style.border = 'none',
     );
   }
 
-  @override
-  void dispose() {
-    _controller1.dispose();
-    _controller2.dispose();
-    _controller3.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // _controller1.dispose();
+  //   // _controller2.dispose();
+  //   // _controller3.dispose();
+  //   super.dispose();
+  // }
 
   List<Widget> pageChildren(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -154,11 +193,15 @@ final List<GridItem> gridItems = [
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          YoutubePlayer(
-                            controller: _controller1,
-                            showVideoProgressIndicator: true,
-                            width: (screenWidth * 0.8) / 3,
-                          ),
+                          // YoutubePlayer(
+                          //   controller: _controller1,
+                          //   aspectRatio: 16 / 9,
+                          // ),
+                          SizedBox(
+                            width: 600,
+                            height: 400,
+                            child: HtmlElementView(viewType: 'youtube-iframe-1'),
+                          )
                         ],
                       ),
                     )
@@ -182,11 +225,11 @@ final List<GridItem> gridItems = [
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        YoutubePlayer(
-                          controller: _controller2,
-                          showVideoProgressIndicator: true,
-                          width: (screenWidth * 0.8) / 3,
-                        ),
+                        SizedBox(
+                            width: 600,
+                            height: 400,
+                            child: HtmlElementView(viewType: 'youtube-iframe-2'),
+                          )
                       ],
                     ),
                   ),
@@ -302,11 +345,10 @@ final List<GridItem> gridItems = [
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          YoutubePlayer(
-                            controller: _controller3,
-                            showVideoProgressIndicator: true,
-                            width: (screenWidth * 0.8) / 3,
-                          ),
+                          // YoutubePlayer(
+                          //   controller: _controller3,
+                          //   aspectRatio: 16 / 9,
+                          // ),
                         ],
                       ),
                     ),
@@ -322,7 +364,7 @@ final List<GridItem> gridItems = [
               crossAxisCount: 3,
               //mainAxisSpacing: 10,
               //crossAxisSpacing: 10,
-              childAspectRatio: 1.0, // Adjust this ratio for the grid item aspect
+              childAspectRatio: 0.75, // Adjust this ratio for the grid item aspect
             ),
             itemCount: gridItems.length, // Use gridItems length
             physics: NeverScrollableScrollPhysics(), // Prevent scrolling
