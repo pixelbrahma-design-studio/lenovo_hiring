@@ -1,6 +1,8 @@
+import 'dart:ui_web' as ui;
+
 import 'package:flutter/material.dart';
 //import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'dart:ui' as ui;  // Import the UI library and prefix it with 'ui'
+
 import 'dart:html';  // Already needed for IFrameElement
 
 class AboutLenovoContent extends StatefulWidget {
@@ -82,14 +84,14 @@ final List<GridItem> gridItems = [
     ui.platformViewRegistry.registerViewFactory(
       'youtube-iframe-1',
       (int viewId) => IFrameElement()
-        ..src = 'https://www.youtube.com/embed/evHhO5naYco'
+        ..src = 'https://youtu.be/evHhO5naYco'
         ..style.border = 'none',
     );
 
     ui.platformViewRegistry.registerViewFactory(
       'youtube-iframe-2',
       (int viewId) => IFrameElement()
-        ..src = 'https://www.youtube.com/embed/JV6i5YsDI7o'
+        ..src = 'https://youtu.be/JV6i5YsDI7o'
         ..style.border = 'none',
     );
   }
