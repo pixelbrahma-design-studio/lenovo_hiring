@@ -60,29 +60,69 @@ class _AddQuizState extends State<AddQuiz> {
                     height: 15,
                   ),
                   SizedBox(
-                    width: 400,
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: state.orderCorntroller,
-                      decoration: InputDecoration(
-                        hintText: "Enter order",
-                        hintStyle: TextStyle(color: Colors.black),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                    width: 600,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            controller: state.orderCorntroller,
+                            decoration: InputDecoration(
+                              hintText: "Enter order",
+                              hintStyle: TextStyle(color: Colors.black),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                            ),
+                            style: TextStyle(color: Colors.black),
+                            validator: (value) {
+                              if (value == null || value!.trim().isEmpty) {
+                                return "Please Enter Order";
+                              }
+                              return null;
+                            },
+                          ),
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                        SizedBox(
+                          width: 20,
                         ),
-                      ),
-                      style: TextStyle(color: Colors.black),
-                      validator: (value) {
-                        if (value == null || value!.trim().isEmpty) {
-                          return "Please Enter Order";
-                        }
-                        return null;
-                      },
+                        Expanded(
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            controller: state.noOfquestionController,
+                            decoration: InputDecoration(
+                              hintText: "Enter number of questions",
+                              hintStyle: TextStyle(color: Colors.black),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                            ),
+                            style: TextStyle(color: Colors.black),
+                            validator: (value) {
+                              if (value == null || value!.trim().isEmpty) {
+                                return "Please Enter number of questions";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -230,6 +270,9 @@ class _AddQuizState extends State<AddQuiz> {
                                 if (check) {
                                   state.setAddLoading();
                                   QuizModel quizModel = QuizModel(
+                                      numberOfQuestions: int.tryParse(state
+                                          .noOfquestionController.text
+                                          .trim())!,
                                       theme: state.themeController.text.trim(),
                                       formateDate: state.formateDate,
                                       order: int.tryParse(
@@ -246,11 +289,6 @@ class _AddQuizState extends State<AddQuiz> {
                                   await _quizRepository.CreateQuiz(quizModel);
 
                                   state.clearState();
-                                  if (mounted) {
-                                    setState(() {
-                                      formKey.currentState?.reset();
-                                    });
-                                  }
 
                                   state.getQuizList();
                                 }

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lenovo_hiring/Quiz/quiz_set.dart';
+import 'package:lenovo_hiring/controllers/quiz_controller/quiz_state.dart';
 import 'package:lenovo_hiring/models/question_model/question_model.dart';
+import 'package:lenovo_hiring/models/quiz_model/quiz_model.dart';
 
 import 'package:lenovo_hiring/repository/question/question_repository.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:provider/provider.dart';
 
 class AddQuestion extends StatefulWidget {
   const AddQuestion({super.key});
@@ -201,6 +205,26 @@ class _AddQuestionState extends State<AddQuestion> {
                       SizedBox(
                         height: 20,
                       ),
+                      Consumer<QuizState>(
+                        builder: (context, ref, child) {
+                          return DropdownButtonFormField(
+                              hint: Text(
+                                ref.selectedQuiz?.theme ?? "select quiz theme",
+                              ),
+                              items: ref.quizModelList.map((QuizModel quiz) {
+                                return DropdownMenuItem<QuizModel>(
+                                    value: quiz, child: Text(quiz.theme));
+                              }).toList(),
+                              onChanged: (val) {
+                                if (val != null) {
+                                  ref.setQuizTheme(val);
+                                }
+                              });
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       loading
                           ? CircularProgressIndicator()
                           : ElevatedButton(
@@ -208,35 +232,56 @@ class _AddQuestionState extends State<AddQuestion> {
                                 if (formKey.currentState!.validate()) {
                                   if (options.isNotEmpty) {
                                     if (answerIndex != null) {
-                                      try {
-                                        setState(() {
-                                          loading = true;
-                                        });
-                                        QuestionModel question = QuestionModel(
-                                            questionTitle:
-                                                titleController.text.trim(),
-                                            options: options,
-                                            answerIndex: answerIndex!,
-                                            explanation: explanationController
-                                                .text
-                                                .trim());
+                                      if (context
+                                              .read<QuizState>()
+                                              .selectedQuiz !=
+                                          null) {
+                                        try {
+                                          setState(() {
+                                            loading = true;
+                                          });
+                                          QuestionModel question =
+                                              QuestionModel(
+                                                  quizId: context
+                                                      .read<QuizState>()
+                                                      .selectedQuiz!
+                                                      .uid!,
+                                                  quizTheme: context
+                                                      .read<QuizState>()
+                                                      .selectedQuiz!
+                                                      .theme,
+                                                  questionTitle: titleController
+                                                      .text
+                                                      .trim(),
+                                                  options: options,
+                                                  answerIndex: answerIndex!,
+                                                  explanation:
+                                                      explanationController.text
+                                                          .trim());
 
-                                        await questionRepository.CreateQuestion(
-                                            question, pickedImage);
-                                        setState(() {
-                                          loading = false;
-                                        });
-                                        // clear();
-                                        context
-                                            .pushReplacement('/add-question');
-                                        print("picked image : $pickedImage");
-                                      } catch (e) {
-                                        setState(() {
-                                          loading = false;
-                                        });
+                                          await questionRepository
+                                              .CreateQuestion(
+                                                  question, pickedImage);
+                                          setState(() {
+                                            loading = false;
+                                          });
+                                          // clear();
+                                          context
+                                              .pushReplacement('/add-question');
+                                          print("picked image : $pickedImage");
+                                        } catch (e) {
+                                          setState(() {
+                                            loading = false;
+                                          });
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  content: Text(e.toString())));
+                                        }
+                                      } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
-                                                content: Text(e.toString())));
+                                                content: Text(
+                                                    'Please select Qize theme')));
                                       }
                                     } else {
                                       ScaffoldMessenger.of(context)

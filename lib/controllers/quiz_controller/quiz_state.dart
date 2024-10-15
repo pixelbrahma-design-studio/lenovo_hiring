@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:lenovo_hiring/models/quiz_model/quiz_model.dart';
 import 'package:lenovo_hiring/repository/quiz/quiz_repository.dart';
@@ -15,12 +16,15 @@ class QuizState extends ChangeNotifier {
   TextEditingController orderCorntroller = TextEditingController();
   TextEditingController pointController = TextEditingController();
   TextEditingController countController = TextEditingController();
+  TextEditingController noOfquestionController = TextEditingController();
   // int? order;
   // double? point;
   dynamic quizDate;
   dynamic startTime;
   dynamic endTime;
   //int? coundown;
+
+  QuizModel? selectedQuiz;
 
   String? formateDate;
   List<String> questions = [];
@@ -96,6 +100,11 @@ class QuizState extends ChangeNotifier {
     return true;
   }
 
+  void setQuizTheme(QuizModel quiz) {
+    selectedQuiz = quiz;
+    notifyListeners();
+  }
+
   void clearState() {
     quizDate = null;
     formateDate = null;
@@ -108,6 +117,7 @@ class QuizState extends ChangeNotifier {
     pointController.clear();
     countController.clear();
     orderCorntroller.clear();
+    noOfquestionController.clear();
     //quizFormKey.currentState?.reset();
 
     notifyListeners();

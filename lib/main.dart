@@ -10,6 +10,7 @@ import 'package:lenovo_hiring/admin/add_question.dart';
 import 'package:lenovo_hiring/about_lenovo.dart';
 import 'package:lenovo_hiring/admin/add_quiz.dart';
 import 'package:lenovo_hiring/controllers/quiz_controller/quiz_state.dart';
+import 'package:lenovo_hiring/demos_check/quize_question_random_check.dart';
 import 'package:lenovo_hiring/firebase_options.dart';
 import 'package:lenovo_hiring/count_down.dart';
 import 'package:lenovo_hiring/footer/footer.dart';
@@ -113,6 +114,10 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: '/add-quiz',
           builder: (context, state) => AddQuiz(),
+        ),
+        GoRoute(
+          path: '/check',
+          builder: (context, state) => QuizeQuestionRandomCheck(),
         ),
       ],
     );

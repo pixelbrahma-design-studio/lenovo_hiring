@@ -13,7 +13,9 @@ class QuizModel {
   List<String> questions = [];
   dynamic createdAt;
   String? formateDate;
+  int numberOfQuestions;
   QuizModel({
+    required this.numberOfQuestions,
     required this.theme,
     this.formateDate,
     this.uid,
@@ -28,6 +30,7 @@ class QuizModel {
   });
 
   QuizModel copyWith({
+    int? numberOfQuestions,
     String? theme,
     String? uid,
     int? order,
@@ -41,6 +44,7 @@ class QuizModel {
     String? formateDate,
   }) {
     return QuizModel(
+      numberOfQuestions: numberOfQuestions ?? this.numberOfQuestions,
       theme: theme ?? this.theme,
       uid: uid ?? this.uid,
       order: order ?? this.order,
@@ -57,6 +61,7 @@ class QuizModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'numberOfQuestions': numberOfQuestions,
       'theme': theme,
       'uid': uid,
       'order': order,
@@ -73,6 +78,7 @@ class QuizModel {
 
   factory QuizModel.fromMap(Map<String, dynamic> map) {
     return QuizModel(
+      numberOfQuestions: map['numberOfQuestions'] as int,
       theme: map['theme'] as String,
       uid: map['uid'] != null ? map['uid'] as String : null,
       order: map['order'] as int,
