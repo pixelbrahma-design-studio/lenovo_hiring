@@ -22,7 +22,7 @@ class QuestionRepository {
       question = question.copyWith(
           uid: id,
           createdAt: Timestamp.now(),
-          createdBy: firebaseAuth.currentUser!.uid);
+          createdBy: firebaseAuth.currentUser?.uid);
 
       if (file == null) {
         await _firestore.collection("questions").doc(id).set(question.toMap());
@@ -69,5 +69,15 @@ class QuestionRepository {
     }).handleError((e) {
       print("error : $e");
     });
+  }
+
+  // get question by uid
+  Future<QuestionModel> getQuestionByUid(String uid) async {
+    try {
+      var data = await _firestore.collection("questions").doc(uid).get();
+      return QuestionModel.fromMap(data.data() as Map<String, dynamic>);
+    } catch (e) {
+      throw e;
+    }
   }
 }

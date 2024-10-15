@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CountdownTimer extends StatefulWidget {
   @override
@@ -17,8 +18,9 @@ class _CountdownTimerState extends State<CountdownTimer> {
   }
 
   void _startTimer() {
-    DateTime targetDate = DateTime(2024, 10, 15, 10, 0, 0); // Set your target date here (year, month, day, hour, min, sec)
-    
+    DateTime targetDate = DateTime(2024, 10, 15, 10, 0,
+        0); // Set your target date here (year, month, day, hour, min, sec)
+
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       DateTime now = DateTime.now();
       setState(() {
@@ -48,68 +50,73 @@ class _CountdownTimerState extends State<CountdownTimer> {
     int minutes = _remainingTime.inMinutes.remainder(60);
     int seconds = _remainingTime.inSeconds.remainder(60);
 
-    return Column(
-      children: [
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
-                child: Container(
+    return Column(children: [
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
+              child: Container(
                   alignment: Alignment.center,
-                  child: Image.asset("assets/images/Smartsprint-logo.png")
-                ),
-              ),
+                  child: Image.asset("assets/images/Smartsprint-logo.png")),
+            ),
 
-              Text(
-                "Day 1 Quiz Starts in",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+            Text(
+              "Day 1 Quiz Starts in",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 20),
-              // Text(
-              //   _remainingTime.inSeconds > 0 
-              //     ? _formatDuration(_remainingTime)
-              //     : "00 00 00 00",
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //     fontSize: 48,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
-              Row(
+            ),
+            const SizedBox(height: 20),
+            // Text(
+            //   _remainingTime.inSeconds > 0
+            //     ? _formatDuration(_remainingTime)
+            //     : "00 00 00 00",
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontSize: 48,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _buildTimeCard(formatTime(days), "Days"),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 _buildTimeCard(formatTime(hours), "Hours"),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 _buildTimeCard(formatTime(minutes), "Minutes"),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 _buildTimeCard(formatTime(seconds), "Seconds"),
               ],
             ),
-              const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: _remainingTime.inSeconds > 0 ? null : () {
-                  // Action to take when countdown is over
-                },
-                child: Text("Enter"),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  textStyle: TextStyle(fontSize: 20),
-                ),
+            const SizedBox(height: 40),
+            ElevatedButton(
+              onPressed: () {
+                context.push('/quiz');
+              },
+              // _remainingTime.inSeconds > 0 ? null : () {
+              // Action to take when countdown is over
+              //  },
+              child: Text("Enter"),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                textStyle: TextStyle(fontSize: 20),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      
-      ]
-    );
+      ),
+    ]);
   }
 
   Widget _buildTimeCard(String time, String label) {
@@ -140,5 +147,5 @@ class _CountdownTimerState extends State<CountdownTimer> {
 }
 
 void main() => runApp(MaterialApp(
-  home: CountdownTimer(),
-));
+      home: CountdownTimer(),
+    ));
