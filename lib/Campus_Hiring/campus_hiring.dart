@@ -47,16 +47,23 @@ class CampusHiring extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(255, 38, 27, 1.0),
-                      ), 
-                      child: const Text(
-                        "Know More",
+                    ElevatedButton.icon(
+                      onPressed: () {
+
+                      },
+                      icon: Icon(Icons.open_in_new, color: Colors.white,),
+                      label: Text(
+                        'Know More',
                         style: TextStyle(
                           color: Colors.white,
                         ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(255, 38, 27, 1.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15), // Button padding
                       ),
                     ),
                     
