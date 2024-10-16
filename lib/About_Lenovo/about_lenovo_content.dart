@@ -84,14 +84,14 @@ final List<GridItem> gridItems = [
     ui.platformViewRegistry.registerViewFactory(
       'youtube-iframe-1',
       (int viewId) => IFrameElement()
-        ..src = 'https://youtu.be/evHhO5naYco'
+        ..src = 'https://www.youtube.com/embed/evHhO5naYco'
         ..style.border = 'none',
     );
 
     ui.platformViewRegistry.registerViewFactory(
       'youtube-iframe-2',
       (int viewId) => IFrameElement()
-        ..src = 'https://youtu.be/JV6i5YsDI7o'
+        ..src = 'https://www.youtube.com/embed/JV6i5YsDI7o'
         ..style.border = 'none',
     );
   }

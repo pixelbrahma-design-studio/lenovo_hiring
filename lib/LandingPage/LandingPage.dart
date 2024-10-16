@@ -25,7 +25,7 @@ class LandingPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15.0),
               child: Image.asset(
-                "assets/images/SmartSprint-logo.png",
+                "assets/images/Smartsprint-logo.png",
                 width: screenWidth * 0.4,
               ),
             ),
