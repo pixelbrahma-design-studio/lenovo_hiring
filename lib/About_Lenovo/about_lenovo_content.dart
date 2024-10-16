@@ -46,39 +46,7 @@ final List<GridItem> gridItems = [
   @override
   void initState() {
     super.initState();
-    // _controller1 = YoutubePlayerController(
-    //   // initialVideoId: 'evHhO5naYco',
-    //   // flags: YoutubePlayerFlags(
-    //   //   autoPlay: false,
-    //   //   mute: true,
-    //   params: YoutubePlayerParams(
-    //     mute: false,
-    //     showControls: true,
-    //     showFullscreenButton: true,
-    //   ),
-    // );
-    // _controller1 = YoutubePlayerController.fromVideoId(videoId: 'evHhO5naYco');
-
-    //  _controller2 = YoutubePlayerController(
-    //   params: YoutubePlayerParams(
-    //     mute: false,
-    //     showControls: true,
-    //     showFullscreenButton: true,
-    //   ),
-    // );
-    //   _controller2 = YoutubePlayerController.fromVideoId(videoId: 'JV6i5YsDI7o');
-
-    // _controller3 = YoutubePlayerController(
-    //   params: YoutubePlayerParams(
-    //     mute: false,
-    //     showControls: true,
-    //     showFullscreenButton: true,
-    //   ),
-    // );
-    // _controller3 = YoutubePlayerController.fromVideoId(videoId: 'c3jsG6JrXCw');
-
-    // Register the HTML iframe elements for the YouTube videos.
-    // You can register multiple views here for each video
+    registerYoutubeIframes();
   }
   void registerYoutubeIframes(){
     ui.platformViewRegistry.registerViewFactory(
@@ -92,6 +60,13 @@ final List<GridItem> gridItems = [
       'youtube-iframe-2',
       (int viewId) => IFrameElement()
         ..src = 'https://www.youtube.com/embed/JV6i5YsDI7o'
+        ..style.border = 'none',
+    );
+
+    ui.platformViewRegistry.registerViewFactory(
+      'youtube-iframe-3',
+      (int viewId) => IFrameElement()
+        ..src = 'https://www.youtube.com/embed/c3jsG6JrXCw'
         ..style.border = 'none',
     );
   }
@@ -351,6 +326,11 @@ final List<GridItem> gridItems = [
                           //   controller: _controller3,
                           //   aspectRatio: 16 / 9,
                           // ),
+                          SizedBox(
+                            width: 600,
+                            height: 400,
+                            child: HtmlElementView(viewType: 'youtube-iframe-3'),
+                          )
                         ],
                       ),
                     ),
