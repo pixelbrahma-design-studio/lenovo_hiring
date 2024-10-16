@@ -10,7 +10,10 @@ import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/admin/add_question.dart';
 import 'package:lenovo_hiring/about_lenovo.dart';
 import 'package:lenovo_hiring/admin/add_quiz.dart';
-import 'package:lenovo_hiring/controllers/quiz_controller/quiz_state.dart';
+import 'package:lenovo_hiring/models/quiz_model/quiz_model.dart';
+import 'package:lenovo_hiring/repository/attendee/attendee_state.dart';
+import 'package:lenovo_hiring/repository/auth/auth_state.dart';
+import 'package:lenovo_hiring/repository/quiz/quiz_state.dart';
 import 'package:lenovo_hiring/demos_check/quize_question_random_check.dart';
 import 'package:lenovo_hiring/firebase_options.dart';
 import 'package:lenovo_hiring/count_down.dart';
@@ -32,6 +35,8 @@ void main() async {
   //setupSmartsprint();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => QuizState()),
+    ChangeNotifierProvider(create: (context) => AuthState()),
+    ChangeNotifierProvider(create: (context) => AttendeeState()),
   ], child: const MyApp()));
 }
 
@@ -87,23 +92,26 @@ class MyApp extends StatelessWidget {
             }
           },
         ),
+
         GoRoute(
-          path: '/add-question',
-          builder: (context, state) => const AddQuestion(),
-          // redirect: (context, state) {
-          //   if (FirebaseAuth.instance.currentUser == null) {
-          //     return "/";
-          //   }
-          //}
-        ),
+            path: '/add-question',
+            builder: (context, state) => const AddQuestion(),
+            redirect: (context, state) {
+              if (FirebaseAuth.instance.currentUser == null ||
+                  context.watch<AuthState>().user?.role != "admin") {
+                return "/";
+              }
+            }),
         // GoRoute(
         //   path: '/about-lenovo',
         //   builder: (context, state) => const AboutLenovoPage(),
         // ),
         GoRoute(
-          path: '/quiz',
-          builder: (context, state) => const QuizPage(),
-        ),
+            path: '/quiz',
+            builder: (context, state) {
+              final quizModel = state.extra as QuizModel;
+              return QuizPage(quizModel: quizModel);
+            }),
         GoRoute(
           path: '/quiz_result',
           builder: (context, state) => const QuizResult(),
@@ -115,6 +123,12 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: '/add-quiz',
           builder: (context, state) => AddQuiz(),
+          redirect: (context, state) {
+            if (FirebaseAuth.instance.currentUser == null ||
+                context.watch<AuthState>().user?.role != "admin") {
+              return "/";
+            }
+          },
         ),
         GoRoute(
           path: '/check',

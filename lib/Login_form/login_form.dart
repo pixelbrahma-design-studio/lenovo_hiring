@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lenovo_hiring/models/user_model/user_model.dart';
 import 'package:lenovo_hiring/repository/auth/auth_repository.dart';
+import 'package:lenovo_hiring/repository/auth/auth_state.dart';
+import 'package:provider/provider.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -208,7 +211,7 @@ class _LoginFormState extends State<LoginForm> {
                                   setState(() {
                                     loading = true;
                                   });
-                                  bool loggedIn =
+                                  UserModel? user =
                                       await authRepository.loginUser(
                                           _emailController.text.trim(),
                                           _passwordController.text.trim());
@@ -216,7 +219,8 @@ class _LoginFormState extends State<LoginForm> {
                                     loading = false;
                                   });
 
-                                  if (loggedIn) {
+                                  if (user != null) {
+                                    context.read<AuthState>().setuser(user);
                                     clear();
                                     context.replace('/count_down');
                                   } else {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lenovo_hiring/Quiz/quiz_set.dart';
-import 'package:lenovo_hiring/controllers/quiz_controller/quiz_state.dart';
+import 'package:lenovo_hiring/repository/quiz/quiz_state.dart';
 import 'package:lenovo_hiring/models/question_model/question_model.dart';
 import 'package:lenovo_hiring/models/quiz_model/quiz_model.dart';
 

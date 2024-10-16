@@ -49,7 +49,7 @@ class AuthRepository {
 
   // login user
 
-  Future<bool> loginUser(String email, String password) async {
+  Future<UserModel?> loginUser(String email, String password) async {
     try {
       UserCredential userCredential =
           await firebaseAuth.signInWithEmailAndPassword(
@@ -59,16 +59,26 @@ class AuthRepository {
       User? user = userCredential.user;
 
       if (user != null && user.emailVerified) {
-        return true;
+        var userModel = await getCurrentUser(user.uid);
+        return userModel;
       } else {
         print('Email is not verified. Logging out...');
         await FirebaseAuth.instance.signOut();
-        return false;
+        return null;
 
         // Notify user to verify email
       }
     } on FirebaseAuthException catch (e) {
       print('Login error: ${e.message}');
+      throw e;
+    }
+  }
+
+  Future<UserModel> getCurrentUser(String uid) async {
+    try {
+      var data = await _firestore.collection("users").doc(uid).get();
+      return UserModel.fromMap(data.data() as Map<String, dynamic>);
+    } catch (e) {
       throw e;
     }
   }
