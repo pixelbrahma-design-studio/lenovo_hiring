@@ -89,6 +89,9 @@ class _LoginFormState extends State<LoginForm> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               controller: _emailController,
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
                               decoration: InputDecoration(
                                 hintText: 'Email ID*',
                                 hintStyle: TextStyle(color: Colors.white),
@@ -97,6 +100,12 @@ class _LoginFormState extends State<LoginForm> {
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
+                                ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
                                 ),
                               ),
                               validator: (value) {
@@ -135,6 +144,9 @@ class _LoginFormState extends State<LoginForm> {
                                   AutovalidateMode.onUserInteraction,
 
                               controller: _passwordController,
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
                               obscureText:
                                   _isPasswordHidden, // Hide the password
                               decoration: InputDecoration(
@@ -145,6 +157,12 @@ class _LoginFormState extends State<LoginForm> {
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
+                                ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
                                 ),
                                 suffixIcon: IconButton(
                                   icon: Icon(
@@ -160,7 +178,7 @@ class _LoginFormState extends State<LoginForm> {
                                   },
                                 ),
                               ),
-                              style: TextStyle(color: Colors.white),
+                              //style: TextStyle(color: Colors.white),
                               validator: (value) {
                                 if (value == null || value!.trim().isEmpty) {
                                   return "Please Enter Password";
@@ -179,6 +197,8 @@ class _LoginFormState extends State<LoginForm> {
                   ),
 
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextButton(
                           onPressed: () {},
