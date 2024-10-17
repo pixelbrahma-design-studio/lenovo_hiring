@@ -946,6 +946,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               if (formKey.currentState!.validate()) {
                                 if (validate()) {
                                   UserModel userModel = UserModel(
+                                      role: "user",
                                       name: nameController.text
                                           .trim()
                                           .toLowerCase(),

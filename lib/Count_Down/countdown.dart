@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lenovo_hiring/repository/quiz/quiz_repository.dart';
 
 class CountdownTimer extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class CountdownTimer extends StatefulWidget {
 }
 
 class _CountdownTimerState extends State<CountdownTimer> {
+  QuizRepository quizRepository = QuizRepository();
   late Timer _timer;
   Duration _remainingTime = Duration();
 
@@ -101,8 +103,9 @@ class _CountdownTimerState extends State<CountdownTimer> {
             ),
             const SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () {
-                context.push('/quiz');
+              onPressed: () async {
+                var a = await quizRepository.getQuizByCount(1);
+                context.push('/quiz', extra: a);
               },
               // _remainingTime.inSeconds > 0 ? null : () {
               // Action to take when countdown is over

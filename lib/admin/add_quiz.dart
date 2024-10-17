@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lenovo_hiring/repository/quiz/quiz_state.dart';
 import 'package:lenovo_hiring/Footer/Footer.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/controllers/quiz_controller/quiz_state.dart';

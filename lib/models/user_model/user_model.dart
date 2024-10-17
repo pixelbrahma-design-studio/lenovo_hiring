@@ -15,6 +15,7 @@ class UserModel {
   bool iAgree;
   bool acceptPrivacyPolicy;
   bool understoodRules;
+  String role;
   UserModel({
     this.uid,
     required this.name,
@@ -29,6 +30,7 @@ class UserModel {
     required this.iAgree,
     required this.acceptPrivacyPolicy,
     required this.understoodRules,
+    required this.role,
   });
 
   UserModel copyWith({
@@ -45,6 +47,7 @@ class UserModel {
     bool? iAgree,
     bool? acceptPrivacyPolicy,
     bool? understoodRules,
+    String? role,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -60,6 +63,7 @@ class UserModel {
       iAgree: iAgree ?? this.iAgree,
       acceptPrivacyPolicy: acceptPrivacyPolicy ?? this.acceptPrivacyPolicy,
       understoodRules: understoodRules ?? this.understoodRules,
+      role: role ?? this.role,
     );
   }
 
@@ -78,6 +82,7 @@ class UserModel {
       'iAgree': iAgree,
       'acceptPrivacyPolicy': acceptPrivacyPolicy,
       'understoodRules': understoodRules,
+      'role': role,
     };
   }
 
@@ -96,6 +101,7 @@ class UserModel {
       iAgree: map['iAgree'] as bool,
       acceptPrivacyPolicy: map['acceptPrivacyPolicy'] as bool,
       understoodRules: map['understoodRules'] as bool,
+      role: map['role'] as String,
     );
   }
 }
