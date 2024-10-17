@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SmartsprintTop extends StatelessWidget {
   const SmartsprintTop({super.key});
@@ -124,6 +125,31 @@ class SmartsprintTop extends StatelessWidget {
                               ),
                             ),
                           ],
+                        ),
+                        SizedBox(height: 40),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15.0),
+                          child: MaterialButton(
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(30.0))
+                            ),
+                            onPressed: (){
+                              context.go('/register');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                              child: const Text(
+                                "Register Now",
+                                style: TextStyle(
+                                  color: Color.fromRGBO(28, 10, 103, 1.0),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  letterSpacing: 0.0,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
