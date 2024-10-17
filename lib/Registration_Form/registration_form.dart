@@ -81,6 +81,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   // Row for side-by-side text fields
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Register for Participating in the contest"
@@ -108,6 +109,9 @@ class _RegisterFormState extends State<RegisterForm> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               controller: nameController,
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
                               decoration: InputDecoration(
                                 hintText: "Name as per Aadhar Card*",
                                 hintStyle: TextStyle(color: Colors.white),
@@ -117,6 +121,12 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                                ),
                               ),
                               validator: (value) {
                                 if (value == null || value!.trim().isEmpty) {
@@ -124,7 +134,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 }
                                 return null;
                               },
-
                               //cursorColor: Colors.pinkAccent,
                             ),
                           ],
@@ -140,6 +149,9 @@ class _RegisterFormState extends State<RegisterForm> {
                               controller: emailController,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
                               decoration: InputDecoration(
                                 hintText: 'Email ID (College ID Preferred)*',
                                 hintStyle: TextStyle(color: Colors.white),
@@ -148,6 +160,12 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
+                                ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
                                 ),
                               ),
                               //cursorColor: Colors.pinkAccent,
@@ -185,16 +203,23 @@ class _RegisterFormState extends State<RegisterForm> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               controller: _passwordController,
+                              
                               obscureText:
                                   _isPasswordHidden, // Hide the password
                               decoration: InputDecoration(
                                 hintText: "Create Your Password",
-                                hintStyle: TextStyle(color: Colors.white54),
+                                hintStyle: TextStyle(color: Colors.white),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
+                                ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
                                 ),
                                 suffixIcon: IconButton(
                                   icon: Icon(
@@ -236,12 +261,18 @@ class _RegisterFormState extends State<RegisterForm> {
                                   _isPasswordHidden, // Hide the password
                               decoration: InputDecoration(
                                 hintText: "Re-enter Your Password",
-                                hintStyle: TextStyle(color: Colors.white54),
+                                hintStyle: TextStyle(color: Colors.white),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
+                                ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
                                 ),
                                 suffixIcon: IconButton(
                                   icon: Icon(
@@ -299,6 +330,9 @@ class _RegisterFormState extends State<RegisterForm> {
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ],
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
                               decoration: InputDecoration(
                                 hintText: 'Contact Number*',
                                 hintStyle: TextStyle(color: Colors.white),
@@ -307,6 +341,12 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
+                                ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
                                 ),
                               ),
                               //cursorColor: Colors.pinkAccent,
@@ -330,7 +370,12 @@ class _RegisterFormState extends State<RegisterForm> {
                               value: _selectedCollege,
                               hint: Text(
                                 "College Name*",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: "Gotham",
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                               dropdownColor: Color.fromRGBO(255, 255, 255,
                                   1), // Dropdown background color
@@ -343,7 +388,31 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                                ),
                               ),
+                              selectedItemBuilder: (BuildContext context) {
+                                return <String>[
+                                  'College A',
+                                  'College B',
+                                  'College C',
+                                  'College D'
+                                ].map<Widget>((String value) {
+                                  return Text(
+                                    value,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontFamily: "Gotham",
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  );
+                                }).toList();
+                              },
                               items: <String>[
                                 'College A',
                                 'College B',
@@ -355,8 +424,11 @@ class _RegisterFormState extends State<RegisterForm> {
                                   child: Text(
                                     value,
                                     style: TextStyle(
-                                        color: Color.fromRGBO(17, 24, 79,
-                                            1)), // Dropdown item text color
+                                      color: Color.fromRGBO(17, 24, 79, 1),
+                                      fontSize: 16,
+                                      fontFamily: "Gotham",
+                                      fontWeight: FontWeight.w500,
+                                    ), // Dropdown item text color
                                   ),
                                 );
                               }).toList(),
@@ -365,6 +437,9 @@ class _RegisterFormState extends State<RegisterForm> {
                                   _selectedCollege = newValue;
                                 });
                               },
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
                               validator: (value) {
                                 if (value == null) {
                                   return "Please Select College";
@@ -393,7 +468,12 @@ class _RegisterFormState extends State<RegisterForm> {
                               value: _selectedDegree,
                               hint: Text(
                                 "Degree*",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: "Gotham",
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                               dropdownColor: Color.fromRGBO(255, 255, 255,
                                   1), // Dropdown background color
@@ -406,7 +486,29 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                                ),
                               ),
+                              selectedItemBuilder: (BuildContext context) {
+                                return <String>[
+                                  'BE/Btech',
+                                  'Others'
+                                ].map<Widget>((String value) {
+                                  return Text(
+                                    value,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontFamily: "Gotham",
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  );
+                                }).toList();
+                              },
                               items: <String>[
                                 'BE/Btech',
                                 'Others'
@@ -416,8 +518,11 @@ class _RegisterFormState extends State<RegisterForm> {
                                   child: Text(
                                     value,
                                     style: TextStyle(
-                                        color: Color.fromRGBO(17, 24, 79,
-                                            1)), // Dropdown item text color
+                                      color: Color.fromRGBO(17, 24, 79, 1),
+                                      fontSize: 16,
+                                      fontFamily: "Gotham",
+                                      fontWeight: FontWeight.w500,
+                                    ),// Dropdown item text color
                                   ),
                                 );
                               }).toList(),
@@ -426,6 +531,9 @@ class _RegisterFormState extends State<RegisterForm> {
                                   _selectedDegree = newValue;
                                 });
                               },
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
                               validator: (value) {
                                 if (value == null) {
                                   return "Please Select Degree";
@@ -446,12 +554,15 @@ class _RegisterFormState extends State<RegisterForm> {
                               value: _selectedCourseName,
                               hint: Text(
                                 "Course Name*",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: "Gotham",
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                              dropdownColor: Color.fromRGBO(255, 255, 255,
-                                  1), // Dropdown background color
-                              iconEnabledColor:
-                                  Colors.white, // Dropdown arrow color
+                              dropdownColor: Color.fromRGBO(255, 255, 255, 1), // Dropdown background color
+                              iconEnabledColor: Colors.white, // Dropdown arrow color
                               decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
@@ -459,7 +570,35 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                                ),
                               ),
+                              style: TextStyle(
+                                color: Colors.white, // Color of selected item in the dropdown when opened
+                              ),
+                              selectedItemBuilder: (BuildContext context) {
+                                return <String>[
+                                  'Computer Science',
+                                  'Electronics & Comm',
+                                  'Electrical & Electronics',
+                                  'Information tech',
+                                  'Instrumentation'
+                                ].map<Widget>((String value) {
+                                  return Text(
+                                    value,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontFamily: "Gotham",
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  );
+                                }).toList();
+                              },
                               items: <String>[
                                 'Computer Science',
                                 'Electronics & Comm',
@@ -472,8 +611,11 @@ class _RegisterFormState extends State<RegisterForm> {
                                   child: Text(
                                     value,
                                     style: TextStyle(
-                                        color: Color.fromRGBO(17, 24, 79,
-                                            1)), // Dropdown item text color
+                                      color: Color.fromRGBO(17, 24, 79, 1),
+                                      fontSize: 16,
+                                      fontFamily: "Gotham",
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 );
                               }).toList(),
@@ -509,6 +651,9 @@ class _RegisterFormState extends State<RegisterForm> {
                           Text(
                             "Year of Graduation*",
                             style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -593,6 +738,9 @@ class _RegisterFormState extends State<RegisterForm> {
                             "Gender*",
                             style: TextStyle(color: Colors.white),
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -673,14 +821,33 @@ class _RegisterFormState extends State<RegisterForm> {
                     children: [
                       //checkbox1
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Checkbox(
-                            value: _checkbox1,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                _checkbox1 = value!;
-                              });
-                            },
+                          Theme(
+                            data: ThemeData(
+                              checkboxTheme: CheckboxThemeData(
+                                fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.selected)) {
+                                    return Colors.white; // Checked state
+                                  }
+                                  return Colors.transparent; // Unchecked state background
+                                }),
+                                side: BorderSide(
+                                  color: Colors.white, 
+                                  width: 2.0,
+                                ), // Unchecked state border color
+                              ),
+                            ),
+                            child: Checkbox(
+                              value: _checkbox1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _checkbox1 = value!;
+                                });
+                              },
+                              activeColor: Colors.white, // Checked background color
+                              checkColor: Color.fromRGBO(28, 10, 103, 1.0),  // Checked checkmark color
+                            ),
                           ),
                           Text(
                             "By checking this box, I agree to be contacted by Lenovo either through emails or calls",
@@ -691,14 +858,33 @@ class _RegisterFormState extends State<RegisterForm> {
                       SizedBox(height: 10),
                       //checkbox1
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Checkbox(
-                            value: _checkbox2,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                _checkbox2 = value!;
-                              });
-                            },
+                          Theme(
+                            data: ThemeData(
+                              checkboxTheme: CheckboxThemeData(
+                                fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.selected)) {
+                                    return Colors.white; // Checked state
+                                  }
+                                  return Colors.transparent; // Unchecked state background
+                                }),
+                                side: BorderSide(
+                                  color: Colors.white, 
+                                  width: 2.0,
+                                ), // Unchecked state border color
+                              ),
+                            ),
+                            child: Checkbox(
+                              value: _checkbox2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _checkbox2 = value!;
+                                });
+                              },
+                              activeColor: Colors.white, // Checked background color
+                              checkColor: Color.fromRGBO(28, 10, 103, 1.0),  // Checked checkmark color
+                            ),
                           ),
                           Text(
                             "I read and accept the privacy policy.",
@@ -709,14 +895,33 @@ class _RegisterFormState extends State<RegisterForm> {
                       SizedBox(height: 10),
                       //checkbox1
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Checkbox(
-                            value: _checkbox3,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                _checkbox3 = value!;
-                              });
-                            },
+                          Theme(
+                            data: ThemeData(
+                              checkboxTheme: CheckboxThemeData(
+                                fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.selected)) {
+                                    return Colors.white; // Checked state
+                                  }
+                                  return Colors.transparent; // Unchecked state background
+                                }),
+                                side: BorderSide(
+                                  color: Colors.white, 
+                                  width: 2.0,
+                                ), // Unchecked state border color
+                              ),
+                            ),
+                            child: Checkbox(
+                              value: _checkbox3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _checkbox3 = value!;
+                                });
+                              },
+                              activeColor: Colors.white, // Checked background color
+                              checkColor: Color.fromRGBO(28, 10, 103, 1.0),  // Checked checkmark color
+                            ),
                           ),
                           Text(
                             "I have read and understood the rules of this program.",
