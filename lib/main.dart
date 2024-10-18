@@ -10,11 +10,13 @@ import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/admin/add_question.dart';
 import 'package:lenovo_hiring/about_lenovo.dart';
 import 'package:lenovo_hiring/admin/add_quiz.dart';
-import 'package:lenovo_hiring/models/attendee_model/attendee_model.dart';
-import 'package:lenovo_hiring/models/user_model/user_model.dart';
+import 'package:lenovo_hiring/leader_board_screen/quize_list_screen.dart';
+
 import 'package:lenovo_hiring/repository/attendee/attendee_state.dart';
 import 'package:lenovo_hiring/repository/auth/auth_repository.dart';
 import 'package:lenovo_hiring/repository/auth/auth_state.dart';
+import 'package:lenovo_hiring/leader_board_screen/leader_board_list.dart';
+import 'package:lenovo_hiring/repository/leader_board/leader_board_state.dart';
 import 'package:lenovo_hiring/repository/quiz/quiz_state.dart';
 import 'package:lenovo_hiring/demos_check/quize_question_random_check.dart';
 import 'package:lenovo_hiring/firebase_options.dart';
@@ -39,6 +41,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => QuizState()),
     ChangeNotifierProvider(create: (context) => AuthState()),
     ChangeNotifierProvider(create: (context) => AttendeeState()),
+    ChangeNotifierProvider(create: (context) => LeaderBoardState()),
   ], child: MyApp()));
 }
 
@@ -118,6 +121,21 @@ class MyApp extends StatelessWidget {
             path: '/quiz',
             builder: (context, state) {
               return QuizPage();
+            }),
+
+        GoRoute(
+            path: '/quiz-list',
+            builder: (context, state) {
+              return QuizListScreen();
+            }),
+
+        GoRoute(
+            path: '/quiz/:quizId',
+            builder: (context, state) {
+              final quizId = state.pathParameters['quizId']!;
+              return LeaderBoardList(
+                quizId: quizId,
+              );
             }),
         GoRoute(
           path: '/quiz_result',
