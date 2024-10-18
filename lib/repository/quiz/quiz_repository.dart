@@ -19,9 +19,7 @@ class QuizRepository {
   Future<List<QuizModel>> listenQuiz() async {
     try {
       var data = await _firestore.collection("quiz").get();
-      return data.docs
-          .map((e) => QuizModel.fromMap(e.data() as Map<String, dynamic>))
-          .toList();
+      return data.docs.map((e) => QuizModel.fromMap(e.data())).toList();
     } catch (e) {
       throw e;
     }
