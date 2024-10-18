@@ -49,7 +49,7 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
+  
     return Form(
       key: formKey,
       child: Column(
@@ -59,13 +59,18 @@ class _RegisterFormState extends State<RegisterForm> {
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
             child: Container(
                 alignment: Alignment.center,
-                child: Image.asset("assets/images/Smartsprint-logo.png")),
+                child: 
+                  Image.asset(
+                    "assets/images/Smartsprint-logo.png",
+                    width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
+                  )
+                ),
           ),
           SizedBox(
             height: 30,
           ),
           Container(
-            width: screenWidth * 0.6,
+            width: screenWidth < 1024 ? screenWidth * 0.85 : screenWidth * 0.8,
             padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               color: Color.fromRGBO(255, 255, 255, 0.2),
@@ -83,14 +88,16 @@ class _RegisterFormState extends State<RegisterForm> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Register for Participating in the contest"
-                            .toUpperCase(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white,
+                      Expanded(
+                        child: Text(
+                          "Register for Participating in the contest"
+                              .toUpperCase(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],
@@ -664,8 +671,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 fillColor: WidgetStateColor.resolveWith(
                                     (states) =>
                                         Color.fromRGBO(255, 255, 255, 1)),
-                                activeColor: Color.fromRGBO(255, 255, 255,
-                                    1), // Change active (selected) color
+                                activeColor: Color.fromRGBO(255, 255, 255, 1), // Change active (selected) color
                                 focusColor: WidgetStateColor.resolveWith(
                                     (states) =>
                                         Color.fromRGBO(255, 255, 255, 1)),
@@ -679,7 +685,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "2025",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              SizedBox(width: 10),
+
                               Radio<String>(
                                 value: "2024",
                                 groupValue: _selectedYear,
@@ -700,7 +706,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "2024",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              SizedBox(width: 10),
+                              
                               Radio<String>(
                                 value: "Others",
                                 groupValue: _selectedYear,
@@ -764,7 +770,9 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "Male",
                                 style: TextStyle(color: Colors.white),
                               ),
+
                               SizedBox(width: 10),
+
                               Radio<String>(
                                 value: "Female",
                                 groupValue: _selectedGender,
@@ -785,7 +793,9 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "Female",
                                 style: TextStyle(color: Colors.white),
                               ),
+
                               SizedBox(width: 10),
+                              
                               Radio<String>(
                                 value: "Others",
                                 groupValue: _selectedGender,
@@ -849,9 +859,11 @@ class _RegisterFormState extends State<RegisterForm> {
                               checkColor: Color.fromRGBO(28, 10, 103, 1.0),  // Checked checkmark color
                             ),
                           ),
-                          Text(
-                            "By checking this box, I agree to be contacted by Lenovo either through emails or calls",
-                            style: TextStyle(color: Colors.white),
+                          Expanded(
+                            child: Text(
+                              "By checking this box, I agree to be contacted by Lenovo either through emails or calls",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ],
                       ),

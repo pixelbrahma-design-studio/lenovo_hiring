@@ -44,13 +44,15 @@ class _LoginFormState extends State<LoginForm> {
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
             child: Container(
                 alignment: Alignment.center,
-                child: Image.asset("assets/images/Smartsprint-logo.png")),
+                child: Image.asset("assets/images/Smartsprint-logo.png",
+                width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
+                )),
           ),
           SizedBox(
             height: 30,
           ),
           Container(
-            width: screenWidth * 0.3,
+            width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
             padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               color: Color.fromRGBO(255, 255, 255, 0.2),
@@ -67,13 +69,15 @@ class _LoginFormState extends State<LoginForm> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "Login to your account".toUpperCase(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white,
+                      Expanded(
+                        child: Text(
+                          "Login to your account".toUpperCase(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],

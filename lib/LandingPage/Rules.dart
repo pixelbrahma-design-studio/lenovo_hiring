@@ -3115,8 +3115,8 @@ class MobileRules extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          //width: 200,
                                           height: 250,
+                                          width: 250,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
@@ -3161,8 +3161,8 @@ class MobileRules extends StatelessWidget {
                                                                             
                                       Expanded(
                                         child: Container(
-                                          //width: 200,
                                           height: 250,
+                                          width: 250,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
@@ -3207,8 +3207,8 @@ class MobileRules extends StatelessWidget {
 
                                       Expanded(
                                         child: Container(
-                                          //width: (screenWidth*0.8) / 2,
                                           height: 250,
+                                          width: 250,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
@@ -3254,6 +3254,7 @@ class MobileRules extends StatelessWidget {
                                       Expanded(
                                         child: Container(
                                           height: 250,
+                                          width: 250,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
@@ -3333,9 +3334,7 @@ class MobileRules extends StatelessWidget {
                               ),
                             ],
                           ),
-                              
-                          
-                                
+
                           const SizedBox(
                             height: 20.0,
                           ),
@@ -3434,105 +3433,99 @@ class MobileRules extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                    ]
-                                  ),
-                                ),
                                 
-                                const SizedBox(
-                                  height: 20.0,
-                                ),
-                                
-                                IntrinsicHeight(
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          width: screenWidth * 0.8,
-                                          //width: 200,
-                                          //height: 200,
-                                          decoration: const BoxDecoration(
-                                            color: Color.fromRGBO(17, 24, 79, 1.0),
-                                            //borderRadius: BorderRadius.circular(171.0)
-                                          ),
-                                          child: const Padding(
-                                            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                
-                                                Text(
-                                                  "Day 3",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: Color.fromRGBO(255, 255, 255, 0.4),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "Digital Workplace Solution (DWS) Delivery Business",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    
-                                                  ),
-                                                ),
-                                              ], 
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                  
                                       const SizedBox(
                                         height: 20.0,
                                       ),
-                                  
-                                      Expanded(
-                                        child: Container(
-                                          //width: 200,
-                                          //height: 200,
-                                          width: screenWidth * 0.8,
-                                          decoration: const BoxDecoration(
-                                            color: Color.fromRGBO(17, 24, 79, 1.0),
-                                            //borderRadius: BorderRadius.circular(171.0)
-                                          ),
-                                          child: const Padding(
-                                            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                
-                                                Text(
-                                                  "Day 4",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: Color.fromRGBO(255, 255, 255, 0.4),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20
-                                                  ),
+                                
+                                    Expanded(
+                                      child: Container(
+                                        width: screenWidth * 0.8,
+                                        //width: 200,
+                                        //height: 200,
+                                        decoration: const BoxDecoration(
+                                          color: Color.fromRGBO(17, 24, 79, 1.0),
+                                          //borderRadius: BorderRadius.circular(171.0)
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              
+                                              Text(
+                                                "Day 3",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(255, 255, 255, 0.4),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20
                                                 ),
-                                                Text(
-                                                  "General Business Knowledge",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    
-                                                  ),
+                                              ),
+                                              Text(
+                                                "Digital Workplace Solution (DWS) Delivery Business",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  
                                                 ),
-                                              ], 
-                                            ),
+                                              ),
+                                            ], 
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                                                
+                                    const SizedBox(
+                                      height: 20.0,
+                                    ),
+                                                                
+                                    Expanded(
+                                      child: Container(
+                                        //width: 200,
+                                        //height: 200,
+                                        width: screenWidth * 0.8,
+                                        decoration: const BoxDecoration(
+                                          color: Color.fromRGBO(17, 24, 79, 1.0),
+                                          //borderRadius: BorderRadius.circular(171.0)
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              
+                                              Text(
+                                                "Day 4",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(255, 255, 255, 0.4),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20
+                                                ),
+                                              ),
+                                              Text(
+                                                "General Business Knowledge",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  
+                                                ),
+                                              ),
+                                            ], 
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                              ),
                               ],
                             ),
                           ),
