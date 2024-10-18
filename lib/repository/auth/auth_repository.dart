@@ -74,7 +74,7 @@ class AuthRepository {
     }
   }
 
-  Future<UserModel> getCurrentUser(String uid) async {
+  Future<UserModel> getCurrentUser(String? uid) async {
     try {
       var data = await _firestore.collection("users").doc(uid).get();
       return UserModel.fromMap(data.data() as Map<String, dynamic>);

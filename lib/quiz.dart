@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:lenovo_hiring/Footer/Footer.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/Quiz/quiz_set.dart';
+import 'package:lenovo_hiring/models/attendee_model/attendee_model.dart';
 import 'package:lenovo_hiring/models/quiz_model/quiz_model.dart';
 
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key, required this.quizModel});
-  final QuizModel quizModel;
+  const QuizPage({
+    super.key,
+  });
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -47,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
                   //crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    QuizSet(quizModel: widget.quizModel),
+                    QuizSet(),
                   ],
                 ),
                 Row(

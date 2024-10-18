@@ -12,6 +12,8 @@ class QuestionModel {
   String? createdBy;
   String? quizId;
   String? quizTheme;
+  int? userAnswerIndex;
+  int? timeTaken;
   QuestionModel({
     this.createdBy,
     this.uid,
@@ -23,6 +25,8 @@ class QuestionModel {
     this.createdAt,
     this.quizId,
     this.quizTheme,
+    this.userAnswerIndex,
+    this.timeTaken,
   });
 
   Map<String, dynamic> toMap() {
@@ -37,6 +41,8 @@ class QuestionModel {
       'createdAt': createdAt,
       'quizId': quizId,
       'quizTheme': quizTheme,
+      'userAnswerIndex': userAnswerIndex,
+      'timeTaken': timeTaken,
     };
   }
 
@@ -52,6 +58,8 @@ class QuestionModel {
       createdAt: map['createdAt'] as dynamic,
       quizId: map['quizId'] ?? "",
       quizTheme: map['quizTheme'] ?? "",
+      userAnswerIndex: map['userAnswerIndex'] ?? null,
+      timeTaken: map['timeTaken'] ?? null,
     );
   }
 
@@ -66,6 +74,8 @@ class QuestionModel {
     dynamic? createdAt,
     String? quizId,
     String? quizTheme,
+    int? userAnswerIndex,
+    int? timeTaken,
   }) {
     return QuestionModel(
       createdBy: createdBy ?? this.createdBy,
@@ -78,6 +88,8 @@ class QuestionModel {
       createdAt: createdAt ?? this.createdAt,
       quizId: quizId ?? this.quizId,
       quizTheme: quizTheme ?? this.quizTheme,
+      userAnswerIndex: userAnswerIndex ?? this.userAnswerIndex,
+      timeTaken: timeTaken ?? this.timeTaken,
     );
   }
 }
