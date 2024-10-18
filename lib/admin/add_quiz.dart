@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:lenovo_hiring/repository/quiz/quiz_state.dart';
 import 'package:lenovo_hiring/Footer/Footer.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
-import 'package:lenovo_hiring/controllers/quiz_controller/quiz_state.dart';
 import 'package:lenovo_hiring/models/quiz_model/quiz_model.dart';
 import 'package:lenovo_hiring/repository/quiz/quiz_repository.dart';
 import 'package:provider/provider.dart';
@@ -31,25 +30,28 @@ class _AddQuizState extends State<AddQuiz> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
-          gradient: RadialGradient(
-            colors: [Color.fromRGBO(222, 6, 191, 1.0), Color.fromRGBO(77, 20, 74, 1.0)]
-          ),
-          image: DecorationImage(
-            image: AssetImage("assets/images/grid-2.png"),
-            repeat: ImageRepeat.repeatY,
-            opacity: 0.5,
-            fit: BoxFit.cover,
-          )
-        ),
+            gradient: RadialGradient(colors: [
+              Color.fromRGBO(222, 6, 191, 1.0),
+              Color.fromRGBO(77, 20, 74, 1.0)
+            ]),
+            image: DecorationImage(
+              image: AssetImage("assets/images/grid-2.png"),
+              repeat: ImageRepeat.repeatY,
+              opacity: 0.5,
+              fit: BoxFit.cover,
+            )),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Navbar(),
-              SizedBox(height: 50,),
+              SizedBox(
+                height: 50,
+              ),
               Container(
                 width: screenWidth * 0.5,
-                padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 80.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 50.0, horizontal: 80.0),
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(255, 255, 255, 0.2),
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -70,11 +72,14 @@ class _AddQuizState extends State<AddQuiz> {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(height: 40,),
+                          SizedBox(
+                            height: 40,
+                          ),
                           SizedBox(
                             //width: screenWidth * 0.5,
                             child: TextFormField(
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               controller: state.themeController,
                               decoration: InputDecoration(
                                 hintText: "Enter Theme",
@@ -85,12 +90,10 @@ class _AddQuizState extends State<AddQuiz> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                               ),
                               style: TextStyle(color: Colors.white),
                               validator: (value) {
@@ -121,21 +124,23 @@ class _AddQuizState extends State<AddQuiz> {
                                       hintText: "Enter order",
                                       hintStyle: TextStyle(color: Colors.white),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
                                       ),
-                                      errorStyle: TextStyle(
-                                        color: Colors.white
-                                      ),
+                                      errorStyle:
+                                          TextStyle(color: Colors.white),
                                       errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white)
-                                      ),
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
                                     ),
                                     style: TextStyle(color: Colors.white),
                                     validator: (value) {
-                                      if (value == null || value!.trim().isEmpty) {
+                                      if (value == null ||
+                                          value!.trim().isEmpty) {
                                         return "Please Enter Order";
                                       }
                                       return null;
@@ -158,21 +163,23 @@ class _AddQuizState extends State<AddQuiz> {
                                       hintText: "Enter number of questions",
                                       hintStyle: TextStyle(color: Colors.white),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
                                       ),
-                                      errorStyle: TextStyle(
-                                        color: Colors.white
-                                      ),
+                                      errorStyle:
+                                          TextStyle(color: Colors.white),
                                       errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white)
-                                      ),
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
                                     ),
                                     style: TextStyle(color: Colors.white),
                                     validator: (value) {
-                                      if (value == null || value!.trim().isEmpty) {
+                                      if (value == null ||
+                                          value!.trim().isEmpty) {
                                         return "Please Enter number of questions";
                                       }
                                       return null;
@@ -202,21 +209,23 @@ class _AddQuizState extends State<AddQuiz> {
                                       hintText: "Enter Count down",
                                       hintStyle: TextStyle(color: Colors.white),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
                                       ),
-                                      errorStyle: TextStyle(
-                                        color: Colors.white
-                                      ),
+                                      errorStyle:
+                                          TextStyle(color: Colors.white),
                                       errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white)
-                                      ),
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
                                     ),
                                     style: TextStyle(color: Colors.white),
                                     validator: (value) {
-                                      if (value == null || value!.trim().isEmpty) {
+                                      if (value == null ||
+                                          value!.trim().isEmpty) {
                                         return "Please Enter count down";
                                       }
                                       return null;
@@ -239,21 +248,23 @@ class _AddQuizState extends State<AddQuiz> {
                                       hintText: "Enter Point",
                                       hintStyle: TextStyle(color: Colors.white),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
                                       ),
-                                      errorStyle: TextStyle(
-                                        color: Colors.white
-                                      ),
+                                      errorStyle:
+                                          TextStyle(color: Colors.white),
                                       errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white)
-                                      ),
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
                                     ),
                                     style: TextStyle(color: Colors.white),
                                     validator: (value) {
-                                      if (value == null || value!.trim().isEmpty) {
+                                      if (value == null ||
+                                          value!.trim().isEmpty) {
                                         return "Please Enter point";
                                       }
                                       return null;
@@ -281,7 +292,8 @@ class _AddQuizState extends State<AddQuiz> {
                                   DateTime? selectedDate = await showDatePicker(
                                       context: context,
                                       firstDate: DateTime(2000),
-                                      lastDate: DateTime(DateTime.now().year + 5),
+                                      lastDate:
+                                          DateTime(DateTime.now().year + 5),
                                       initialDate: DateTime.now());
                                   if (selectedDate != null) {
                                     state.setQuizDate(selectedDate);
@@ -289,80 +301,80 @@ class _AddQuizState extends State<AddQuiz> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-                                  backgroundColor: const Color.fromRGBO(28, 10, 103, 0.5),
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    side: BorderSide(
-                                      color: Colors.white,
-                                      width: 2,
-                                    )
-                                  )
-                                ),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 20, horizontal: 50),
+                                    backgroundColor:
+                                        const Color.fromRGBO(28, 10, 103, 0.5),
+                                    foregroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        side: BorderSide(
+                                          color: Colors.white,
+                                          width: 2,
+                                        ))),
                               ),
-                            //],
-                          // ),
-                          // SizedBox(
-                          //   height: 30,
-                          // ),
-                          // SizedBox(
-                          //   //width: 600,
+                              //],
+                              // ),
+                              // SizedBox(
+                              //   height: 30,
+                              // ),
+                              // SizedBox(
+                              //   //width: 600,
                               // Row(
                               //   children: [
-                                  ElevatedButton(
-                                    child: Text(state.startTime == null
-                                        ? "Start Time"
-                                        : state.startTime!.format(context)),
-                                    onPressed: () async {
-                                      TimeOfDay? time = await showTimePicker(
-                                          context: context,
-                                          initialTime: TimeOfDay.now());
-                                      if (time != null) {
-                                        state.setStartTime(time);
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-                                      backgroundColor: const Color.fromRGBO(28, 10, 103, 0.5),
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
+                              ElevatedButton(
+                                child: Text(state.startTime == null
+                                    ? "Start Time"
+                                    : state.startTime!.format(context)),
+                                onPressed: () async {
+                                  TimeOfDay? time = await showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay.now());
+                                  if (time != null) {
+                                    state.setStartTime(time);
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 20, horizontal: 50),
+                                    backgroundColor:
+                                        const Color.fromRGBO(28, 10, 103, 0.5),
+                                    foregroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         side: BorderSide(
                                           color: Colors.white,
                                           width: 2,
-                                        )
-                                      )
-                                    ),
-                                  ),
-                                  // SizedBox(
-                                  //   width: 20,
-                                  // ),
-                                  ElevatedButton(
-                                    child: Text(state.endTime == null
-                                        ? "End Time"
-                                        : state.endTime!.format(context)),
-                                    onPressed: () async {
-                                      TimeOfDay? time = await showTimePicker(
-                                          context: context,
-                                          initialTime: TimeOfDay.now());
-                                      if (time != null) {
-                                        state.setEndTime(time);
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-                                      backgroundColor: const Color.fromRGBO(28, 10, 103, 0.5),
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
+                                        ))),
+                              ),
+                              // SizedBox(
+                              //   width: 20,
+                              // ),
+                              ElevatedButton(
+                                child: Text(state.endTime == null
+                                    ? "End Time"
+                                    : state.endTime!.format(context)),
+                                onPressed: () async {
+                                  TimeOfDay? time = await showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay.now());
+                                  if (time != null) {
+                                    state.setEndTime(time);
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 20, horizontal: 50),
+                                    backgroundColor:
+                                        const Color.fromRGBO(28, 10, 103, 0.5),
+                                    foregroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         side: BorderSide(
                                           color: Colors.white,
                                           width: 2,
-                                        )
-                                      )
-                                    ),
-                                  ),
+                                        ))),
+                              ),
                             ],
                           ),
                           SizedBox(
@@ -378,47 +390,55 @@ class _AddQuizState extends State<AddQuiz> {
                                         if (check) {
                                           state.setAddLoading();
                                           QuizModel quizModel = QuizModel(
-                                              numberOfQuestions: int.tryParse(state
-                                                  .noOfquestionController.text
-                                                  .trim())!,
-                                              theme: state.themeController.text.trim(),
+                                              numberOfQuestions: int.tryParse(
+                                                  state.noOfquestionController
+                                                      .text
+                                                      .trim())!,
+                                              theme: state.themeController.text
+                                                  .trim(),
                                               formateDate: state.formateDate,
-                                              order: int.tryParse(
-                                                  state.orderCorntroller.text.trim())!,
-                                              point: double.tryParse(
-                                                  state.pointController.text.trim())!,
+                                              order: int.tryParse(state
+                                                  .orderCorntroller.text
+                                                  .trim())!,
+                                              point: double.tryParse(state
+                                                  .pointController.text
+                                                  .trim())!,
                                               quizDate: state.quizDate,
-                                              startTime:
-                                                  state.startTime!.format(context),
-                                              endTime: state.endTime!.format(context),
-                                              coundown: int.tryParse(
-                                                  state.countController.text.trim())!,
+                                              startTime: state.startTime!
+                                                  .format(context),
+                                              endTime:
+                                                  state.endTime!.format(context),
+                                              coundown: int.tryParse(state.countController.text.trim())!,
                                               questions: []);
-                                          await _quizRepository.CreateQuiz(quizModel);
-                        
+                                          await _quizRepository.CreateQuiz(
+                                              quizModel);
+
                                           state.clearState();
-                        
+
                                           state.getQuizList();
                                         }
                                       }
                                     } catch (e) {
                                       state.setAddLoading();
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text(e.toString())));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                              content: Text(e.toString())));
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-                                    backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                                    foregroundColor: Color.fromRGBO(28, 10, 103, 1.0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      side: BorderSide(
-                                        color: Colors.white,
-                                        width: 2,
-                                      )
-                                    )
-                                  ),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 20, horizontal: 50),
+                                      backgroundColor: const Color.fromRGBO(
+                                          255, 255, 255, 1),
+                                      foregroundColor:
+                                          Color.fromRGBO(28, 10, 103, 1.0),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          side: BorderSide(
+                                            color: Colors.white,
+                                            width: 2,
+                                          ))),
                                   child: Text(
                                     "Add Quiz",
                                     style: TextStyle(
@@ -427,41 +447,42 @@ class _AddQuizState extends State<AddQuiz> {
                                       fontSize: 16,
                                       letterSpacing: 0.0,
                                     ),
-                                  )
-                                ),
+                                  )),
                           SizedBox(
                             height: 40,
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(28, 10, 103, 0.5),
-                              borderRadius: BorderRadius.all(Radius.circular(20.0))
-                            ),
+                                color: Color.fromRGBO(28, 10, 103, 0.5),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0))),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 20.0),
                               child: Consumer<QuizState>(
                                 builder: (context, ref, child) {
                                   return ref.fetchLoading
-                                    ? CircularProgressIndicator()
-                                    : ListView.builder(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount: ref.quizModelList.length,
-                                        itemBuilder: (c, i) {
-                                          QuizModel quiz = ref.quizModelList[i];
-                                          return ListTile(
-                                            title: Text(
-                                              quiz.theme ?? "",
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white,
-                                                //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
+                                      ? CircularProgressIndicator()
+                                      : ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: ref.quizModelList.length,
+                                          itemBuilder: (c, i) {
+                                            QuizModel quiz =
+                                                ref.quizModelList[i];
+                                            return ListTile(
+                                              title: Text(
+                                                quiz.theme ?? "",
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white,
+                                                  //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        }
-                                      );
+                                            );
+                                          });
                                 },
                               ),
                             ),

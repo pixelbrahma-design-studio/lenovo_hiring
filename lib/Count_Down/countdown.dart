@@ -1,7 +1,13 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lenovo_hiring/models/attendee_model/attendee_model.dart';
+import 'package:lenovo_hiring/repository/attendee/attendee_repository.dart';
+import 'package:lenovo_hiring/repository/attendee/attendee_state.dart';
+import 'package:lenovo_hiring/repository/auth/auth_state.dart';
 import 'package:lenovo_hiring/repository/quiz/quiz_repository.dart';
+import 'package:provider/provider.dart';
 
 class CountdownTimer extends StatefulWidget {
   @override
@@ -10,6 +16,7 @@ class CountdownTimer extends StatefulWidget {
 
 class _CountdownTimerState extends State<CountdownTimer> {
   QuizRepository quizRepository = QuizRepository();
+  AttendeeRepository attendeeRepository = AttendeeRepository();
   late Timer _timer;
   Duration _remainingTime = Duration();
 
@@ -102,20 +109,54 @@ class _CountdownTimerState extends State<CountdownTimer> {
               ],
             ),
             const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () async {
-                var a = await quizRepository.getQuizByCount(1);
-                context.push('/quiz', extra: a);
-              },
-              // _remainingTime.inSeconds > 0 ? null : () {
-              // Action to take when countdown is over
-              //  },
-              child: Text("Enter"),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                textStyle: TextStyle(fontSize: 20),
-              ),
-            ),
+
+            Consumer<AttendeeState>(builder: (context, state, _) {
+              return state.loading
+                  ? CircularProgressIndicator()
+                  : ElevatedButton(
+                      onPressed: () async {
+                        try {
+                          state.setLoading();
+                          var a = await quizRepository.getQuizByCount(1);
+                          AttendeeModel attendeeModel = AttendeeModel(
+                            totalTimeInSeconds:
+                                a.numberOfQuestions * a.coundown,
+                            completed: false,
+                            attendBy: FirebaseAuth.instance.currentUser!.uid,
+                            currentQuestionIndex: 0,
+                            points: 0,
+                            quizModel: a,
+                            questions: [],
+                          );
+                          var result = await attendeeRepository.createAttendee(
+                              attendeeModel, a);
+                          if (result == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Already attended")));
+                            state.setLoading();
+                          } else {
+                            state.setLoading();
+
+                            context.go('/quiz');
+                          }
+                        } catch (e) {
+                          state.setLoading();
+                          print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(e.toString())));
+                        }
+                      },
+                      // _remainingTime.inSeconds > 0 ? null : () {
+                      // Action to take when countdown is over
+                      //  },
+                      child: Text("Enter"),
+                      style: ElevatedButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        textStyle: TextStyle(fontSize: 20),
+                      ),
+                    );
+            }),
           ],
         ),
       ),
