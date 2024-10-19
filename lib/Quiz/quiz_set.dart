@@ -70,16 +70,7 @@ class _QuizSetState extends State<QuizSet> {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
-                child: Container(
-                    alignment: Alignment.center,
-                    child: Image.asset("assets/images/Smartsprint-logo.png")),
-              ),
-              SizedBox(
-                height: 30,
-              ),
+              
               Container(
                 width: screenWidth * 0.8,
                 child: Padding(
@@ -133,6 +124,10 @@ class _QuizSetState extends State<QuizSet> {
                           fontSize: 14,
                         ),
                       ),
+                      SizedBox(height: 20),
+                      if (state.questionModel?.questionImage!=null)
+                        //image
+                        Image.asset("assets/images/table-example.png"),
                       SizedBox(height: 20),
                       Text(
                         "${state.questionModel?.questionTitle}",

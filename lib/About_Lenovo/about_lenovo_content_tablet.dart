@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 import 'dart:html';  // Already needed for IFrameElement
 
-class AboutLenovoContent extends StatefulWidget {
-  const AboutLenovoContent({super.key});
+class AboutLenovoContentTablet extends StatefulWidget {
+  const AboutLenovoContentTablet({super.key});
 
   @override
-  State<AboutLenovoContent> createState() => _AboutLenovoContentState();
+  State<AboutLenovoContentTablet> createState() => _AboutLenovoContentTabletState();
 }
 // class GridItem {
 //   final String title;
@@ -18,7 +18,7 @@ class AboutLenovoContent extends StatefulWidget {
 
 //   GridItem({required this.title, required this.description, required this.imageUrl});
 // }
-class _AboutLenovoContentState extends State<AboutLenovoContent> {
+class _AboutLenovoContentTabletState extends State<AboutLenovoContentTablet> {
   // late YoutubePlayerController _controller1;
   // late YoutubePlayerController _controller2;
   // late YoutubePlayerController _controller3;
@@ -490,35 +490,8 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                           ),
                           Expanded(
                             child: Container(
-                              child: Image.asset("assets/images/learning.png"),
+                              child: Image.asset("assets/images/recognition.png"),
                             )
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Our Offices".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 20, 
-                                      color: Color.fromRGBO(27, 9, 20, 1),
-                                    )
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    "No matter where you sit, you're working with - and impacting - the rest of us, worldwide. With locations across the globe, we strive to provide dynamic and colorful workplaces that promote creativity and collaboration.",
-                                    style: TextStyle(
-                                      fontSize: 14, 
-                                      color: Color.fromRGBO(27, 9, 20, 1),
-                                    )
-                                  ),
-                                                
-                                ],
-                              ),
-                            ),
                           ),
                         ],
                       ),
@@ -535,7 +508,7 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                         children: [
                           Expanded(
                             child: Container(
-                              child: Image.asset("assets/images/recognition.png"),
+                              child: Image.asset("assets/images/learning.png"),
                             )
                           ),
                           Expanded(
@@ -565,6 +538,46 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                               ),
                             ),
                           ),
+                        ],
+                      ),
+                    )
+                  ] 
+                ),
+                
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Our Offices".toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 20, 
+                                      color: Color.fromRGBO(27, 9, 20, 1),
+                                    )
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    "No matter where you sit, you're working with - and impacting - the rest of us, worldwide. With locations across the globe, we strive to provide dynamic and colorful workplaces that promote creativity and collaboration.",
+                                    style: TextStyle(
+                                      fontSize: 14, 
+                                      color: Color.fromRGBO(27, 9, 20, 1),
+                                    )
+                                  ),
+                                                
+                                ],
+                              ),
+                            ),
+                          ),
                           Expanded(
                             child: Container(
                               child: Image.asset("assets/images/office.png"),
@@ -574,8 +587,8 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                       ),
                     )
                   ] 
-                )
-                
+                ),
+                          
               ],
             ),
           )

@@ -58,6 +58,33 @@
     const analytics = getAnalytics(app);
   </script>
 
+<script>
+  var serviceWorkerVersion = 'v1';
+  window.addEventListener('load', function (ev) {
+    console.log('Loading the Flutter entry point...');
+    _flutter.loader.loadEntrypoint({
+      serviceWorker: {
+        serviceWorkerVersion: serviceWorkerVersion,
+      },
+      onEntrypointLoaded: async function (engineInitializer) {
+        console.log('Entrypoint loaded successfully.');
+        let appRunner = await engineInitializer.initializeEngine({
+          hostElement: document.querySelector("#flutter_app"),
+          renderer: "html"
+        }).then(function (appRunner) {
+          console.log('Flutter app is running.');
+          return appRunner.runApp();
+        }).catch(function (error) {
+          console.error('Error running Flutter app:', error);
+        });
+      }
+    }).catch(function (error) {
+      console.error('Error loading entrypoint:', error);
+    });
+  });
+
+</script>
+
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

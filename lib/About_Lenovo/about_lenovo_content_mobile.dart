@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 import 'dart:html';  // Already needed for IFrameElement
 
-class AboutLenovoContent extends StatefulWidget {
-  const AboutLenovoContent({super.key});
+class AboutLenovoContentMobile extends StatefulWidget {
+  const AboutLenovoContentMobile({super.key});
 
   @override
-  State<AboutLenovoContent> createState() => _AboutLenovoContentState();
+  State<AboutLenovoContentMobile> createState() => _AboutLenovoContentMobileState();
 }
 // class GridItem {
 //   final String title;
@@ -18,7 +18,7 @@ class AboutLenovoContent extends StatefulWidget {
 
 //   GridItem({required this.title, required this.description, required this.imageUrl});
 // }
-class _AboutLenovoContentState extends State<AboutLenovoContent> {
+class _AboutLenovoContentMobileState extends State<AboutLenovoContentMobile> {
   // late YoutubePlayerController _controller1;
   // late YoutubePlayerController _controller2;
   // late YoutubePlayerController _controller3;
@@ -97,10 +97,10 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
               ),
             ),
             child: Container(
-              width: screenWidth * 0.7,
+              width: screenWidth * 0.8,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 10),
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -110,7 +110,7 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: (screenWidth * 0.7) / 2,
+                          width: (screenWidth * 0.8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -163,9 +163,10 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 30,),
                     // Video Column
                     SizedBox(
-                      width: (screenWidth * 0.7) / 2,
+                      width: (screenWidth * 0.8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -194,12 +195,12 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
             width: screenWidth * 0.8,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 0),
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: (screenWidth * 0.7) / 2,
+                    width: (screenWidth * 0.8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -212,12 +213,13 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 30,),
                   // Culture Text
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: (screenWidth * 0.7) / 2,
+                        width: (screenWidth * 0.8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -272,10 +274,10 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
               color: Color.fromRGBO(77, 20, 74, 1),
             ),
             child: Container(
-              width: screenWidth * 0.7,
+              width: screenWidth * 0.8,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 0),
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -283,7 +285,7 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: (screenWidth * 0.7) / 2,
+                          width: (screenWidth * 0.8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -317,9 +319,10 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 30,),
                     // Video for Perks
                     SizedBox(
-                      width: (screenWidth * 0.7) / 2,
+                      width: (screenWidth * 0.8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -346,237 +349,139 @@ class _AboutLenovoContentState extends State<AboutLenovoContent> {
             ),
           ),
 
-          // Grid Section
-          // GridView.builder(
-          //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //     crossAxisCount: 3,
-          //     //mainAxisSpacing: 10,
-          //     //crossAxisSpacing: 10,
-          //     childAspectRatio: 0.75, // Adjust this ratio for the grid item aspect
-          //   ),
-          //   itemCount: gridItems.length, // Use gridItems length
-          //   physics: NeverScrollableScrollPhysics(), // Prevent scrolling
-          //   shrinkWrap: true, // Ensure it takes only as much height as needed
-          //   itemBuilder: (context, index) {
-          //     bool isFirstItem = index == 0;
-          //     bool isLastItem = index == gridItems.length - 1;
-          //     return Container(
-          //       decoration: BoxDecoration(
-          //         color: Color.fromRGBO(241, 225, 237, 1),
-          //         //borderRadius: BorderRadius.circular(10),
-          //       ),
-          //       //alignment: Alignment.center,
-          //       child: Column(
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           if (isFirstItem || isLastItem) 
-          //           Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               Container(
-          //                 //width: screenWidth / 3,
-          //                 height: 386,
-          //                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60.0),
-          //                 child: Column(
-          //                   crossAxisAlignment: CrossAxisAlignment.start,
-          //                   mainAxisAlignment: MainAxisAlignment.center,
-          //                   children: [
-          //                     Text(
-          //                       gridItems[index].title,
-          //                       style: TextStyle(fontSize: 20, color: Color.fromRGBO(27, 9, 20, 1),),
-          //                     ),
-          //                     SizedBox(height: 10),
-          //                     Text(
-          //                       gridItems[index].description,
-          //                       style: TextStyle(fontSize: 14, color: Color.fromRGBO(27, 9, 20, 1),),
-          //                     ),
-          //                   ],
-          //                 ),
-          //               ),
-          //               Container(
-          //                 height: 386,
-          //                 child: Image.asset(
-          //                   gridItems[index].imageUrl,
-          //                   fit: BoxFit.cover,
-          //                 ),
-          //               ),
-          //             ] 
-          //           ) else 
-          //           Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               Container(
-          //                 height: 386,
-          //                 child: Image.asset(
-          //                   gridItems[index].imageUrl,
-          //                   fit: BoxFit.cover,
-          //                 ),
-          //               ),
-          //               Container(
-          //                 height: 386,
-          //                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60.0),
-          //                 child: Column(
-          //                   mainAxisAlignment: MainAxisAlignment.center,
-          //                   crossAxisAlignment: CrossAxisAlignment.start,
-          //                   children: [
-          //                     Text(
-          //                       gridItems[index].title,
-          //                       style: TextStyle(fontSize: 20, color: Color.fromRGBO(27, 9, 20, 1),),
-          //                     ),
-          //                     SizedBox(height: 10),
-          //                     Text(
-          //                       gridItems[index].description,
-          //                       style: TextStyle(fontSize: 14, color: Color.fromRGBO(27, 9, 20, 1),),
-          //                     ),
-          //                   ],
-          //                 ),
-          //               ),
-          //             ] 
-          //           )
-                    
-          //         ],
-          //       ),
-          //     );
-          //   },
-          // ),
-
           Container(
             decoration: BoxDecoration(
               color: Color.fromRGBO(241, 225, 237, 1),
               //borderRadius: BorderRadius.circular(10),
             ),
             //alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    IntrinsicHeight(
-                      child: Row(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 60.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
                         children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Recognition and Rewards".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 20, 
-                                      color: Color.fromRGBO(27, 9, 20, 1),
-                                    )
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    "Around here, our work is also our reward. This is a place where ideas grow, initiative wins, achievements are celebrated, and we love the work we get to do.",
-                                    style: TextStyle(
-                                      fontSize: 14, 
-                                      color: Color.fromRGBO(27, 9, 20, 1),
-                                    )
-                                  ),
-                                                        
-                                ],
-                              ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 60, bottom: 30, right: 60, left: 60),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Recognition and Rewards".toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 20, 
+                                    color: Color.fromRGBO(27, 9, 20, 1),
+                                  )
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "Around here, our work is also our reward. This is a place where ideas grow, initiative wins, achievements are celebrated, and we love the work we get to do.",
+                                  style: TextStyle(
+                                    fontSize: 14, 
+                                    color: Color.fromRGBO(27, 9, 20, 1),
+                                  )
+                                ),
+                                                      
+                              ],
                             ),
                           ),
-                          Expanded(
-                            child: Container(
-                              child: Image.asset("assets/images/learning.png"),
-                            )
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Our Offices".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 20, 
-                                      color: Color.fromRGBO(27, 9, 20, 1),
-                                    )
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    "No matter where you sit, you're working with - and impacting - the rest of us, worldwide. With locations across the globe, we strive to provide dynamic and colorful workplaces that promote creativity and collaboration.",
-                                    style: TextStyle(
-                                      fontSize: 14, 
-                                      color: Color.fromRGBO(27, 9, 20, 1),
-                                    )
-                                  ),
-                                                
-                                ],
-                              ),
-                            ),
+                          Container(
+                            child: Image.asset("assets/images/recognition.png"),
                           ),
                         ],
-                      ),
-                    )
-                  ] 
-                ),
-
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    IntrinsicHeight(
-                      child: Row(
+                      )
+                    ] 
+                  ),
+              
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
                         children: [
-                          Expanded(
-                            child: Container(
-                              child: Image.asset("assets/images/recognition.png"),
-                            )
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Learning and Development".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 20, 
-                                      color: Color.fromRGBO(27, 9, 20, 1),
-                                    )
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    "At Lenovo, you're setting the stage for growth in every corner of the globe - including your own. In addition to our exciting and rewarding work, Grow@Lenovo offers you tens of thousands of free resources including: books, courses, videos, boot-camps, and in-person training. You can also find free professional exam certification training paths and tools to guide, develop and prepare you for the future.",
-                                    style: TextStyle(
-                                      fontSize: 14, 
-                                      color: Color.fromRGBO(27, 9, 20, 1),
-                                    )
-                                  ),
-                                                
-                                ],
-                              ),
+                          
+                          Padding(
+                            padding: EdgeInsets.only(top: 60, bottom: 30, right: 60, left: 60),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Learning and Development".toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 20, 
+                                    color: Color.fromRGBO(27, 9, 20, 1),
+                                  )
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "At Lenovo, you're setting the stage for growth in every corner of the globe - including your own. In addition to our exciting and rewarding work, Grow@Lenovo offers you tens of thousands of free resources including: books, courses, videos, boot-camps, and in-person training. You can also find free professional exam certification training paths and tools to guide, develop and prepare you for the future.",
+                                  style: TextStyle(
+                                    fontSize: 14, 
+                                    color: Color.fromRGBO(27, 9, 20, 1),
+                                  )
+                                ),
+                                              
+                              ],
                             ),
                           ),
-                          Expanded(
-                            child: Container(
-                              child: Image.asset("assets/images/office.png"),
-                            )
+                          Container(
+                            child: Image.asset("assets/images/learning.png"),
                           ),
                         ],
-                      ),
-                    )
-                  ] 
-                )
-                
-              ],
+                      )
+                    ] 
+                  ),
+                  
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 60, bottom: 30, right: 60, left: 60),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Our Offices".toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 20, 
+                                    color: Color.fromRGBO(27, 9, 20, 1),
+                                  )
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "No matter where you sit, you're working with - and impacting - the rest of us, worldwide. With locations across the globe, we strive to provide dynamic and colorful workplaces that promote creativity and collaboration.",
+                                  style: TextStyle(
+                                    fontSize: 14, 
+                                    color: Color.fromRGBO(27, 9, 20, 1),
+                                  )
+                                ),
+                                              
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: Image.asset("assets/images/office.png"),
+                          ),
+                        ],
+                      )
+                    ] 
+                  ),
+                            
+                ],
+              ),
             ),
           )
   
