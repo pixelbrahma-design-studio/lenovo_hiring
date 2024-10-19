@@ -68,6 +68,7 @@ class AttendeeState extends ChangeNotifier {
   void startTimer(BuildContext context) {
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (timeBalanced > 0) {
+        updateTimeTaken();
         decreaseTime();
       } else {
         updateUserAnswerToDatabase(auth.currentUser!.uid, context);
