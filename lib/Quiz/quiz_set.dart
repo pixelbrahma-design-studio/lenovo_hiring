@@ -32,27 +32,6 @@ class _QuizSetState extends State<QuizSet> {
         FirebaseAuth.instance.currentUser!.uid,
         context); // Load attendee asynchronously
     // _startTimer();
-
-    window.onBeforeUnload.listen((event) {
-      updateTimeTaken();
-    });
-  }
-
-  Future<void> updateTimeTaken() async {
-    try {
-      print("update time taken  called");
-      await attendeeRepository.updateAttendee(uiattendeeModel!);
-      print("update time taken  called after");
-    } catch (e) {
-      print("update time taken error: $e");
-    }
-  }
-
-  @override
-  void dispose() {
-    updateTimeTaken();
-    print("Disposing");
-    super.dispose();
   }
 
   @override
@@ -104,6 +83,17 @@ class _QuizSetState extends State<QuizSet> {
                     children: [
                       Icon(Icons.timer_outlined, color: Colors.white),
                       SizedBox(width: 5),
+                      SizedBox(
+                        height: 40,
+                        width: 100,
+                        child: LinearProgressIndicator(
+                          value: state.timeBalanced /
+                              state.attendeeModel!.quizModel!.coundown,
+                          backgroundColor: Colors.white,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Color.fromRGBO(28, 10, 103, 1.0)),
+                        ),
+                      ),
                       Text(
                         '00:${state.timeBalanced} s remaining',
                         style: TextStyle(
