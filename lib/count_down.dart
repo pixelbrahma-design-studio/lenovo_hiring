@@ -35,12 +35,7 @@ class _CountDownState extends State<CountDown> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Navbar(),
-                  ],
-                ), 
+                Navbar(), 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

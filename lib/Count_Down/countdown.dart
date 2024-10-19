@@ -15,6 +15,7 @@ class CountdownTimer extends StatefulWidget {
 }
 
 class _CountdownTimerState extends State<CountdownTimer> {
+  
   QuizRepository quizRepository = QuizRepository();
   AttendeeRepository attendeeRepository = AttendeeRepository();
   late Timer _timer;
@@ -54,6 +55,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     int days = _remainingTime.inDays;
     int hours = _remainingTime.inHours.remainder(24);
     int minutes = _remainingTime.inMinutes.remainder(60);
@@ -68,7 +70,9 @@ class _CountdownTimerState extends State<CountdownTimer> {
               padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
               child: Container(
                   alignment: Alignment.center,
-                  child: Image.asset("assets/images/Smartsprint-logo.png")),
+                  child: Image.asset("assets/images/Smartsprint-logo.png",
+                  width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
+                  )),
             ),
 
             Text(
@@ -91,7 +95,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
             //   ),
             // ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _buildTimeCard(formatTime(days), "Days"),
                 SizedBox(
@@ -152,8 +156,13 @@ class _CountdownTimerState extends State<CountdownTimer> {
                       child: Text("Enter"),
                       style: ElevatedButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        textStyle: TextStyle(fontSize: 20),
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                        textStyle: TextStyle(
+                          color: Color.fromRGBO(28, 10, 103, 1.0),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          letterSpacing: 0.0,
+                        ),
                       ),
                     );
             }),
@@ -164,15 +173,18 @@ class _CountdownTimerState extends State<CountdownTimer> {
   }
 
   Widget _buildTimeCard(String time, String label) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double timeFontSize = screenWidth < 769 ? 40 : 60; // 10% of screen width
+    //double labelFontSize = screenWidth * 0.04; // 4% of screen width
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
         children: <Widget>[
           Text(
             time,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 60,
+              fontSize: timeFontSize,
               fontWeight: FontWeight.bold,
             ),
           ),

@@ -198,7 +198,7 @@ class DesktopSmartSprintTop extends StatelessWidget {
             ),
             
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
@@ -206,7 +206,7 @@ class DesktopSmartSprintTop extends StatelessWidget {
                   child: const Padding(
                     padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 40.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Column(
