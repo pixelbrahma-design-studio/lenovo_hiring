@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lenovo_hiring/models/attendee_model/attendee_model.dart';
 import 'package:lenovo_hiring/models/question_model/question_model.dart';
 import 'package:lenovo_hiring/models/quiz_model/quiz_model.dart';
@@ -9,14 +11,16 @@ class AttendeeRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // CREATE ATTDEDEE
-  Future<int?> createAttendee(
-      AttendeeModel attendeeModel, QuizModel quizModel) async {
+  Future<int?> createAttendee(AttendeeModel attendeeModel, QuizModel quizModel,
+      BuildContext contex) async {
     try {
-      bool exist = await checkIfAttendeeExist(attendeeModel.attendBy, true);
+      bool exist =
+          await checkIfAttendeeExist(attendeeModel.attendBy, true, contex);
       if (exist) {
         return null;
       } else {
-        bool exist = await checkIfAttendeeExist(attendeeModel.attendBy, false);
+        bool exist =
+            await checkIfAttendeeExist(attendeeModel.attendBy, false, contex);
         if (exist) {
           return 0;
         } else {
@@ -106,12 +110,19 @@ class AttendeeRepository {
   }
 
   // get attendee by attendBy limit 1
-  Future<AttendeeModel> getAttendeeByAttendBy(String attendBy) async {
+  Future<AttendeeModel> getAttendeeByAttendBy(
+      String attendBy, DateTime date, BuildContext context) async {
     try {
       return await _firestore
           .collection('attendees')
-          .where('attendBy',
-              isEqualTo: attendBy) // check the date and completed
+          .where('attendBy', isEqualTo: attendBy)
+          .where("quizModel.formateDate",
+              isEqualTo: DateFormat.yMd().format(date))
+          .where('quizModel.endTime',
+              isLessThanOrEqualTo: TimeOfDay.now().format(context))
+          .where('quizModel.startTime',
+              isGreaterThanOrEqualTo: TimeOfDay.now()
+                  .format(context)) // check the date and completed
           .limit(1)
           .get()
           .then((value) {
@@ -124,13 +135,20 @@ class AttendeeRepository {
     }
   }
 
-  Future<bool> checkIfAttendeeExist(String attendBy, bool completed) async {
+  Future<bool> checkIfAttendeeExist(
+      String attendBy, bool completed, BuildContext contex) async {
     try {
       return await _firestore
           .collection('attendees')
           .where('attendBy', isEqualTo: attendBy)
-          .where('completed',
-              isEqualTo: completed) // check the date and completed
+          .where('completed', isEqualTo: completed)
+          .where("quizModel.formateDate",
+              isEqualTo: DateFormat.yMd().format(DateTime.now()))
+          .where('startTime',
+              isGreaterThanOrEqualTo: TimeOfDay.now().format(contex))
+          .where('endTime',
+              isLessThan: TimeOfDay.now()
+                  .format(contex)) // check the date and completed
           .limit(1)
           .get()
           .then((value) {

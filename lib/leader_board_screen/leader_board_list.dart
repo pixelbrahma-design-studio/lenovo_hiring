@@ -29,7 +29,7 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
           itemBuilder: (context, index) {
             LeaderBoardModel leaderBoardModel = state.leaderBoardList[index];
             return ListTile(
-              leading: Text('Leader Board $index'),
+              leading: Text('Leader Board ${index + 1}'),
               title: Text(leaderBoardModel.user.name),
               subtitle: Text(
                   "Score: ${leaderBoardModel.totoalScore} , Time: ${leaderBoardModel.totalTimeTaken}"),

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:lenovo_hiring/models/attendee_model/attendee_model.dart';
 import 'package:lenovo_hiring/repository/attendee/attendee_repository.dart';
 import 'package:lenovo_hiring/repository/attendee/attendee_state.dart';
@@ -117,7 +118,8 @@ class _CountdownTimerState extends State<CountdownTimer> {
                       onPressed: () async {
                         try {
                           state.setLoading();
-                          var a = await quizRepository.getQuizByCount(1);
+                          var a = await quizRepository.getQuizByCount(
+                              DateFormat.yMd().format(DateTime.now()), context);
                           AttendeeModel attendeeModel = AttendeeModel(
                             totalTimeInSeconds:
                                 a.numberOfQuestions * a.coundown,
@@ -129,7 +131,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
                             questions: [],
                           );
                           var result = await attendeeRepository.createAttendee(
-                              attendeeModel, a);
+                              attendeeModel, a, context);
                           if (result == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Already attended")));
