@@ -4,8 +4,7 @@ import 'package:lenovo_hiring/repository/leader_board/leader_board_state.dart';
 import 'package:provider/provider.dart';
 
 class LeaderBoardList extends StatefulWidget {
-  LeaderBoardList({super.key, required this.quizId});
-  String quizId;
+  LeaderBoardList({super.key});
 
   @override
   State<LeaderBoardList> createState() => _LeaderBoardListState();
@@ -14,7 +13,7 @@ class LeaderBoardList extends StatefulWidget {
 class _LeaderBoardListState extends State<LeaderBoardList> {
   @override
   void initState() {
-    context.read<LeaderBoardState>().setLeaderBoardList(widget.quizId);
+    context.read<LeaderBoardState>().setLeaderBoardList();
     super.initState();
   }
 
