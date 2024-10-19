@@ -51,7 +51,8 @@ class AttendeeState extends ChangeNotifier {
   }
 
   Future<void> setAttendeeModel(String uid, BuildContext context) async {
-    var a = await attendeeRepository.getAttendeeByAttendBy(uid);
+    var a = await attendeeRepository.getAttendeeByAttendBy(
+        uid, DateTime.now(), context);
     attendeeModel = a;
     // print only debug mode
     if (kDebugMode) {
