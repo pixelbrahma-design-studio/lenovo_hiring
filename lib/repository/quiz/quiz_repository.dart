@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lenovo_hiring/models/quiz_model/quiz_model.dart';
 
 class QuizRepository {
@@ -33,13 +34,15 @@ class QuizRepository {
 
   // GET QUIZ BY COUNT WITH RANDOM QUESTION
   Future<QuizModel> getQuizByCount(String date, BuildContext contex) async {
+    DateTime date = DateTime.now();
+    String timeFormate = DateFormat('HH:mm').format(DateTime(date.year,
+        date.month, date.day, TimeOfDay.now().hour, TimeOfDay.now().minute));
     try {
       var data = await _firestore
           .collection("quiz")
           .where("formateDate", isEqualTo: date)
-          .where('startTime',
-              isGreaterThanOrEqualTo: TimeOfDay.now().format(contex))
-          .where('endTime', isLessThan: TimeOfDay.now().format(contex))
+          .where('startTime', isGreaterThanOrEqualTo: timeFormate)
+          .where('endTime', isLessThan: timeFormate)
           .limit(1)
           .get();
 

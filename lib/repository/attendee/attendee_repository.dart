@@ -113,16 +113,17 @@ class AttendeeRepository {
   Future<AttendeeModel> getAttendeeByAttendBy(
       String attendBy, DateTime date, BuildContext context) async {
     try {
+      String timeFormate = DateFormat('HH:mm').format(DateTime(date.year,
+          date.month, date.day, TimeOfDay.now().hour, TimeOfDay.now().minute));
       return await _firestore
           .collection('attendees')
           .where('attendBy', isEqualTo: attendBy)
           .where("quizModel.formateDate",
               isEqualTo: DateFormat.yMd().format(date))
-          .where('quizModel.endTime',
-              isLessThanOrEqualTo: TimeOfDay.now().format(context))
+          .where('quizModel.endTime', isLessThanOrEqualTo: timeFormate)
           .where('quizModel.startTime',
-              isGreaterThanOrEqualTo: TimeOfDay.now()
-                  .format(context)) // check the date and completed
+              isGreaterThanOrEqualTo:
+                  timeFormate) // check the date and completed
           .limit(1)
           .get()
           .then((value) {
