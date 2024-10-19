@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lenovo_hiring/models/attendee_model/attendee_model.dart';
 import 'package:lenovo_hiring/models/question_model/question_model.dart';
 import 'package:lenovo_hiring/repository/attendee/attendee_repository.dart';
@@ -31,7 +32,13 @@ class _QuizSetState extends State<QuizSet> {
     context.read<AttendeeState>().setAttendeeModel(
         FirebaseAuth.instance.currentUser!.uid,
         context); // Load attendee asynchronously
-    // _startTimer();
+
+    SystemChannels.navigation.setMethodCallHandler((call) async {
+      if (call.method == 'popRoute') {
+        // Stop the timer on browser back navigation
+        context.read<AttendeeState>().timer?.cancel();
+      }
+    });
   }
 
   @override

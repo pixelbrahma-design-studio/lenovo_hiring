@@ -9,32 +9,37 @@ class AttendeeRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // CREATE ATTDEDEE
-  Future<AttendeeModel?> createAttendee(
+  Future<int?> createAttendee(
       AttendeeModel attendeeModel, QuizModel quizModel) async {
     try {
-      bool exist = await checkIfAttendeeExist(attendeeModel.attendBy);
+      bool exist = await checkIfAttendeeExist(attendeeModel.attendBy, true);
       if (exist) {
         return null;
       } else {
-        String id = _firestore.collection('attendees').doc().id;
-        attendeeModel = attendeeModel.copyWith(
-          id: id,
-          attendedAt: Timestamp.now(),
-        );
+        bool exist = await checkIfAttendeeExist(attendeeModel.attendBy, false);
+        if (exist) {
+          return 0;
+        } else {
+          String id = _firestore.collection('attendees').doc().id;
+          attendeeModel = attendeeModel.copyWith(
+            id: id,
+            attendedAt: Timestamp.now(),
+          );
 
-        for (var i = 0; i < quizModel.questions.length; i++) {
-          QuestionModel questionModel =
-              await getQuestionById(quizModel.questions[i]);
-          questionModel = questionModel.copyWith();
-          attendeeModel.questions.add(questionModel);
+          for (var i = 0; i < quizModel.questions.length; i++) {
+            QuestionModel questionModel =
+                await getQuestionById(quizModel.questions[i]);
+            questionModel = questionModel.copyWith();
+            attendeeModel.questions.add(questionModel);
+          }
+
+          await _firestore
+              .collection('attendees')
+              .doc(id)
+              .set(attendeeModel.toMap());
+          // AttendeeModel attendeeModelFromDataBase = await getAttendee(id);
+          return 1;
         }
-
-        await _firestore
-            .collection('attendees')
-            .doc(id)
-            .set(attendeeModel.toMap());
-        AttendeeModel attendeeModelFromDataBase = await getAttendee(id);
-        return attendeeModelFromDataBase;
       }
     } catch (e) {
       print("wrroe : $e");
@@ -119,12 +124,13 @@ class AttendeeRepository {
     }
   }
 
-  Future<bool> checkIfAttendeeExist(String attendBy) async {
+  Future<bool> checkIfAttendeeExist(String attendBy, bool completed) async {
     try {
       return await _firestore
           .collection('attendees')
           .where('attendBy', isEqualTo: attendBy)
-          .where('completed', isEqualTo: true) // check the date and completed
+          .where('completed',
+              isEqualTo: completed) // check the date and completed
           .limit(1)
           .get()
           .then((value) {

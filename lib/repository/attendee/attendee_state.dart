@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lenovo_hiring/models/attendee_model/attendee_model.dart';
@@ -52,13 +53,16 @@ class AttendeeState extends ChangeNotifier {
   Future<void> setAttendeeModel(String uid, BuildContext context) async {
     var a = await attendeeRepository.getAttendeeByAttendBy(uid);
     attendeeModel = a;
-    print("AttendeeModel: ${attendeeModel?.id}");
+    // print only debug mode
+    if (kDebugMode) {
+      print("AttendeeModel: ${attendeeModel?.toMap()}");
+    }
     questionModel = a.questions[a.currentQuestionIndex];
-    print("QuestionModel: ${questionModel?.questionTitle}");
+
     int time = attendeeModel!.quizModel!.coundown -
         a.questions[a.currentQuestionIndex].timeTaken!;
     timeBalanced = time;
-    print("TimeBalanced: $timeBalanced");
+
     startTimer(context);
 
     notifyListeners();
@@ -80,8 +84,7 @@ class AttendeeState extends ChangeNotifier {
   Future<void> updateTimeTaken() async {
     attendeeModel!.questions[attendeeModel!.currentQuestionIndex].timeTaken =
         attendeeModel!.quizModel!.coundown - timeBalanced;
-    print(
-        "TimeTaken: ${attendeeModel!.questions[attendeeModel!.currentQuestionIndex].timeTaken}");
+
     await attendeeRepository.updateAttendee(attendeeModel!);
     notifyListeners();
   }
@@ -115,8 +118,6 @@ class AttendeeState extends ChangeNotifier {
                     : e.userAnswerIndex))
             .toList(),
       );
-      print(
-          "after assign user index: ${attendeeModel?.questions[attendeeModel!.currentQuestionIndex].userAnswerIndex}");
 
       // updating time taken for the question
       attendeeModel!.questions[attendeeModel!.currentQuestionIndex].timeTaken =
@@ -130,8 +131,6 @@ class AttendeeState extends ChangeNotifier {
         clear(); // clear the state
         context.go('/');
       } else {
-        print(
-            "AttendeeModel: ${attendeeModel?.id},, ${attendeeModel?.questions[attendeeModel!.currentQuestionIndex].userAnswerIndex}");
         await attendeeRepository.updateAttendee(attendeeModel!);
         selectedAnswer = null;
         setAttendeeModel(uid, context);
@@ -154,5 +153,11 @@ class AttendeeState extends ChangeNotifier {
     questionModel = null;
     timeBalanced = 0;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    clear();
+    super.dispose();
   }
 }

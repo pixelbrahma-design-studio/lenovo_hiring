@@ -6,12 +6,9 @@ import 'package:lenovo_hiring/models/user_model/user_model.dart';
 class LeaderBoardRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<List<LeaderBoardModel>> getLeaderBordbyQuizId(String quizId) async {
+  Future<List<LeaderBoardModel>> getLeaderBord() async {
     try {
-      var snap = await _firestore
-          .collection('attendees')
-          .where('quizModel.uid', isEqualTo: quizId)
-          .get();
+      var snap = await _firestore.collection('attendees').get();
 
       List<LeaderBoardModel> leaderBoardList = [];
 

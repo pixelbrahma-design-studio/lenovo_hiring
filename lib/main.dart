@@ -130,12 +130,9 @@ class MyApp extends StatelessWidget {
             }),
 
         GoRoute(
-            path: '/quiz/:quizId',
+            path: '/leader-board',
             builder: (context, state) {
-              final quizId = state.pathParameters['quizId']!;
-              return LeaderBoardList(
-                quizId: quizId,
-              );
+              return LeaderBoardList();
             }),
         GoRoute(
           path: '/quiz_result',

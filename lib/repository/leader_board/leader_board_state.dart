@@ -6,9 +6,9 @@ class LeaderBoardState extends ChangeNotifier {
   LeaderBoardRepository leaderBoardRepository = LeaderBoardRepository();
   List<LeaderBoardModel> leaderBoardList = [];
 
-  Future<void> setLeaderBoardList(String quizId) async {
+  Future<void> setLeaderBoardList() async {
     try {
-      var list = await leaderBoardRepository.getLeaderBordbyQuizId(quizId);
+      var list = await leaderBoardRepository.getLeaderBord();
       leaderBoardList = list;
     } catch (e) {
       print(e);
