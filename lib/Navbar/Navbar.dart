@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -103,22 +105,36 @@ class MobileNavbar extends StatelessWidget {
   Widget _buildNavList(BuildContext context) {
     return Consumer<AuthState>(
       builder: (context, state, _) {
+        // Determine if the user is logged in
+        bool isLoggedIn = state.user != null;
+        // Select the navigation titles based on the user role
         List<String> navItems =
             state.user?.role == 'admin' ? adminNavTitles : navTitles;
+
+        // Remove the "LOGOUT" option if the user is logged in
+        if (FirebaseAuth.instance.currentUser != null) {
+          navItems.removeWhere((title) => title == "LOGIN");
+          print("User is logged in ${navItems}");
+        } else {
+          // Remove the "LOGOUT" option if the user is not logged in
+          navItems.removeWhere((title) => title == "LOGOUT");
+          print("User is not logged out ${navItems}");
+        }
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: navItems
-              .map((title) => ListTile(
-                    title: Text(
-                      title,
-                      style: const TextStyle(color: Colors.white, fontSize: 14),
-                    ),
-                    onTap: () {
-                      handleNavItemClick(context, title);
-                      Overlay.of(context)?.dispose();
-                    },
-                  ))
-              .toList(),
+          children: navItems.map((title) {
+            return ListTile(
+              title: Text(
+                title,
+                style: const TextStyle(color: Colors.white, fontSize: 14),
+              ),
+              onTap: () {
+                handleNavItemClick(context, title);
+                Overlay.of(context)?.dispose();
+              },
+            );
+          }).toList(),
         );
       },
     );
@@ -136,6 +152,18 @@ class NavbarContent extends StatelessWidget {
       builder: (context, state, _) {
         List<String> navItems =
             state.user?.role == 'admin' ? adminNavTitles : navTitles;
+        // Determine if the user is logged in
+        bool isLoggedIn = state.user != null;
+
+        // Remove the "LOGOUT" option if the user is logged in
+        if (FirebaseAuth.instance.currentUser != null) {
+          navItems.removeWhere((title) => title == "LOGIN");
+          print("User is logged in ${navItems}");
+        } else {
+          // Remove the "LOGOUT" option if the user is not logged in
+          navItems.removeWhere((title) => title == "LOGOUT");
+          print("User is not logged out ${navItems}");
+        }
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
           child: Container(
