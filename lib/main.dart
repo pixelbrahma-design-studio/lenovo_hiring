@@ -108,8 +108,9 @@ class MyApp extends StatelessWidget {
             path: '/add-question',
             builder: (context, state) => const AddQuestion(),
             redirect: (context, state) {
-              if (FirebaseAuth.instance.currentUser == null ||
-                  context.watch<AuthState>().user?.role != "admin") {
+              print(context.read<AuthState>().user?.role);
+              if (context.read<AuthState>().user == null ||
+                  context.read<AuthState>().user?.role != "admin") {
                 return "/";
               }
             }),
@@ -143,15 +144,15 @@ class MyApp extends StatelessWidget {
           builder: (context, state) => const AboutLenovoPage(),
         ),
         GoRoute(
-          path: '/add-quiz',
-          builder: (context, state) => AddQuiz(),
-          redirect: (context, state) {
-            if (FirebaseAuth.instance.currentUser == null ||
-                context.watch<AuthState>().user?.role != "admin") {
-              return "/";
-            }
-          },
-        ),
+            path: '/add-quiz',
+            builder: (context, state) => AddQuiz(),
+            redirect: (context, state) {
+              print(context.read<AuthState>().user?.role);
+              if (context.read<AuthState>().user == null ||
+                  context.read<AuthState>().user?.role != "admin") {
+                return "/";
+              }
+            }),
         GoRoute(
           path: '/check',
           builder: (context, state) => QuizeQuestionRandomCheck(),

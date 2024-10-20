@@ -14,10 +14,9 @@ class QuizModel {
   dynamic createdAt;
   String? formateDate;
   int numberOfQuestions;
+  bool completed;
   QuizModel({
-    required this.numberOfQuestions,
     required this.theme,
-    this.formateDate,
     this.uid,
     required this.order,
     required this.point,
@@ -27,6 +26,9 @@ class QuizModel {
     required this.coundown,
     required this.questions,
     this.createdAt,
+    this.formateDate,
+    required this.numberOfQuestions,
+    required this.completed,
   });
 
   QuizModel copyWith({
@@ -42,6 +44,7 @@ class QuizModel {
     List<String>? questions,
     dynamic? createdAt,
     String? formateDate,
+    bool? completed,
   }) {
     return QuizModel(
       numberOfQuestions: numberOfQuestions ?? this.numberOfQuestions,
@@ -56,6 +59,7 @@ class QuizModel {
       questions: questions ?? this.questions,
       createdAt: createdAt ?? this.createdAt,
       formateDate: formateDate ?? this.formateDate,
+      completed: completed ?? this.completed,
     );
   }
 
@@ -73,6 +77,7 @@ class QuizModel {
       'questions': questions,
       'createdAt': createdAt,
       'formateDate': formateDate,
+      'completed': completed,
     };
   }
 
@@ -91,6 +96,7 @@ class QuizModel {
       createdAt: map['createdAt'] as dynamic,
       formateDate:
           map['formateDate'] != null ? map['formateDate'] as String : null,
+      completed: map['completed'] as bool,
     );
   }
 
