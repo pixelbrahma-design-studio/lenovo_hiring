@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:lenovo_hiring/repository/quiz/quiz_state.dart';
 import 'package:lenovo_hiring/Footer/Footer.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
@@ -386,6 +387,7 @@ class _AddQuizState extends State<AddQuiz> {
                                   onPressed: () async {
                                     try {
                                       if (formKey.currentState!.validate()) {
+                                        DateTime now = DateTime.now();
                                         bool check = state.stateCheck(context);
                                         if (check) {
                                           state.setAddLoading();
@@ -404,10 +406,9 @@ class _AddQuizState extends State<AddQuiz> {
                                                   .pointController.text
                                                   .trim())!,
                                               quizDate: state.quizDate,
-                                              startTime: state.startTime!
-                                                  .format(context),
-                                              endTime:
-                                                  state.endTime!.format(context),
+                                              startTime: DateFormat('HH:mm').format(
+                                                  DateTime(now.year, now.month, now.day, state.startTime.hour, state.startTime.minute)),
+                                              endTime: DateFormat('HH:mm').format(DateTime(now.year, now.month, now.day, state.endTime.hour, state.endTime.minute)),
                                               coundown: int.tryParse(state.countController.text.trim())!,
                                               questions: []);
                                           await _quizRepository.CreateQuiz(
