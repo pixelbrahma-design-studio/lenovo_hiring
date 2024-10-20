@@ -120,10 +120,10 @@ class AttendeeRepository {
           .where('attendBy', isEqualTo: attendBy)
           .where("quizModel.formateDate",
               isEqualTo: DateFormat.yMd().format(date))
-          .where('quizModel.endTime', isLessThanOrEqualTo: Timestamp.now())
-          .where('quizModel.startTime',
-              isGreaterThanOrEqualTo:
-                  Timestamp.now()) // check the date and completed
+          // .where('quizModel.endTime', isGreaterThanOrEqualTo: Timestamp.now())
+          // .where('quizModel.startTime',
+          //     isLessThanOrEqualTo:
+          //         Timestamp.now()) // check the date and completed
           .limit(1)
           .get()
           .then((value) {
@@ -145,11 +145,11 @@ class AttendeeRepository {
           .where('completed', isEqualTo: completed)
           .where("quizModel.formateDate",
               isEqualTo: DateFormat.yMd().format(DateTime.now()))
-          .where('startTime',
-              isGreaterThanOrEqualTo:
-                  Timestamp.now()) // check the date and completed
-          .where('endTime',
-              isLessThan: Timestamp.now()) // check the date and completed
+          // .where('startTime',
+          //     isGreaterThanOrEqualTo:
+          //         Timestamp.now()) // check the date and completed
+          // .where('endTime',
+          //     isLessThan: Timestamp.now()) // check the date and completed
           .limit(1)
           .get()
           .then((value) {

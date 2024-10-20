@@ -108,10 +108,10 @@ class MyApp extends StatelessWidget {
             path: '/add-question',
             builder: (context, state) => const AddQuestion(),
             redirect: (context, state) {
-              // if (FirebaseAuth.instance.currentUser == null ||
-              //     context.watch<AuthState>().user?.role != "admin") {
-              //   return "/";
-              // }
+              if (FirebaseAuth.instance.currentUser == null ||
+                  context.watch<AuthState>().user?.role != "admin") {
+                return "/";
+              }
             }),
         // GoRoute(
         //   path: '/about-lenovo',
@@ -146,10 +146,10 @@ class MyApp extends StatelessWidget {
           path: '/add-quiz',
           builder: (context, state) => AddQuiz(),
           redirect: (context, state) {
-            // if (FirebaseAuth.instance.currentUser == null ||
-            //     context.watch<AuthState>().user?.role != "admin") {
-            //   return "/";
-            // }
+            if (FirebaseAuth.instance.currentUser == null ||
+                context.watch<AuthState>().user?.role != "admin") {
+              return "/";
+            }
           },
         ),
         GoRoute(

@@ -43,9 +43,13 @@ class QuizRepository {
       var data = await _firestore
           .collection("quiz")
           .where("formateDate", isEqualTo: date)
-          .where('startTime', isGreaterThanOrEqualTo: Timestamp.now())
-          .where('endTime', isLessThan: Timestamp.now())
+          .where('startTime', isLessThanOrEqualTo: Timestamp.now())
+          .where('endTime', isGreaterThanOrEqualTo: Timestamp.now())
           .get();
+      if (data.docs.isEmpty) {
+        print("No quiz found for the given criteria.");
+        throw Exception("No quiz found for the given criteria.");
+      }
 
       print("Data : ${data.docs.first.data()}");
 
