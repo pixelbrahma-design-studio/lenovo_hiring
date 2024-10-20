@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lenovo_hiring/Count_Down/coundown_state.dart';
 //import 'package:lenovo_hiring/CampusHiring2025.dart';
 import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
 import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
@@ -42,6 +43,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => AuthState()),
     ChangeNotifierProvider(create: (context) => AttendeeState()),
     ChangeNotifierProvider(create: (context) => LeaderBoardState()),
+    ChangeNotifierProvider(create: (context) => CoundownState()),
   ], child: MyApp()));
 }
 

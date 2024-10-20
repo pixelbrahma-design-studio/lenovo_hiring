@@ -388,16 +388,15 @@ class _AddQuizState extends State<AddQuiz> {
                                   onPressed: () async {
                                     try {
                                       if (formKey.currentState!.validate()) {
-                                        DateTime now = DateTime.now();
+                                        // DateTime now = DateTime.now();
                                         bool check = state.stateCheck(context);
                                         if (check) {
                                           state.setAddLoading();
                                           QuizModel quizModel = QuizModel(
                                               completed: false,
-                                              numberOfQuestions: int.tryParse(
-                                                  state.noOfquestionController
-                                                      .text
-                                                      .trim())!,
+                                              numberOfQuestions: int.tryParse(state
+                                                  .noOfquestionController.text
+                                                  .trim())!,
                                               theme: state.themeController.text
                                                   .trim(),
                                               formateDate: state.formateDate,
@@ -408,10 +407,25 @@ class _AddQuizState extends State<AddQuiz> {
                                                   .pointController.text
                                                   .trim())!,
                                               quizDate: state.quizDate,
-                                              startTime: Timestamp.fromDate(
-                                                  DateTime(now.year, now.month, now.day, state.startTime.hour, state.startTime.minute)),
-                                              endTime: Timestamp.fromDate(DateTime(now.year, now.month, now.day, state.endTime.hour, state.endTime.minute)),
-                                              coundown: int.tryParse(state.countController.text.trim())!,
+                                              startTime:
+                                                  Timestamp.fromDate(DateTime(
+                                                state.quizDate.toDate().year,
+                                                state.quizDate.toDate().month,
+                                                state.quizDate.toDate().day,
+                                                state.startTime.hour,
+                                                state.startTime.minute,
+                                              )),
+                                              endTime:
+                                                  Timestamp.fromDate(DateTime(
+                                                state.quizDate.toDate().year,
+                                                state.quizDate.toDate().month,
+                                                state.quizDate.toDate().day,
+                                                state.endTime.hour,
+                                                state.endTime.minute,
+                                              )),
+                                              coundown: int.tryParse(state
+                                                  .countController.text
+                                                  .trim())!,
                                               questions: []);
                                           await _quizRepository.CreateQuiz(
                                               quizModel);

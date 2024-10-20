@@ -93,4 +93,16 @@ class QuizRepository {
       throw e;
     }
   }
+
+  Future<List<QuizModel>> getQuizeForCountDown() async {
+    try {
+      var data = await _firestore
+          .collection("quiz")
+          .orderBy('quizDate', descending: false)
+          .get();
+      return data.docs.map((e) => QuizModel.fromMap(e.data())).toList();
+    } catch (e) {
+      throw e;
+    }
+  }
 }
