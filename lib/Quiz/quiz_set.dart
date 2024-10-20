@@ -70,7 +70,6 @@ class _QuizSetState extends State<QuizSet> {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              
               Container(
                 width: screenWidth * 0.8,
                 child: Padding(
@@ -125,9 +124,18 @@ class _QuizSetState extends State<QuizSet> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      if (state.questionModel?.questionImage!=null)
+                      if (state.questionModel?.questionImage != null)
                         //image
-                        Image.asset("assets/images/table-example.png"),
+                        Image.network(
+                          errorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            print("Error: $exception");
+                            return Text('😢');
+                          },
+                          state.questionModel!.questionImage!,
+                          width: 200,
+                          height: 200,
+                        ),
                       SizedBox(height: 20),
                       Text(
                         "${state.questionModel?.questionTitle}",
