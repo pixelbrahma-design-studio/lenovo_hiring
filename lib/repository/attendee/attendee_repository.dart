@@ -113,17 +113,17 @@ class AttendeeRepository {
   Future<AttendeeModel> getAttendeeByAttendBy(
       String attendBy, DateTime date, BuildContext context) async {
     try {
-      String timeFormate = DateFormat('HH:mm').format(DateTime(date.year,
-          date.month, date.day, TimeOfDay.now().hour, TimeOfDay.now().minute));
+      // String timeFormate = DateFormat('HH:mm').format(DateTime(date.year,
+      //     date.month, date.day, TimeOfDay.now().hour, TimeOfDay.now().minute));
       return await _firestore
           .collection('attendees')
           .where('attendBy', isEqualTo: attendBy)
           .where("quizModel.formateDate",
               isEqualTo: DateFormat.yMd().format(date))
-          .where('quizModel.endTime', isLessThanOrEqualTo: timeFormate)
+          .where('quizModel.endTime', isLessThanOrEqualTo: Timestamp.now())
           .where('quizModel.startTime',
               isGreaterThanOrEqualTo:
-                  timeFormate) // check the date and completed
+                  Timestamp.now()) // check the date and completed
           .limit(1)
           .get()
           .then((value) {
@@ -146,10 +146,10 @@ class AttendeeRepository {
           .where("quizModel.formateDate",
               isEqualTo: DateFormat.yMd().format(DateTime.now()))
           .where('startTime',
-              isGreaterThanOrEqualTo: TimeOfDay.now().format(contex))
+              isGreaterThanOrEqualTo:
+                  Timestamp.now()) // check the date and completed
           .where('endTime',
-              isLessThan: TimeOfDay.now()
-                  .format(contex)) // check the date and completed
+              isLessThan: Timestamp.now()) // check the date and completed
           .limit(1)
           .get()
           .then((value) {

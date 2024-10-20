@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -406,9 +407,9 @@ class _AddQuizState extends State<AddQuiz> {
                                                   .pointController.text
                                                   .trim())!,
                                               quizDate: state.quizDate,
-                                              startTime: DateFormat('HH:mm').format(
+                                              startTime: Timestamp.fromDate(
                                                   DateTime(now.year, now.month, now.day, state.startTime.hour, state.startTime.minute)),
-                                              endTime: DateFormat('HH:mm').format(DateTime(now.year, now.month, now.day, state.endTime.hour, state.endTime.minute)),
+                                              endTime: Timestamp.fromDate(DateTime(now.year, now.month, now.day, state.endTime.hour, state.endTime.minute)),
                                               coundown: int.tryParse(state.countController.text.trim())!,
                                               questions: []);
                                           await _quizRepository.CreateQuiz(

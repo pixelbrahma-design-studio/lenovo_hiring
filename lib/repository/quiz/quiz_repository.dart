@@ -34,19 +34,23 @@ class QuizRepository {
 
   // GET QUIZ BY COUNT WITH RANDOM QUESTION
   Future<QuizModel> getQuizByCount(String date, BuildContext contex) async {
-    DateTime date = DateTime.now();
-    String timeFormate = DateFormat('HH:mm').format(DateTime(date.year,
-        date.month, date.day, TimeOfDay.now().hour, TimeOfDay.now().minute));
+    // DateTime date = DateTime.now();
+    // String timeFormate = DateFormat('HH:mm').format(DateTime(date.year,
+    //     date.month, date.day, TimeOfDay.now().hour, TimeOfDay.now().minute));
+
+    print("Date : $date");
     try {
       var data = await _firestore
           .collection("quiz")
           .where("formateDate", isEqualTo: date)
-          .where('startTime', isGreaterThanOrEqualTo: timeFormate)
-          .where('endTime', isLessThan: timeFormate)
-          .limit(1)
+          .where('startTime', isGreaterThanOrEqualTo: Timestamp.now())
+          .where('endTime', isLessThan: Timestamp.now())
           .get();
 
+      print("Data : ${data.docs.first.data()}");
+
       QuizModel quiz = QuizModel.fromMap(data.docs.first.data());
+      print("Quiz : ${quiz.toMap()}");
       // get qustions with quiz id limit 5 with random
       var questions = await _firestore
           .collection("questions")
@@ -68,7 +72,8 @@ class QuizRepository {
       quiz.questions = randomQuestions;
 
       return quiz;
-    } catch (e) {
+    } on FirebaseException catch (e) {
+      print(" Get quiz by count error : ${e.message}");
       throw e;
     }
   }
