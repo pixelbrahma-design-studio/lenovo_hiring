@@ -358,6 +358,13 @@ class _AddQuizState extends State<AddQuiz> {
                                     : state.endTime!.format(context)),
                                 onPressed: () async {
                                   TimeOfDay? time = await showTimePicker(
+                                      // builder: (context, child) {
+                                      //   return MediaQuery(
+                                      //     data: MediaQuery.of(context).copyWith(
+                                      //         alwaysUse24HourFormat: true),
+                                      //     child: child!,
+                                      //   );
+                                      // },
                                       context: context,
                                       initialTime: TimeOfDay.now());
                                   if (time != null) {
@@ -489,8 +496,45 @@ class _AddQuizState extends State<AddQuiz> {
                                             QuizModel quiz =
                                                 ref.quizModelList[i];
                                             return ListTile(
+                                              leading: Text(
+                                                "${i + 1}",
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white,
+                                                  //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
+                                                ),
+                                              ),
+                                              trailing: IconButton(
+                                                icon: Icon(
+                                                  Icons.delete,
+                                                  color: Colors.red,
+                                                ),
+                                                onPressed: () async {
+                                                  try {
+                                                    await _quizRepository
+                                                        .deleteQuiz(quiz.uid!);
+                                                    ref.getQuizList();
+                                                  } catch (e) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                e.toString())));
+                                                  }
+                                                },
+                                              ),
+                                              subtitle: Text(
+                                                "No of Questions: ${quiz.numberOfQuestions} , Point: ${quiz.point} , Count Down: ${quiz.coundown}",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white,
+                                                  //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
+                                                ),
+                                              ),
                                               title: Text(
-                                                quiz.theme ?? "",
+                                                "Theme: ${quiz.theme} , Date: ${DateFormat.yMMMd().format(quiz.quizDate.toDate())} , Start Time: ${DateFormat.jm().format(quiz.startTime.toDate())} , End Time: ${DateFormat.jm().format(quiz.endTime.toDate())} , Order: ${quiz.order}",
                                                 style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w500,

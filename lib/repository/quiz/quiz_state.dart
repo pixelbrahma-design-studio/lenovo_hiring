@@ -97,6 +97,21 @@ class QuizState extends ChangeNotifier {
           .showSnackBar(SnackBar(content: Text("please Select end Time")));
       return false;
     }
+
+    // Compare hours first
+    if (endTime!.hour < startTime!.hour) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("End time should be after start time")));
+      return false;
+    } else if (endTime!.hour == startTime!.hour) {
+      // If hours are equal, compare minutes
+      if (endTime!.minute <= startTime!.minute) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("End time should be after start time")));
+        return false;
+      }
+    }
+
     return true;
   }
 

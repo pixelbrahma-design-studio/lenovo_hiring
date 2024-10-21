@@ -105,4 +105,13 @@ class QuizRepository {
       throw e;
     }
   }
+
+  // delte quiz
+  Future<void> deleteQuiz(String uid) async {
+    try {
+      await _firestore.collection("quiz").doc(uid).delete();
+    } catch (e) {
+      throw e;
+    }
+  }
 }
