@@ -340,8 +340,8 @@ class DesktopRules extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          width: 200,
-                                          height: 200,
+                                          width: 250,
+                                          height: 250,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
@@ -386,8 +386,8 @@ class DesktopRules extends StatelessWidget {
                                   
                                       Expanded(
                                         child: Container(
-                                          width: 200,
-                                          height: 200,
+                                          width: 250,
+                                          height: 250,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
@@ -432,8 +432,8 @@ class DesktopRules extends StatelessWidget {
                                   
                                       Expanded(
                                         child: Container(
-                                          width: 200,
-                                          height: 200,
+                                          width: 250,
+                                          height: 250,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
@@ -478,8 +478,8 @@ class DesktopRules extends StatelessWidget {
                                   
                                       Expanded(
                                         child: Container(
-                                          width: 200,
-                                          height: 200,
+                                          width: 250,
+                                          height: 250,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
@@ -757,7 +757,7 @@ class DesktopRules extends StatelessWidget {
               
                     Container(
                      // width: screenWidth * 0.8,
-                      child: IntrinsicWidth(
+                      child: IntrinsicHeight(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
