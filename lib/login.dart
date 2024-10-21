@@ -19,26 +19,24 @@ class _LoginPageState extends State<LoginPage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
-          gradient: RadialGradient(
-            colors: [Color.fromRGBO(222, 6, 191, 1.0), Color.fromRGBO(77, 20, 74, 1.0)]
-          ),
-          image: DecorationImage(
-            image: AssetImage("assets/images/grid-2.png"),
-            repeat: ImageRepeat.repeatY,
-            opacity: 0.5,
-            fit: BoxFit.cover,
-          )
-        ),
-
+            gradient: RadialGradient(colors: [
+              Color.fromRGBO(222, 6, 191, 1.0),
+              Color.fromRGBO(77, 20, 74, 1.0)
+            ]),
+            image: DecorationImage(
+              image: AssetImage("assets/images/grid-2.png"),
+              repeat: ImageRepeat.repeatY,
+              opacity: 0.5,
+              fit: BoxFit.cover,
+            )),
         child: SingleChildScrollView(
-          
           child: Container(
-            height: MediaQuery.of(context).size.height,
+            // height: MediaQuery.of(context).size.height,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Navbar(), 
+                Navbar(),
                 LoginForm(),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -50,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-        ),  
+        ),
       ),
     );
   }

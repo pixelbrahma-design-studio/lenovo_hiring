@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:lenovo_hiring/constants/nav_items.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lenovo_hiring/repository/auth/auth_state.dart';
 import 'package:provider/provider.dart';
+import 'package:lenovo_hiring/repository/auth/auth_state.dart';
+import 'package:lenovo_hiring/constants/nav_items.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
@@ -13,7 +15,7 @@ class Navbar extends StatelessWidget {
       builder: (context, constraints) {
         if (constraints.maxWidth > 1200) {
           return const DesktopNavbar();
-        } else if (constraints.maxWidth > 800 && constraints.maxWidth < 1200) {
+        } else if (constraints.maxWidth > 800) {
           return const TabletNavbar();
         } else {
           return const MobileNavbar();
@@ -23,72 +25,13 @@ class Navbar extends StatelessWidget {
   }
 }
 
-
-
 class DesktopNavbar extends StatelessWidget {
   const DesktopNavbar({super.key});
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-      child: Container(
-        width: screenWidth * 0.8,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                context.go('/');
-              },
-              child: Image.asset(
-                "assets/images/logo.png",
-              ),
-            ),
-            const Spacer(),
-            for (int i = 0; i < navTitles.length; i++)
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: TextButton(
-                  onPressed: () {
-                    // Handle navigation for each navTitle
-                    switch (navTitles[i]) {
-                      case "SMARTSPRINT":
-                        context.go('/smartsprint');
-                        break;
-                      case "CAMPUS HIRING 2025":
-                        context.go('/campus-hiring-2025');
-                        break;
-                      case "LOGIN":
-                        context.go('/login');
-                        break;
-                      case "ABOUT LENOVO":
-                        context.go('/about_lenovo');
-                        break;
-                      case "LOGOUT":
-                        context.read<AuthState>().logout(context);
-                        break;
-                      default:
-                        context.go('/');
-                    }
-                  },
-                  child: Text(
-                    navTitles[i],
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
+    return NavbarContent(screenWidth: screenWidth * 0.8);
   }
 }
 
@@ -96,66 +39,9 @@ class TabletNavbar extends StatelessWidget {
   const TabletNavbar({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-      child: Container(
-        width: screenWidth * 0.9,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                context.go('/');
-              },
-              child: Image.asset(
-                "assets/images/logo.png",
-                height: 30,
-              ),
-            ),
-            const Spacer(),
-            for (int i = 0; i < navTitles.length; i++)
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: TextButton(
-                  onPressed: () {
-                    // Handle navigation for each navTitle
-                    switch (navTitles[i]) {
-                      case "SMARTSPRINT":
-                        context.go('/smartsprint');
-                        break;
-                      case "CAMPUS HIRING 2025":
-                        context.go('/campus-hiring-2025');
-                        break;
-                      case "LOGIN":
-                        context.go('/login');
-                        break;
-                      case "ABOUT LENOVO":
-                        context.go('/about_lenovo');
-                        break;
-                      case "LOGOUT":
-                        context.read<AuthState>().logout(context);
-                        break;
-                      default:
-                        context.go('/');
-                    }
-                  },
-                  child: Text(
-                    navTitles[i],
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
+    return NavbarContent(screenWidth: screenWidth * 0.9);
   }
 }
 
@@ -170,20 +56,12 @@ class MobileNavbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           GestureDetector(
-            onTap: () {
-              context.go("/");
-            },
-            child: Image.asset(
-              "assets/images/logo.png",
-              height: 30,
-            ),
+            onTap: () => context.go('/'),
+            child: Image.asset("assets/images/logo.png", height: 30),
           ),
           IconButton(
             icon: const Icon(Icons.menu, color: Colors.white),
-            onPressed: () {
-              // Trigger the custom drawer
-              _showCustomDrawer(context);
-            },
+            onPressed: () => _showCustomDrawer(context),
           ),
         ],
       ),
@@ -191,78 +69,173 @@ class MobileNavbar extends StatelessWidget {
   }
 
   void _showCustomDrawer(BuildContext context) {
-  // Use Overlay to display a custom drawer
-  OverlayState overlayState = Overlay.of(context);
+    OverlayState overlayState = Overlay.of(context);
+    late OverlayEntry overlayEntry;
 
-  // Declare overlayEntry as 'late' so it can be initialized after creation
-  late OverlayEntry overlayEntry;
-
-  // Initialize the overlayEntry with the actual widget
-  overlayEntry = OverlayEntry(
-    builder: (context) {
-      return Positioned(
-        top: 0,
-        right: 0,
-        child: Material(
-          color: Color.fromRGBO(77, 20, 74, 1),
-          child: Container(
-            width: 250,
-            height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.close, color: Colors.white,),
-                  onPressed: () {
-                    overlayEntry.remove(); // Close drawer manually
-                  },
-                ),
-                for (int i = 0; i < navTitles.length; i++)
-                  ListTile(
-                    title: Text(
-                      navTitles[i],
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14
-                      ),
-                    ),
-                    onTap: () {
-                      // Handle navigation inside the overlay drawer
-                      switch (navTitles[i]) {
-                        case "SMARTSPRINT":
-                          context.go('/smartsprint');
-                          break;
-                        case "CAMPUS HIRING 2025":
-                          context.go('/campus-hiring-2025');
-                          break;
-                        case "LOGIN":
-                          context.go('/login');
-                          break;
-                        case "ABOUT LENOVO":
-                          context.go('/about_lenovo');
-                          break;
-                        case "LOGOUT":
-                          context.read<AuthState>().logout(context);
-                          break;
-                        default:
-                          context.go('/');
-                      }
-                      overlayEntry.remove(); // Close drawer after selection
-                    },
+    overlayEntry = OverlayEntry(
+      builder: (context) {
+        return Positioned(
+          top: 0,
+          right: 0,
+          child: Material(
+            color: const Color.fromRGBO(77, 20, 74, 1),
+            child: Container(
+              width: 250,
+              height: MediaQuery.of(context).size.height,
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: () => overlayEntry.remove(),
                   ),
-                
+                  _buildNavList(context),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    overlayState.insert(overlayEntry);
+  }
+
+  Widget _buildNavList(BuildContext context) {
+    return Consumer<AuthState>(
+      builder: (context, state, _) {
+        // Determine if the user is logged in
+        bool isLoggedIn = state.user != null;
+        // Select the navigation titles based on the user role
+        List<String> navItems =
+            state.user?.role == 'admin' ? adminNavTitles : navTitles;
+
+        // Remove the "LOGOUT" option if the user is logged in
+        if (FirebaseAuth.instance.currentUser != null) {
+          navItems.removeWhere((title) => title == "LOGIN");
+          print("User is logged in ${navItems}");
+        } else {
+          // Remove the "LOGOUT" option if the user is not logged in
+          navItems.removeWhere((title) => title == "LOGOUT");
+          print("User is not logged out ${navItems}");
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: navItems.map((title) {
+            return ListTile(
+              title: Text(
+                title,
+                style: const TextStyle(color: Colors.white, fontSize: 14),
+              ),
+              onTap: () {
+                handleNavItemClick(context, title);
+                Overlay.of(context)?.dispose();
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+}
+
+class NavbarContent extends StatelessWidget {
+  final double screenWidth;
+
+  const NavbarContent({required this.screenWidth, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AuthState>(
+      builder: (context, state, _) {
+        List<String> navItems =
+            state.user?.role == 'admin' ? adminNavTitles : navTitles;
+        // Determine if the user is logged in
+        bool isLoggedIn = state.user != null;
+
+        // Remove the "LOGOUT" option if the user is logged in
+        if (FirebaseAuth.instance.currentUser != null) {
+          navItems.removeWhere((title) => title == "LOGIN");
+          print("User is logged in ${navItems}");
+        } else {
+          // Remove the "LOGOUT" option if the user is not logged in
+          navItems.removeWhere((title) => title == "LOGOUT");
+          print("User is not logged out ${navItems}");
+        }
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+          child: Container(
+            width: screenWidth,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () => context.go('/'),
+                  child: Image.asset("assets/images/logo.png"),
+                ),
+                const Spacer(),
+                Row(
+                  children: navItems
+                      .map((title) => _buildNavItem(context, title))
+                      .toList(),
+                ),
               ],
             ),
           ),
-        ),
-      );
-    },
-  );
+        );
+      },
+    );
+  }
 
-  // Insert the overlay entry into the overlay
-  overlayState.insert(overlayEntry);
+  Widget _buildNavItem(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20),
+      child: TextButton(
+        onPressed: () => handleNavItemClick(context, title),
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-
+// Helper function for navigation
+void handleNavItemClick(BuildContext context, String title) {
+  switch (title) {
+    case "SMARTSPRINT":
+      context.go('/smartsprint');
+      break;
+    case "CAMPUS HIRING 2025":
+      context.go('/campus-hiring-2025');
+      break;
+    case "LOGIN":
+      context.go('/login');
+      break;
+    case "ABOUT LENOVO":
+      context.go('/about_lenovo');
+      break;
+    case "LEADERBOARD":
+      context.go('/leader-board');
+      break;
+    case "ADD QUIZ":
+      context.go('/add-quiz');
+      break;
+    case "ADD QUESTION":
+      context.go('/add-question');
+      break;
+    case "LOGOUT":
+      context.read<AuthState>().logout(context);
+      break;
+    default:
+      context.go('/');
+  }
 }

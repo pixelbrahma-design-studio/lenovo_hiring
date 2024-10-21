@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lenovo_hiring/Count_Down/coundown_state.dart';
 //import 'package:lenovo_hiring/CampusHiring2025.dart';
 import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
 import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
@@ -42,6 +43,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => AuthState()),
     ChangeNotifierProvider(create: (context) => AttendeeState()),
     ChangeNotifierProvider(create: (context) => LeaderBoardState()),
+    ChangeNotifierProvider(create: (context) => CoundownState()),
   ], child: MyApp()));
 }
 
@@ -108,10 +110,11 @@ class MyApp extends StatelessWidget {
             path: '/add-question',
             builder: (context, state) => const AddQuestion(),
             redirect: (context, state) {
-              // if (FirebaseAuth.instance.currentUser == null ||
-              //     context.watch<AuthState>().user?.role != "admin") {
-              //   return "/";
-              // }
+              print(context.read<AuthState>().user?.role);
+              if (context.read<AuthState>().user == null ||
+                  context.read<AuthState>().user?.role != "admin") {
+                return "/";
+              }
             }),
         // GoRoute(
         //   path: '/about-lenovo',
@@ -143,15 +146,15 @@ class MyApp extends StatelessWidget {
           builder: (context, state) => const AboutLenovoPage(),
         ),
         GoRoute(
-          path: '/add-quiz',
-          builder: (context, state) => AddQuiz(),
-          redirect: (context, state) {
-            // if (FirebaseAuth.instance.currentUser == null ||
-            //     context.watch<AuthState>().user?.role != "admin") {
-            //   return "/";
-            // }
-          },
-        ),
+            path: '/add-quiz',
+            builder: (context, state) => AddQuiz(),
+            redirect: (context, state) {
+              print(context.read<AuthState>().user?.role);
+              if (context.read<AuthState>().user == null ||
+                  context.read<AuthState>().user?.role != "admin") {
+                return "/";
+              }
+            }),
         GoRoute(
           path: '/check',
           builder: (context, state) => QuizeQuestionRandomCheck(),

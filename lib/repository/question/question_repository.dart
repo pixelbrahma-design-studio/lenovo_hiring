@@ -28,7 +28,7 @@ class QuestionRepository {
         await _firestore.collection("questions").doc(id).set(question.toMap());
       } else {
         // add image
-        var url = await saveImage(file);
+        var url = await saveImage(file, id);
         question = question.copyWith(questionImage: url);
         await _firestore.collection("questions").doc(id).set(question.toMap());
       }
@@ -43,11 +43,11 @@ class QuestionRepository {
     return pickedFile?.files[0];
   }
 
-  Future<String> saveImage(PlatformFile? image) async {
+  Future<String> saveImage(PlatformFile? image, String id) async {
     try {
       // String fileName = image!.path!;
       Reference storageRef =
-          _storage.ref().child('questions/${Timestamp.now()}');
+          _storage.ref().child('questions/${id}.${image?.extension}');
       UploadTask uploadTask = kIsWeb
           ? storageRef.putData(image!.bytes!)
           : storageRef.putFile(File(image!.path!));
