@@ -1284,296 +1284,6 @@ class DesktopRules extends StatelessWidget {
                     ),
 
               
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 0.0),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: [
-                    //       Container(
-                    //         width: screenWidth * 0.8,
-                    //         //alignment: Alignment.center,
-                           
-                    //         decoration: const BoxDecoration(
-                    //           color: Color.fromRGBO(255, 255, 255, 0.2),
-                    //           borderRadius: BorderRadius.all(Radius.circular(20.0))
-                    //         ),
-                            
-                    //         child: Row(
-                    //           children: [
-                    //             Expanded(
-                    //               //width: screenWidth * 0.5,
-                    //               child: const Padding(
-                    //                 padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 40.0),
-                    //                 child: Column(
-                    //                   crossAxisAlignment: CrossAxisAlignment.start,
-                    //                   mainAxisAlignment: MainAxisAlignment.center,
-                    //                   children: [
-                    //                     Text(
-                    //                       "FAQs",
-                    //                       style: TextStyle(
-                    //                         fontSize: 18,
-                    //                         fontWeight: FontWeight.bold,
-                    //                         color: Colors.white,
-                    //                       ),
-                    //                     ),
-                                        
-                    //                     SizedBox(height: 10),
-                                        
-                    //                     Row(
-                    //                       crossAxisAlignment: CrossAxisAlignment.start,
-                    //                       children: [
-                    //                         Text(
-                    //                           "1.", 
-                    //                           style: TextStyle(
-                    //                             color: Colors.white,
-                    //                           ),
-                    //                         ),
-                    //                         SizedBox(width: 10,),
-                    //                         Expanded(
-                    //                           child: Column(
-                    //                             crossAxisAlignment: CrossAxisAlignment.start,
-                    //                             children: [
-                    //                               Text(
-                    //                                 "Who can participate?",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                   fontWeight: FontWeight.bold,
-                    //                                 ),
-                    //                               ),
-                    //                               Text(
-                    //                                 "Final-year B.Tech/B.E. students from selected colleges are eligible to participate.",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                 ),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                                        
-                    //                     SizedBox(height: 10),
-                                        
-                    //                     Row(
-                    //                       crossAxisAlignment: CrossAxisAlignment.start,
-                    //                       children: [
-                    //                         Text(
-                    //                           "2.", 
-                    //                           style: TextStyle(
-                    //                             color: Colors.white,
-                    //                           ),
-                    //                         ),
-                    //                         SizedBox(width: 10,),
-                    //                         Expanded(
-                    //                           child: Column(
-                    //                             crossAxisAlignment: CrossAxisAlignment.start,
-                    //                             children: [
-                    //                               Text(
-                    //                                 "Can I participate as part of a team?",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                   fontWeight: FontWeight.bold,
-                    //                                 ),
-                    //                               ),
-                    //                               Text(
-                    //                                 "No, the quiz is strictly for individual participants.",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                 ),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                                        
-                    //                     SizedBox(height: 10),
-                                        
-                    //                     Row(
-                    //                       crossAxisAlignment: CrossAxisAlignment.start,
-                    //                       children: [
-                    //                         Text(
-                    //                           "3.", 
-                    //                           style: TextStyle(
-                    //                             color: Colors.white,
-                    //                           ),
-                    //                         ),
-                    //                         SizedBox(width: 10,),
-                    //                         Expanded(
-                    //                           child: Column(
-                    //                             crossAxisAlignment: CrossAxisAlignment.start,
-                    //                             children: [
-                    //                               Text(
-                    //                                 "How do I access the quiz?",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                   fontWeight: FontWeight.bold,
-                    //                                 ),
-                    //                               ),
-                    //                               Text(
-                    //                                 "You can access the quiz online. Log in at the scheduled time each day to participate.",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                 ),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                                        
-                    //                     SizedBox(height: 10),
-                                        
-                    //                     Row(
-                    //                       crossAxisAlignment: CrossAxisAlignment.start,
-                    //                       children: [
-                    //                         Text(
-                    //                           "4.", 
-                    //                           style: TextStyle(
-                    //                             color: Colors.white,
-                    //                           ),
-                    //                         ),
-                    //                         SizedBox(width: 10,),
-                    //                         Expanded(
-                    //                           child: Column(
-                    //                             crossAxisAlignment: CrossAxisAlignment.start,
-                    //                             children: [
-                    //                               Text(
-                    //                                 "What should I do if I face technical difficulties during the quiz?",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                   fontWeight: FontWeight.bold,
-                    //                                 ),
-                    //                               ),
-                    //                               Text(
-                    //                                 "Try to rejoin the quiz immediately. If the problem persists, contact our support team.",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                 ),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                                        
-                    //                     SizedBox(height: 10),
-                                        
-                    //                     Row(
-                    //                       crossAxisAlignment: CrossAxisAlignment.start,
-                    //                       children: [
-                    //                         Text(
-                    //                           "5.", 
-                    //                           style: TextStyle(
-                    //                             color: Colors.white,
-                    //                           ),
-                    //                         ),
-                    //                         SizedBox(width: 10,),
-                    //                         Expanded(
-                    //                           child: Column(
-                    //                             crossAxisAlignment: CrossAxisAlignment.start,
-                    //                             children: [
-                    //                               Text(
-                    //                                 "How are winners determined?",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                   fontWeight: FontWeight.bold,
-                    //                                 ),
-                    //                               ),
-                    //                               Text(
-                    //                                 "Winners are selected based on the number of correct answers and the time taken to complete the quiz. The overall winner will be chosen based on cumulative performance across all four days.",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                 ),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                                        
-                    //                     SizedBox(height: 10),
-                                        
-                    //                     Row(
-                    //                       crossAxisAlignment: CrossAxisAlignment.start,
-                    //                       children: [
-                    //                         Text(
-                    //                           "6.", 
-                    //                           style: TextStyle(
-                    //                             color: Colors.white,
-                    //                           ),
-                    //                         ),
-                    //                         SizedBox(width: 10,),
-                    //                         Expanded(
-                    //                           child: Column(
-                    //                             crossAxisAlignment: CrossAxisAlignment.start,
-                    //                             children: [
-                    //                               Text(
-                    //                                 "What happens if I don’t finish the quiz on time?",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                   fontWeight: FontWeight.bold,
-                    //                                 ),
-                    //                               ),
-                    //                               Text(
-                    //                                 "The quiz will automatically submit when the time expires.",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                 ),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                                        
-                    //                     SizedBox(height: 10),
-                                        
-                    //                     Row(
-                    //                       crossAxisAlignment: CrossAxisAlignment.start,
-                    //                       children: [
-                    //                         Text(
-                    //                           "7.", 
-                    //                           style: TextStyle(
-                    //                             color: Colors.white,
-                    //                           ),
-                    //                         ),
-                    //                         SizedBox(width: 10,),
-                    //                         Expanded(
-                    //                           child: Column(
-                    //                             crossAxisAlignment: CrossAxisAlignment.start,
-                    //                             children: [
-                    //                               Text(
-                    //                                 "What if I engage in misconduct during the quiz?",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                   fontWeight: FontWeight.bold,
-                    //                                 ),
-                    //                               ),
-                    //                               Text(
-                    //                                 "Any cheating or academic dishonesty will lead to immediate disqualification.",
-                    //                                 style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                 ),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                                        
-                    //                   ],
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                          
-                    //     ],
-                    //   ),
-                    // ),
-
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 0.0),
                       child: Row(
@@ -1581,89 +1291,290 @@ class DesktopRules extends StatelessWidget {
                         children: [
                           Container(
                             width: screenWidth * 0.8,
+                            //alignment: Alignment.center,
+                           
                             decoration: const BoxDecoration(
                               color: Color.fromRGBO(255, 255, 255, 0.2),
-                              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                              borderRadius: BorderRadius.all(Radius.circular(20.0))
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 40.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "FAQs",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                            
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  //width: screenWidth * 0.5,
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 40.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "FAQs",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        
+                                        SizedBox(height: 10),
+                                        
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "1.", 
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Who can participate?",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Final-year B.Tech/B.E. students from selected colleges are eligible to participate.",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        
+                                        SizedBox(height: 10),
+                                        
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "2.", 
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Can I participate as part of a team?",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "No, the quiz is strictly for individual participants.",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        
+                                        SizedBox(height: 10),
+                                        
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "3.", 
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "How do I access the quiz?",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "You can access the quiz online. Log in at the scheduled time each day to participate.",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        
+                                        SizedBox(height: 10),
+                                        
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "4.", 
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "What should I do if I face technical difficulties during the quiz?",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Try to rejoin the quiz immediately. If the problem persists, contact our support team.",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        
+                                        SizedBox(height: 10),
+                                        
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "5.", 
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "How are winners determined?",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Winners are selected based on the number of correct answers and the time taken to complete the quiz. The overall winner will be chosen based on cumulative performance across all four days.",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        
+                                        SizedBox(height: 10),
+                                        
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "6.", 
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "What happens if I don’t finish the quiz on time?",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "The quiz will automatically submit when the time expires.",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        
+                                        SizedBox(height: 10),
+                                        
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "7.", 
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "What if I engage in misconduct during the quiz?",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Any cheating or academic dishonesty will lead to immediate disqualification.",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(height: 10),
-                                  // FAQ 1
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("1.", style: TextStyle(color: Colors.white)),
-                                      SizedBox(width: 10),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Who can participate?",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Final-year B.Tech/B.E. students from selected colleges are eligible to participate.",
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  // FAQ 2
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("2.", style: TextStyle(color: Colors.white)),
-                                      SizedBox(width: 10),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Can I participate as part of a team?",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              "No, the quiz is strictly for individual participants.",
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  // Add similar FAQs below
-                                  // FAQ 3...
-                                  // FAQ 4...
-                                  // Continue with more FAQs if needed
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
+                          
                         ],
                       ),
                     ),
+
+                    
 
               
                     
