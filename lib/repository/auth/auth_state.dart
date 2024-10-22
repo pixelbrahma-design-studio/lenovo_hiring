@@ -11,6 +11,25 @@ class AuthState extends ChangeNotifier {
   UserModel? _user;
   UserModel? get user => _user;
 
+  List<String> navTitles = [
+    "SMARTSPRINT",
+    "CAMPUS HIRING 2025",
+    "ABOUT LENOVO",
+    "LOGIN",
+    "LOGOUT"
+  ];
+
+  List<String> adminNavTitles = [
+    "SMARTSPRINT",
+    "CAMPUS HIRING 2025",
+    "ABOUT LENOVO",
+    'ADD QUIZ',
+    'ADD QUESTION',
+    'LEADERBOARD',
+    "LOGIN",
+    'LOGOUT'
+  ];
+
   AuthState() {
     firebaseAuth.authStateChanges().listen((User? user) {
       if (user == null) {
@@ -20,6 +39,41 @@ class AuthState extends ChangeNotifier {
       }
       notifyListeners();
     });
+  }
+
+  List<String> nav() {
+    if (_user == null) {
+      navTitles = [
+        'SMARTSPRINT',
+        'CAMPUS HIRING 2025',
+        'ABOUT LENOVO',
+        'LOGIN'
+      ];
+      adminNavTitles = [
+        'SMARTSPRINT',
+        'CAMPUS HIRING 2025',
+        'ABOUT LENOVO',
+        'LOGIN'
+      ];
+    } else {
+      navTitles = [
+        'SMARTSPRINT',
+        'CAMPUS HIRING 2025',
+        'ABOUT LENOVO',
+        'LOGOUT'
+      ];
+      adminNavTitles = [
+        'SMARTSPRINT',
+        'CAMPUS HIRING 2025',
+        'ABOUT LENOVO',
+        'ADD QUIZ',
+        'ADD QUESTION',
+        'LEADERBOARD',
+        'LOGOUT'
+      ];
+    }
+
+    return _user?.role == "admin" ? adminNavTitles : navTitles;
   }
 
   void setuser(UserModel user) {

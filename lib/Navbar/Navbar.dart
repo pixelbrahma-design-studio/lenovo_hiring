@@ -105,25 +105,9 @@ class MobileNavbar extends StatelessWidget {
   Widget _buildNavList(BuildContext context) {
     return Consumer<AuthState>(
       builder: (context, state, _) {
-        // Determine if the user is logged in
-        bool isLoggedIn = state.user != null;
-        // Select the navigation titles based on the user role
-        List<String> navItems =
-            state.user?.role == 'admin' ? adminNavTitles : navTitles;
-
-        // Remove the "LOGOUT" option if the user is logged in
-        if (FirebaseAuth.instance.currentUser != null) {
-          navItems.removeWhere((title) => title == "LOGIN");
-          print("User is logged in ${navItems}");
-        } else {
-          // Remove the "LOGOUT" option if the user is not logged in
-          navItems.removeWhere((title) => title == "LOGOUT");
-          print("User is not logged out ${navItems}");
-        }
-
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: navItems.map((title) {
+          children: state.nav().map((title) {
             return ListTile(
               title: Text(
                 title,
@@ -150,20 +134,6 @@ class NavbarContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthState>(
       builder: (context, state, _) {
-        List<String> navItems =
-            state.user?.role == 'admin' ? adminNavTitles : navTitles;
-        // Determine if the user is logged in
-        bool isLoggedIn = state.user != null;
-
-        // Remove the "LOGOUT" option if the user is logged in
-        if (FirebaseAuth.instance.currentUser != null) {
-          navItems.removeWhere((title) => title == "LOGIN");
-          print("User is logged in ${navItems}");
-        } else {
-          // Remove the "LOGOUT" option if the user is not logged in
-          navItems.removeWhere((title) => title == "LOGOUT");
-          print("User is not logged out ${navItems}");
-        }
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
           child: Container(
@@ -178,7 +148,8 @@ class NavbarContent extends StatelessWidget {
                 ),
                 const Spacer(),
                 Row(
-                  children: navItems
+                  children: state
+                      .nav()
                       .map((title) => _buildNavItem(context, title))
                       .toList(),
                 ),
