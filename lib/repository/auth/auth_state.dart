@@ -15,6 +15,7 @@ class AuthState extends ChangeNotifier {
     "SMARTSPRINT",
     "CAMPUS HIRING 2025",
     "ABOUT LENOVO",
+    'LEADERBOARD',
     "LOGIN",
     "LOGOUT"
   ];
@@ -60,6 +61,7 @@ class AuthState extends ChangeNotifier {
         'SMARTSPRINT',
         'CAMPUS HIRING 2025',
         'ABOUT LENOVO',
+        'LEADERBOARD',
         'LOGOUT'
       ];
       adminNavTitles = [
