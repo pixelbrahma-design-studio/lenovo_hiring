@@ -203,6 +203,9 @@ void handleNavItemClick(BuildContext context, String title) {
     case "ADD QUESTION":
       context.go('/add-question');
       break;
+    case "ADD ADMIN":
+      context.go('/add-admin');
+      break;
     case "LOGOUT":
       context.read<AuthState>().logout(context);
       break;

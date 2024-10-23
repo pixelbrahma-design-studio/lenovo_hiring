@@ -7,17 +7,19 @@ class CoundownState extends ChangeNotifier {
   QuizRepository quizRepository = QuizRepository();
 
   CoundownState() {
-    QuizeList();
+    QuizList();
   }
 
   int days = 0;
   int hours = 0;
   int minutes = 0;
   int seconds = 0;
+  bool noQuiz = false;
 
   bool showTimer = true;
   bool allQuizzesFinished = false;
-  int currentQuizOrder = 0; // To store the current quiz order
+  bool isOngoingQuiz = false; // New flag to indicate ongoing quiz
+  int currentQuizOrder = 0;
 
   List<QuizModel> quizList = [];
 
@@ -32,95 +34,131 @@ class CoundownState extends ChangeNotifier {
   void showFinishedMessage() {
     allQuizzesFinished = true;
     showTimer = false;
+    isOngoingQuiz = false; // Reset ongoing quiz flag
     notifyListeners();
   }
 
-  // Fetch quiz list and set the countdown logic
-  Future<void> QuizeList() async {
+  Future<void> QuizList() async {
     try {
       var list = await quizRepository.getQuizeForCountDown();
+      if (list.isEmpty) {
+        noQuiz = true;
+        notifyListeners();
+        return;
+      }
+
       quizList = list;
       print("QuizList: ${quizList.length}");
 
-      // Sort quizzes by start time to ensure correct order
       quizList.sort(
           (a, b) => a.startTime!.toDate().compareTo(b.startTime!.toDate()));
       DateTime now = DateTime.now();
-
-      // Iterate over quizzes and set the timer for each in order
-      for (int i = 0; i < quizList.length; i++) {
-        var quiz = quizList[i];
-        DateTime now = DateTime.now();
-        DateTime startTime = quiz.startTime!.toDate();
-        DateTime endTime = quiz.endTime!.toDate();
-
-        // Check if the current time is before the quiz start time
-        if (now.isBefore(startTime)) {
-          print("Upcoming quiz: ${quiz.startTime}");
-          DateTime targetDate = startTime;
-
-          // Set the order of the current quiz
-          currentQuizOrder = quiz.order ?? 0;
-
-          // Show the timer for the upcoming quiz
-          showTimer = true;
-          allQuizzesFinished = false;
-
-          Timer.periodic(const Duration(seconds: 1), (timer) {
-            DateTime now = DateTime.now();
-            Duration remainingTime = targetDate.difference(now);
-
-            if (remainingTime.isNegative) {
-              // Time has passed, stop the timer
-              timer.cancel();
-              updateCountDown(0, 0, 0, 0);
-
-              // Start the next quiz timer if the current one has ended
-              if (now.isAfter(endTime)) {
-                print("Quiz ended, starting next quiz timer...");
-                if (i + 1 < quizList.length) {
-                  var nextQuiz = quizList[i + 1];
-                  DateTime nextStartTime = nextQuiz.startTime!.toDate();
-                  startNextQuizTimer(nextStartTime, nextQuiz.order ?? 0);
-                } else {
-                  // All quizzes have ended, show finished message
-                  showFinishedMessage();
-                }
-              }
-            } else {
-              // Update the countdown timer display
-              updateCountDown(
-                remainingTime.inDays,
-                remainingTime.inHours.remainder(24),
-                remainingTime.inMinutes.remainder(60),
-                remainingTime.inSeconds.remainder(60),
-              );
-            }
-          });
-          break; // Exit loop after setting the timer for the first valid quiz
-        } else if (now.isBefore(endTime)) {
-          // The current quiz is ongoing, hide the timer
-          print("Current quiz is ongoing, hiding timer.");
-          showTimer = false;
-          notifyListeners();
-          break; // Exit loop, timer will resume for the next quiz
-        }
+      if (quizList.last.endTime!.toDate().isBefore(now)) {
+        allQuizzesFinished = true;
+        showTimer = false;
+        notifyListeners();
       }
 
-      // If no upcoming quizzes, show "Quiz day finished"
-      if (quizList.isEmpty || now.isAfter(quizList.last.endTime!.toDate())) {
-        showFinishedMessage();
+      for (int i = 0; i < quizList.length; i++) {
+        var quiz = quizList[i];
+        DateTime startTime = quiz.startTime!.toDate();
+        DateTime endTime = quiz.endTime!.toDate();
+        currentQuizOrder = quiz.order ?? 0;
+
+        if (now.isBefore(startTime)) {
+          // Upcoming quiz logic
+          print("Upcoming quiz: ${quiz.startTime}");
+          startUpcomingQuizTimer(startTime, quiz.order ?? 0, i);
+          break; // Exit loop after starting the timer
+        } else if (now.isAfter(startTime) && now.isBefore(endTime)) {
+          // Ongoing quiz logic
+          print("Current quiz is ongoing, showing ongoing message.");
+          isOngoingQuiz = true; // Set ongoing flag for current quiz
+          startOngoingQuizTimer(endTime, i);
+          break; // Exit loop
+        }
       }
 
       notifyListeners();
     } catch (e) {
       print(e);
-      throw e;
+      // Handle errors appropriately (e.g., notify user)
     }
+  }
+
+  void startUpcomingQuizTimer(DateTime targetDate, int quizOrder, int index) {
+    currentQuizOrder = quizOrder;
+    showTimer = true;
+    allQuizzesFinished = false;
+    isOngoingQuiz = false; // Upcoming quiz, reset ongoing flag
+
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      DateTime now = DateTime.now();
+      Duration remainingTime = targetDate.difference(now);
+
+      if (remainingTime.isNegative) {
+        updateCountDown(0, 0, 0, 0);
+        timer.cancel(); // Cancel the timer when time is up
+        isOngoingQuiz = true; // Set ongoing flag for the upcoming quiz
+        showTimer = false; // Hide timer for upcoming quiz
+        notifyListeners();
+
+        // Check for the next quiz
+        if (index + 1 < quizList.length) {
+          var nextQuiz = quizList[index + 1];
+          DateTime nextStartTime = nextQuiz.startTime!.toDate();
+          startNextQuizTimer(nextStartTime, nextQuiz.order ?? 0);
+        } else {
+          // Do not show finished message yet
+        }
+      } else {
+        updateCountDown(
+          remainingTime.inDays,
+          remainingTime.inHours.remainder(24),
+          remainingTime.inMinutes.remainder(60),
+          remainingTime.inSeconds.remainder(60),
+        );
+      }
+    });
+  }
+
+  void startOngoingQuizTimer(DateTime endTime, int index) {
+    // isOngoingQuiz is already set when we call this method
+    showTimer = true; // Show timer for ongoing quiz
+
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      DateTime now = DateTime.now();
+      Duration remainingTime = endTime.difference(now);
+
+      if (remainingTime.isNegative) {
+        updateCountDown(0, 0, 0, 0);
+        timer.cancel(); // Cancel the timer when time is up
+
+        // Check for the next quiz after current one ends
+        if (index + 1 < quizList.length) {
+          var nextQuiz = quizList[index + 1];
+          DateTime nextStartTime = nextQuiz.startTime!.toDate();
+          startNextQuizTimer(nextStartTime, nextQuiz.order ?? 0);
+        } else {
+          // Now it's safe to show the finished message after the last quiz ends
+          showFinishedMessage();
+          timer.cancel(); // Show finished message only after the last quiz ends
+        }
+      } else {
+        updateCountDown(
+          remainingTime.inDays,
+          remainingTime.inHours.remainder(24),
+          remainingTime.inMinutes.remainder(60),
+          remainingTime.inSeconds.remainder(60),
+        );
+      }
+    });
   }
 
   void startNextQuizTimer(DateTime nextStartTime, int nextQuizOrder) {
     currentQuizOrder = nextQuizOrder;
+    showTimer = true; // Show timer for the next quiz
+    isOngoingQuiz = false; // Reset ongoing flag
     Timer.periodic(const Duration(seconds: 1), (timer) {
       DateTime now = DateTime.now();
       Duration remainingTime = nextStartTime.difference(now);

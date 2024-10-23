@@ -8,6 +8,7 @@ import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
 import 'package:lenovo_hiring/LandingPage/rules.dart';
 import 'package:lenovo_hiring/LandingPage/why-participate.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
+import 'package:lenovo_hiring/admin/add_admin_screen.dart';
 import 'package:lenovo_hiring/admin/add_question.dart';
 import 'package:lenovo_hiring/about_lenovo.dart';
 import 'package:lenovo_hiring/admin/add_quiz.dart';
@@ -155,10 +156,20 @@ class MyApp extends StatelessWidget {
                 return "/";
               }
             }),
+        // GoRoute(
+        //   path: '/check',
+        //   builder: (context, state) => QuizeQuestionRandomCheck(),
+        // ),
         GoRoute(
-          path: '/check',
-          builder: (context, state) => QuizeQuestionRandomCheck(),
-        ),
+            path: '/add-admin',
+            builder: (context, state) => AddAdminScreen(),
+            redirect: (context, state) {
+              print(context.read<AuthState>().user?.role);
+              if (context.read<AuthState>().user == null ||
+                  context.read<AuthState>().user?.role != "admin") {
+                return "/";
+              }
+            }),
       ],
     );
 
