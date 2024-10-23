@@ -15,7 +15,7 @@ class Navbar extends StatelessWidget {
       builder: (context, constraints) {
         if (constraints.maxWidth > 1200) {
           return const DesktopNavbar();
-        } else if (constraints.maxWidth > 800) {
+        } else if (constraints.maxWidth > 1025) {
           return const TabletNavbar();
         } else {
           return const MobileNavbar();
@@ -31,7 +31,7 @@ class DesktopNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    return NavbarContent(screenWidth: screenWidth * 0.8);
+    return NavbarContent(screenWidth: screenWidth * 0.9);
   }
 }
 
@@ -50,8 +50,9 @@ class MobileNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -135,7 +136,7 @@ class NavbarContent extends StatelessWidget {
     return Consumer<AuthState>(
       builder: (context, state, _) {
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
           child: Container(
             width: screenWidth,
             child: Row(
@@ -144,7 +145,7 @@ class NavbarContent extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () => context.go('/'),
-                  child: Image.asset("assets/images/logo.png"),
+                  child: Image.asset("assets/images/logo.png", height: 30,),
                 ),
                 const Spacer(),
                 Row(
@@ -163,14 +164,14 @@ class NavbarContent extends StatelessWidget {
 
   Widget _buildNavItem(BuildContext context, String title) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20),
+      padding: const EdgeInsets.only(left: 10),
       child: TextButton(
         onPressed: () => handleNavItemClick(context, title),
         child: Text(
           title,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 14,
+            fontSize: 13,
             fontWeight: FontWeight.bold,
           ),
         ),
