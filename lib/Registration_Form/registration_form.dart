@@ -49,7 +49,7 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-  
+
     return Form(
       key: formKey,
       child: Column(
@@ -59,12 +59,12 @@ class _RegisterFormState extends State<RegisterForm> {
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
             child: Container(
                 alignment: Alignment.center,
-                child: 
-                  Image.asset(
-                    "assets/images/Smartsprint-logo.png",
-                    width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
-                  )
-                ),
+                child: Image.asset(
+                  "assets/images/Smartsprint-logo.png",
+                  width: screenWidth < 600
+                      ? screenWidth * 0.85
+                      : screenWidth * 0.5,
+                )),
           ),
           SizedBox(
             height: 30,
@@ -116,9 +116,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               controller: nameController,
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                              style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                 hintText: "Name as per Aadhar Card*",
                                 hintStyle: TextStyle(color: Colors.white),
@@ -128,12 +126,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                               ),
                               validator: (value) {
                                 if (value == null || value!.trim().isEmpty) {
@@ -156,9 +152,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               controller: emailController,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                              style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                 hintText: 'Email ID (College ID Preferred)*',
                                 hintStyle: TextStyle(color: Colors.white),
@@ -168,12 +162,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                               ),
                               //cursorColor: Colors.pinkAccent,
                               validator: (value) {
@@ -210,7 +202,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               controller: _passwordController,
-                              
+
                               obscureText:
                                   _isPasswordHidden, // Hide the password
                               decoration: InputDecoration(
@@ -222,12 +214,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     _isPasswordHidden
@@ -246,6 +236,9 @@ class _RegisterFormState extends State<RegisterForm> {
                               validator: (value) {
                                 if (value == null || value!.trim().isEmpty) {
                                   return "Please Enter Password";
+                                }
+                                if (value.length < 6) {
+                                  return "Password must be at least 6 characters long";
                                 }
                                 return null;
                               },
@@ -275,12 +268,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     _isPasswordHidden
@@ -337,9 +328,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ],
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                              style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                 hintText: 'Contact Number*',
                                 hintStyle: TextStyle(color: Colors.white),
@@ -349,12 +338,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                               ),
                               //cursorColor: Colors.pinkAccent,
                               validator: (value) {
@@ -395,12 +382,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                               ),
                               selectedItemBuilder: (BuildContext context) {
                                 return <String>[
@@ -444,9 +429,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   _selectedCollege = newValue;
                                 });
                               },
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                              style: TextStyle(color: Colors.white),
                               validator: (value) {
                                 if (value == null) {
                                   return "Please Select College";
@@ -493,18 +476,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                               ),
                               selectedItemBuilder: (BuildContext context) {
-                                return <String>[
-                                  'BE/Btech',
-                                  'Others'
-                                ].map<Widget>((String value) {
+                                return <String>['BE/Btech', 'Others']
+                                    .map<Widget>((String value) {
                                   return Text(
                                     value,
                                     style: TextStyle(
@@ -529,7 +508,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       fontSize: 16,
                                       fontFamily: "Gotham",
                                       fontWeight: FontWeight.w500,
-                                    ),// Dropdown item text color
+                                    ), // Dropdown item text color
                                   ),
                                 );
                               }).toList(),
@@ -538,9 +517,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   _selectedDegree = newValue;
                                 });
                               },
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                              style: TextStyle(color: Colors.white),
                               validator: (value) {
                                 if (value == null) {
                                   return "Please Select Degree";
@@ -568,8 +545,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              dropdownColor: Color.fromRGBO(255, 255, 255, 1), // Dropdown background color
-                              iconEnabledColor: Colors.white, // Dropdown arrow color
+                              dropdownColor: Color.fromRGBO(255, 255, 255,
+                                  1), // Dropdown background color
+                              iconEnabledColor:
+                                  Colors.white, // Dropdown arrow color
                               decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
@@ -577,15 +556,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                               ),
                               style: TextStyle(
-                                color: Colors.white, // Color of selected item in the dropdown when opened
+                                color: Colors
+                                    .white, // Color of selected item in the dropdown when opened
                               ),
                               selectedItemBuilder: (BuildContext context) {
                                 return <String>[
@@ -671,7 +649,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                 fillColor: WidgetStateColor.resolveWith(
                                     (states) =>
                                         Color.fromRGBO(255, 255, 255, 1)),
-                                activeColor: Color.fromRGBO(255, 255, 255, 1), // Change active (selected) color
+                                activeColor: Color.fromRGBO(255, 255, 255,
+                                    1), // Change active (selected) color
                                 focusColor: WidgetStateColor.resolveWith(
                                     (states) =>
                                         Color.fromRGBO(255, 255, 255, 1)),
@@ -685,7 +664,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "2025",
                                 style: TextStyle(color: Colors.white),
                               ),
-
                               Radio<String>(
                                 value: "2024",
                                 groupValue: _selectedYear,
@@ -706,7 +684,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "2024",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              
                               Radio<String>(
                                 value: "Others",
                                 groupValue: _selectedYear,
@@ -770,9 +747,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "Male",
                                 style: TextStyle(color: Colors.white),
                               ),
-
                               SizedBox(width: 10),
-
                               Radio<String>(
                                 value: "Female",
                                 groupValue: _selectedGender,
@@ -793,9 +768,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "Female",
                                 style: TextStyle(color: Colors.white),
                               ),
-
                               SizedBox(width: 10),
-                              
                               Radio<String>(
                                 value: "Others",
                                 groupValue: _selectedGender,
@@ -836,14 +809,17 @@ class _RegisterFormState extends State<RegisterForm> {
                           Theme(
                             data: ThemeData(
                               checkboxTheme: CheckboxThemeData(
-                                fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                                fillColor:
+                                    WidgetStateProperty.resolveWith<Color>(
+                                        (Set<WidgetState> states) {
                                   if (states.contains(WidgetState.selected)) {
                                     return Colors.white; // Checked state
                                   }
-                                  return Colors.transparent; // Unchecked state background
+                                  return Colors
+                                      .transparent; // Unchecked state background
                                 }),
                                 side: BorderSide(
-                                  color: Colors.white, 
+                                  color: Colors.white,
                                   width: 2.0,
                                 ), // Unchecked state border color
                               ),
@@ -855,8 +831,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                   _checkbox1 = value!;
                                 });
                               },
-                              activeColor: Colors.white, // Checked background color
-                              checkColor: Color.fromRGBO(28, 10, 103, 1.0),  // Checked checkmark color
+                              activeColor:
+                                  Colors.white, // Checked background color
+                              checkColor: Color.fromRGBO(
+                                  28, 10, 103, 1.0), // Checked checkmark color
                             ),
                           ),
                           Expanded(
@@ -875,14 +853,17 @@ class _RegisterFormState extends State<RegisterForm> {
                           Theme(
                             data: ThemeData(
                               checkboxTheme: CheckboxThemeData(
-                                fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                                fillColor:
+                                    WidgetStateProperty.resolveWith<Color>(
+                                        (Set<WidgetState> states) {
                                   if (states.contains(WidgetState.selected)) {
                                     return Colors.white; // Checked state
                                   }
-                                  return Colors.transparent; // Unchecked state background
+                                  return Colors
+                                      .transparent; // Unchecked state background
                                 }),
                                 side: BorderSide(
-                                  color: Colors.white, 
+                                  color: Colors.white,
                                   width: 2.0,
                                 ), // Unchecked state border color
                               ),
@@ -894,8 +875,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                   _checkbox2 = value!;
                                 });
                               },
-                              activeColor: Colors.white, // Checked background color
-                              checkColor: Color.fromRGBO(28, 10, 103, 1.0),  // Checked checkmark color
+                              activeColor:
+                                  Colors.white, // Checked background color
+                              checkColor: Color.fromRGBO(
+                                  28, 10, 103, 1.0), // Checked checkmark color
                             ),
                           ),
                           Text(
@@ -912,14 +895,17 @@ class _RegisterFormState extends State<RegisterForm> {
                           Theme(
                             data: ThemeData(
                               checkboxTheme: CheckboxThemeData(
-                                fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                                fillColor:
+                                    WidgetStateProperty.resolveWith<Color>(
+                                        (Set<WidgetState> states) {
                                   if (states.contains(WidgetState.selected)) {
                                     return Colors.white; // Checked state
                                   }
-                                  return Colors.transparent; // Unchecked state background
+                                  return Colors
+                                      .transparent; // Unchecked state background
                                 }),
                                 side: BorderSide(
-                                  color: Colors.white, 
+                                  color: Colors.white,
                                   width: 2.0,
                                 ), // Unchecked state border color
                               ),
@@ -931,8 +917,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                   _checkbox3 = value!;
                                 });
                               },
-                              activeColor: Colors.white, // Checked background color
-                              checkColor: Color.fromRGBO(28, 10, 103, 1.0),  // Checked checkmark color
+                              activeColor:
+                                  Colors.white, // Checked background color
+                              checkColor: Color.fromRGBO(
+                                  28, 10, 103, 1.0), // Checked checkmark color
                             ),
                           ),
                           Text(

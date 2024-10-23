@@ -130,7 +130,7 @@ class AttendeeState extends ChangeNotifier {
         attendeeModel = attendeeModel!.copyWith(completed: true);
         await attendeeRepository.updateAttendee(attendeeModel!);
         clear(); // clear the state
-        context.go('/');
+        context.go('/quiz_result');
       } else {
         await attendeeRepository.updateAttendee(attendeeModel!);
         selectedAnswer = null;

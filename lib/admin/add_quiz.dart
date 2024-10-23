@@ -240,9 +240,9 @@ class _AddQuizState extends State<AddQuiz> {
                                 Expanded(
                                   child: TextFormField(
                                     keyboardType: TextInputType.number,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
+                                    // inputFormatters: [
+                                    //   FilteringTextInputFormatter.digitsOnly
+                                    // ],
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
                                     controller: state.pointController,

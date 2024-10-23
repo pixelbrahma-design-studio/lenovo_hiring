@@ -71,6 +71,7 @@ class AuthState extends ChangeNotifier {
         'ADD QUIZ',
         'ADD QUESTION',
         'LEADERBOARD',
+        'ADD ADMIN',
         'LOGOUT'
       ];
     }
