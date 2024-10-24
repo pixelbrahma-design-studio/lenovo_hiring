@@ -4,6 +4,8 @@ import 'package:lenovo_hiring/Footer/Footer.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
 import 'package:lenovo_hiring/models/user_model/user_model.dart';
 import 'package:lenovo_hiring/repository/auth/auth_repository.dart';
+import 'package:lenovo_hiring/repository/auth/auth_state.dart';
+import 'package:provider/provider.dart';
 
 class AddAdminScreen extends StatefulWidget {
   const AddAdminScreen({super.key});
@@ -23,9 +25,11 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
   bool loading = false;
 
   bool _isPasswordHidden = true;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -43,24 +47,23 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
             )),
         child: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height,
+            width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.8,
             child: Form(
               key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Navbar(),
-
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
                     child: Container(
-                        alignment: Alignment.center,
-                        child: Image.asset("assets/images/Smartsprint-logo.png",
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        "assets/images/Smartsprint-logo.png",
                         width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
-                        )),
+                      ),
+                    ),
                   ),
-                  
                   Container(
                     width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
                     padding: const EdgeInsets.all(20.0),
@@ -76,7 +79,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                             controller: nameController,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              if (value == null || value!.trim().isEmpty) {
+                              if (value == null || value.trim().isEmpty) {
                                 return "Please Enter Valid Name";
                               }
                               return null;
@@ -129,9 +132,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                           ),
                           SizedBox(height: 20),
                           TextFormField(
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: _passwordController,
-                          
                             obscureText: _isPasswordHidden, // Hide the password
                             decoration: InputDecoration(
                               hintText: "Create Your Password",
@@ -161,7 +162,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                             ),
                             style: TextStyle(color: Colors.white),
                             validator: (value) {
-                              if (value == null || value!.trim().isEmpty) {
+                              if (value == null || value.trim().isEmpty) {
                                 return "Please Enter Password";
                               }
                               if (value.length < 6) {
@@ -184,22 +185,23 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                                     onPressed: () async {
                                       if (formKey.currentState!.validate()) {
                                         UserModel userModel = UserModel(
-                                            role: "admin",
-                                            name: nameController.text
-                                                .trim()
-                                                .toLowerCase(),
-                                            email: emailController.text
-                                                .trim()
-                                                .toLowerCase(),
-                                            collegeName: "",
-                                            contactNumber: 0000000000,
-                                            degree: "",
-                                            courseName: "",
-                                            yearOfGraduation: "",
-                                            gender: "",
-                                            iAgree: true,
-                                            acceptPrivacyPolicy: true,
-                                            understoodRules: true);
+                                          role: "admin",
+                                          name: nameController.text
+                                              .trim()
+                                              .toLowerCase(),
+                                          email: emailController.text
+                                              .trim()
+                                              .toLowerCase(),
+                                          collegeName: "",
+                                          contactNumber: 0000000000,
+                                          degree: "",
+                                          courseName: "",
+                                          yearOfGraduation: "",
+                                          gender: "",
+                                          iAgree: true,
+                                          acceptPrivacyPolicy: true,
+                                          understoodRules: true,
+                                        );
                                         try {
                                           setState(() {
                                             loading = true;
@@ -216,13 +218,11 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                                               builder: (c) {
                                                 return AlertDialog(
                                                   title: Text(
-                                                      "SuccessFully Created - Please confirm the email"),
+                                                      "Successfully Created - Please confirm the email"),
                                                   actions: [
                                                     ElevatedButton(
                                                         onPressed: () {
-                                                          c.pop();
-                                                          // context.go('/login');
-                                                          //context.go('/login');
+                                                          Navigator.of(context).pop();
                                                         },
                                                         child: Text("OK"))
                                                   ],
@@ -256,13 +256,58 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                       ),
                     ),
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Footer(),
-                    ],
+                  SizedBox(height: 30),
+
+                  Container(
+                    width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
+                    padding: const EdgeInsets.only(top: 20, bottom: 20),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(28, 10, 103, 1.0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      )
+                    ),
+                    child: Text(
+                      "Admin List",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20
+                      ),
+                    ),
                   ),
+                  // This section now has a fixed height for ListView.builder
+                  Container(
+                    padding: const EdgeInsets.all(20.0),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(28, 10, 103, 0.5),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
+                    height: 300, // Define a fixed height for the list
+                    width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
+                    child: Consumer<AuthState>(builder: (context, state, _) {
+                      return ListView.builder(
+                        itemCount: state.admins.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(
+                              state.admins[index].name,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            subtitle: Text(
+                              state.admins[index].email,
+                              style: TextStyle(color: Colors.white70),
+                            ),
+                          );
+                        },
+                      );
+                    }),
+                  ),
+                  Footer(),
                 ],
               ),
             ),
@@ -277,7 +322,6 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
       nameController.clear();
       emailController.clear();
       _passwordController.clear();
-
       phoneController.clear();
     });
   }
