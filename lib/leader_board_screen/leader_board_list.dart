@@ -87,20 +87,47 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
                           : screenWidth * 0.2,
                     )),
               ),
+              SizedBox(height: 30,),
               Container(
-                child: Row(
+                width: screenWidth * 0.8,
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset("assets/images/lb-icon.png"),
-                    Text(
-                      "Leaderboard".toUpperCase(),
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(77, 20, 74, 1.0),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.white,
+                            )
+                          ),
+                          child: 
+                            Row(
+                              children: [
+                                Image.asset("assets/images/lb-icon.png"),
+                                SizedBox(width: 20,),
+                                Text(
+                                  "Leaderboard".toUpperCase(),
+                                  style: TextStyle(color: Colors.white, fontSize: 20),
+                                ),
+                              ],
+                            ),
+                        ),
+                      ],
                     ),
+                    SizedBox(height: 20,),
                     if (context.read<AuthState>().user?.role == "admin")
                       Align(
                           alignment: Alignment.centerRight,
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               // select leader board start time
                               InkWell(
@@ -121,9 +148,13 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
                                   width: 150,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: const Color.fromRGBO(28, 10, 103, 0.5),
                                     borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                    )
                                   ),
+                                  
                                   child: Center(
                                     child: Text(
                                       state.startTime != null
@@ -131,7 +162,7 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
                                               .format(state.startTime.toDate())
                                           : "start time",
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 16,
                                       ),
                                     ),
@@ -159,8 +190,11 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
                                   width: 150,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: const Color.fromRGBO(28, 10, 103, 0.5),
                                     borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                    )
                                   ),
                                   child: Center(
                                     child: Text(
@@ -169,7 +203,7 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
                                               .format(state.endTime.toDate())
                                           : "End time",
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 16,
                                       ),
                                     ),
@@ -182,26 +216,35 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
                               ),
                               // switch button for  hide
                               Container(
-                                width: 150,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                                //width: 150,
+                                //height: 40,
+                                // decoration: BoxDecoration(
+                                //   color: Colors.white,
+                                //   borderRadius: BorderRadius.circular(10),
+                                // ),
                                 child: Center(
                                     child: Row(
                                   children: [
-                                    Text("Show"),
+                                    Text("Show",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),),
                                     Switch(
-                                        value: state.show,
-                                        onChanged: (val) {
-                                          state.setShow(val);
-                                        }),
+                                      value: state.show,
+                                      onChanged: (val) {
+                                        state.setShow(val);
+                                      },
+                                      activeColor: Color.fromRGBO(17, 24, 79, 1.0), // Custom thumb color when active
+                                      activeTrackColor: Colors.white, // Custom track color when active
+                                      inactiveThumbColor: Colors.grey, // Custom thumb color when inactive
+                                      inactiveTrackColor: const Color.fromARGB(255, 48, 48, 48),// Custom track color when inactive
+                                    ),
                                   ],
                                 )),
                               ),
                             ],
-                          )),
+                          )
+                        ),
                   ],
                 ),
               ),
