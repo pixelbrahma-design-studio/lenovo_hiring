@@ -12,6 +12,7 @@ import 'package:lenovo_hiring/admin/add_admin_screen.dart';
 import 'package:lenovo_hiring/admin/add_question.dart';
 import 'package:lenovo_hiring/about_lenovo.dart';
 import 'package:lenovo_hiring/admin/add_quiz.dart';
+import 'package:lenovo_hiring/forgot_password.dart';
 import 'package:lenovo_hiring/leader_board_screen/quize_list_screen.dart';
 
 import 'package:lenovo_hiring/repository/attendee/attendee_state.dart';
@@ -170,6 +171,10 @@ class MyApp extends StatelessWidget {
                 return "/";
               }
             }),
+        GoRoute(
+          path: '/forgot-password',
+          builder: (context, state) => ForgotPasswordScreen(),
+        ),
       ],
     );
 

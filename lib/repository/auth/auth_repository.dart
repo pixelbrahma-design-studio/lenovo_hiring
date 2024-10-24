@@ -82,4 +82,17 @@ class AuthRepository {
       throw e;
     }
   }
+
+  // get admins from user collection
+  Future<List<UserModel>> getAdmins() async {
+    try {
+      var data = await _firestore
+          .collection("users")
+          .where("role", isEqualTo: "admin")
+          .get();
+      return data.docs.map((e) => UserModel.fromMap(e.data())).toList();
+    } catch (e) {
+      throw e;
+    }
+  }
 }
