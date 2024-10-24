@@ -9,17 +9,24 @@ class AdminListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Admin List')),
-      body: Consumer<AuthState>(builder: (context, state, _) {
-        return ListView.builder(
-          itemCount: state.admins.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(state.admins[index].name),
-              subtitle: Text(state.admins[index].email),
-            );
-          },
-        );
-      }),
+      body: Container(
+        padding: const EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(255, 255, 255, 0.2),
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        ),
+        child: Consumer<AuthState>(builder: (context, state, _) {
+          return ListView.builder(
+            itemCount: state.admins.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(state.admins[index].name),
+                subtitle: Text(state.admins[index].email),
+              );
+            },
+          );
+        }),
+      ),
     );
   }
 }
