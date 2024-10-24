@@ -44,8 +44,11 @@ class _LoginFormState extends State<LoginForm> {
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
             child: Container(
                 alignment: Alignment.center,
-                child: Image.asset("assets/images/Smartsprint-logo.png",
-                width: screenWidth < 600 ? screenWidth * 0.85 : screenWidth * 0.5,
+                child: Image.asset(
+                  "assets/images/Smartsprint-logo.png",
+                  width: screenWidth < 600
+                      ? screenWidth * 0.85
+                      : screenWidth * 0.5,
                 )),
           ),
           SizedBox(
@@ -96,9 +99,7 @@ class _LoginFormState extends State<LoginForm> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               controller: _emailController,
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                              style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                 hintText: 'Email ID*',
                                 hintStyle: TextStyle(color: Colors.white),
@@ -108,12 +109,10 @@ class _LoginFormState extends State<LoginForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                               ),
                               validator: (value) {
                                 String pattern =
@@ -151,9 +150,7 @@ class _LoginFormState extends State<LoginForm> {
                                   AutovalidateMode.onUserInteraction,
 
                               controller: _passwordController,
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                              style: TextStyle(color: Colors.white),
                               obscureText:
                                   _isPasswordHidden, // Hide the password
                               decoration: InputDecoration(
@@ -165,12 +162,10 @@ class _LoginFormState extends State<LoginForm> {
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                errorStyle: TextStyle(
-                                  color: Colors.white
-                                ),
+                                errorStyle: TextStyle(color: Colors.white),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     _isPasswordHidden
@@ -208,7 +203,9 @@ class _LoginFormState extends State<LoginForm> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.go('/forgot-password');
+                          },
                           child: Text(
                             "Forgot Password?",
                             style: TextStyle(

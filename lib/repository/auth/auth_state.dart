@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,10 @@ import 'package:lenovo_hiring/repository/auth/auth_repository.dart';
 class AuthState extends ChangeNotifier {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   AuthRepository authRepository = AuthRepository();
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   UserModel? _user;
   UserModel? get user => _user;
+  List<UserModel> admins = [];
 
   List<String> navTitles = [
     "SMARTSPRINT",
@@ -37,6 +40,7 @@ class AuthState extends ChangeNotifier {
         _user = null;
       } else {
         getCurrentUser();
+        listenAdmins();
       }
       notifyListeners();
     });
@@ -108,5 +112,17 @@ class AuthState extends ChangeNotifier {
       print(e);
     }
     notifyListeners();
+  }
+
+  // LISTEN admis
+  void listenAdmins() async {
+    _firestore
+        .collection("users")
+        .where("role", isEqualTo: "admin")
+        .snapshots()
+        .listen((event) {
+      admins = event.docs.map((e) => UserModel.fromMap(e.data())).toList();
+      notifyListeners();
+    });
   }
 }
