@@ -51,7 +51,7 @@ class LeaderBoardRepository {
               attendeeModel.questions[i].userAnswerIndex) {
             // Add points if the answer is correct
             leaderBoardModel = leaderBoardModel.copyWith(
-              totoalScore: leaderBoardModel.totoalScore + attendeeModel.points,
+              totoalScore: leaderBoardModel.totoalScore + attendeeModel.quizModel!.point,
               totalTimeTaken: leaderBoardModel.totalTimeTaken +
                   attendeeModel.questions[i].timeTaken!, // Sum up time taken
             );
