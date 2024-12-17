@@ -16,6 +16,7 @@ class UserModel {
   bool acceptPrivacyPolicy;
   bool understoodRules;
   String role;
+  bool? emailVerified;
   UserModel({
     this.uid,
     required this.name,
@@ -31,6 +32,7 @@ class UserModel {
     required this.acceptPrivacyPolicy,
     required this.understoodRules,
     required this.role,
+    this.emailVerified,
   });
 
   UserModel copyWith({
@@ -48,6 +50,7 @@ class UserModel {
     bool? acceptPrivacyPolicy,
     bool? understoodRules,
     String? role,
+    bool? emailVerified,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -64,6 +67,7 @@ class UserModel {
       acceptPrivacyPolicy: acceptPrivacyPolicy ?? this.acceptPrivacyPolicy,
       understoodRules: understoodRules ?? this.understoodRules,
       role: role ?? this.role,
+      emailVerified: emailVerified ?? this.emailVerified,
     );
   }
 
@@ -83,6 +87,7 @@ class UserModel {
       'acceptPrivacyPolicy': acceptPrivacyPolicy,
       'understoodRules': understoodRules,
       'role': role,
+      'emailVerified': emailVerified,
     };
   }
 
@@ -102,6 +107,7 @@ class UserModel {
       acceptPrivacyPolicy: map['acceptPrivacyPolicy'] as bool,
       understoodRules: map['understoodRules'] as bool,
       role: map['role'] as String,
+      emailVerified: map['emailVerified'] as bool,
     );
   }
 }

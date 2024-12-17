@@ -961,7 +961,8 @@ class _RegisterFormMobileState extends State<RegisterFormMobile> {
                                       gender: _selectedGender!,
                                       iAgree: _checkbox1,
                                       acceptPrivacyPolicy: _checkbox2,
-                                      understoodRules: _checkbox3);
+                                      understoodRules: _checkbox3,
+                                  emailVerified: false,);
                                   try {
                                     setState(() {
                                       loading = true;

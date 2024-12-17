@@ -44,6 +44,7 @@ class AuthState extends ChangeNotifier {
       }
       notifyListeners();
     });
+
   }
 
   List<String> nav() {
@@ -91,8 +92,8 @@ class AuthState extends ChangeNotifier {
   Future<void> getCurrentUser() async {
     User? user = firebaseAuth.currentUser;
     if (user != null) {
-      UserModel userModell = await authRepository.getCurrentUser(user.uid);
-      _user = userModell;
+      UserModel userModel = await authRepository.getCurrentUser(user.uid);
+      _user = userModel;
     }
     notifyListeners();
   }

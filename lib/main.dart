@@ -70,6 +70,7 @@ class MyApp extends StatelessWidget {
 
               return "/count_down";
             }
+            return null;
           },
         ),
         GoRoute(
@@ -117,6 +118,7 @@ class MyApp extends StatelessWidget {
                   context.read<AuthState>().user?.role != "admin") {
                 return "/";
               }
+              return null;
             }),
         // GoRoute(
         //   path: '/about-lenovo',
@@ -156,6 +158,7 @@ class MyApp extends StatelessWidget {
                   context.read<AuthState>().user?.role != "admin") {
                 return "/";
               }
+              return null;
             }),
         // GoRoute(
         //   path: '/check',
@@ -170,6 +173,7 @@ class MyApp extends StatelessWidget {
                   context.read<AuthState>().user?.role != "admin") {
                 return "/";
               }
+              return null;
             }),
         GoRoute(
           path: '/forgot-password',

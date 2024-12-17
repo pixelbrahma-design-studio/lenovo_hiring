@@ -201,6 +201,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                                           iAgree: true,
                                           acceptPrivacyPolicy: true,
                                           understoodRules: true,
+                                          emailVerified: true,
                                         );
                                         try {
                                           setState(() {

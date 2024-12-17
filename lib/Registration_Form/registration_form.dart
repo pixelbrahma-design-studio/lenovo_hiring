@@ -964,7 +964,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                       gender: _selectedGender!,
                                       iAgree: _checkbox1,
                                       acceptPrivacyPolicy: _checkbox2,
-                                      understoodRules: _checkbox3);
+                                      understoodRules: _checkbox3,
+                                  emailVerified: false);
                                   try {
                                     setState(() {
                                       loading = true;
