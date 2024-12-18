@@ -20,6 +20,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   void initState() {
     super.initState();
     context.read<CoundownState>().QuizList();
+
   }
 
   String formatTime(int timeUnit) {
@@ -50,7 +51,8 @@ class _CountdownTimerState extends State<CountdownTimer> {
                           : screenWidth * 0.5,
                     )),
               ),
-              if (state.noQuiz)
+              if (state.noQuiz &&
+                  FirebaseAuth.instance.currentUser!.emailVerified)
                 Text(
                   "No quiz available",
                   style: TextStyle(
@@ -59,7 +61,8 @@ class _CountdownTimerState extends State<CountdownTimer> {
                     fontWeight: FontWeight.bold,
                   ),
                 )
-              else if (state.allQuizzesFinished)
+              else if (state.allQuizzesFinished &&
+                  FirebaseAuth.instance.currentUser!.emailVerified)
                 Text(
                   "All quiz finished",
                   style: TextStyle(

@@ -342,6 +342,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 errorBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.white)),
+                                counterStyle: TextStyle(color: Colors.white),
                               ),
                               //cursorColor: Colors.pinkAccent,
                               validator: (value) {
@@ -987,7 +988,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                               ElevatedButton(
                                                   onPressed: () {
                                                     c.pop();
-                                                    context.go('/login');
+                                                    context.go('/splash_screen');
                                                     //context.go('/login');
                                                   },
                                                   child: Text("OK"))

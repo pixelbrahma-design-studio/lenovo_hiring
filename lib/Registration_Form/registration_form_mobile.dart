@@ -984,7 +984,7 @@ class _RegisterFormMobileState extends State<RegisterFormMobile> {
                                               ElevatedButton(
                                                   onPressed: () {
                                                     c.pop();
-                                                    context.go('/login');
+                                                    context.go('/splash_screen');
                                                     //context.go('/login');
                                                   },
                                                   child: Text("OK"))

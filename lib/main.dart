@@ -32,6 +32,7 @@ import 'package:lenovo_hiring/quiz_result.dart';
 import 'package:lenovo_hiring/register.dart';
 import 'package:lenovo_hiring/smartsprint.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lenovo_hiring/splash_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 //import 'smartsprint.dart';
@@ -61,17 +62,23 @@ class MyApp extends StatelessWidget {
       routes: [
         GoRoute(
           path: '/',
-          builder: (context, state) => const MyHomePage(),
-          redirect: (context, state) async {
-            if (FirebaseAuth.instance.currentUser != null) {
-              // UserModel user = await authRepository
-              //     .getCurrentUser(FirebaseAuth.instance.currentUser!.uid);
-              // context.read()<AuthState>().setuser(user);
-
-              return "/count_down";
+          builder: (context, state) => const MyHomePage(), // Splash or Login Page
+          redirect: (context, state) {
+            final user = FirebaseAuth.instance.currentUser;
+            if (user != null) {
+              if(user.emailVerified) {
+                return '/count_down';
+                // return '/splash_screen';
+              } else {
+                return '/splash_screen';
+              }
             }
-            return null;
+            return null; // Stay on '/'
           },
+        ),
+        GoRoute(
+          path: '/splash_screen',
+          builder: (context, state) => const SplashScreen(),
         ),
         GoRoute(
           path: '/smartsprint',
@@ -94,8 +101,14 @@ class MyApp extends StatelessWidget {
           path: '/login',
           builder: (context, state) => const LoginPage(),
           redirect: (context, state) {
-            if (FirebaseAuth.instance.currentUser != null) {
-              return "/count_down";
+            final user = FirebaseAuth.instance.currentUser;
+            if(user != null) {
+              if(user.emailVerified) {
+                return '/count_down';
+                // return '/splash_screen';
+              } else {
+                return '/splash_screen';
+              }
             }
           },
         ),
@@ -103,8 +116,16 @@ class MyApp extends StatelessWidget {
           path: '/count_down',
           builder: (context, state) => const CountDown(),
           redirect: (context, state) {
-            if (FirebaseAuth.instance.currentUser == null) {
-              return "/";
+            final user = FirebaseAuth.instance.currentUser;
+            if(user != null) {
+              if(user.emailVerified) {
+                return '/count_down';
+                // return '/splash_screen';
+              } else {
+                return '/splash_screen';
+              }
+            } else {
+              return '/';
             }
           },
         ),
@@ -180,6 +201,7 @@ class MyApp extends StatelessWidget {
           builder: (context, state) => ForgotPasswordScreen(),
         ),
       ],
+      // refreshListenable: AuthState(),
     );
 
     return MaterialApp.router(
@@ -188,6 +210,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         fontFamily: "Gotham",
         useMaterial3: true,
+        progressIndicatorTheme: ProgressIndicatorThemeData(
+          color: Colors.red, // Change this to your desired color
+          circularTrackColor: Colors.white, // Optional: Track color
+        ),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.red, // Set your desired cursor color here
+        ),
       ),
       routerConfig: _router,
       //home: const MyHomePage(),

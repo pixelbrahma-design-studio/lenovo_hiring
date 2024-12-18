@@ -42,6 +42,7 @@ class AuthState extends ChangeNotifier {
         getCurrentUser();
         listenAdmins();
       }
+      print('firebaseAuth.authStateChanges().listen print');
       notifyListeners();
     });
 
