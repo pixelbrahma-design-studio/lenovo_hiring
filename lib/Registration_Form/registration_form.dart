@@ -1,3 +1,7 @@
+
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -38,6 +42,26 @@ class _RegisterFormState extends State<RegisterForm> {
       TextEditingController();
 
   bool _isPasswordHidden = true; // To toggle password visibility
+
+  late Timer _timer;
+  @override
+  void initState() {
+    super.initState();
+
+    _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await user.reload();
+        if (user.emailVerified) {
+          timer.cancel();
+          print("Email verified!");
+          await authRepository.checkEmailVerificationAndUpdate(uid: user.uid);
+          // Navigate to home or another screen
+          Future.microtask(() => context.go('/count_down'));
+        }
+      }
+    });
+  }
 
   @override
   void dispose() {

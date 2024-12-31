@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lenovo_hiring/Footer/Footer.dart';
 import 'package:lenovo_hiring/Navbar/Navbar.dart';
+import 'package:lenovo_hiring/repository/auth/auth_repository.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,6 +16,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late Timer _timer;
+  final authRepository = AuthRepository();
   @override
   void initState() {
     super.initState();
@@ -26,6 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (user.emailVerified) {
           timer.cancel();
           print("Email verified!");
+          await authRepository.checkEmailVerificationAndUpdate(uid: user.uid);
           // Navigate to home or another screen
           Future.microtask(() => context.go('/count_down'));
         }

@@ -95,4 +95,21 @@ class AuthRepository {
       throw e;
     }
   }
+
+  // Check email verification and update Firestore
+  Future<void> checkEmailVerificationAndUpdate({required String uid}) async {
+    User? user = firebaseAuth.currentUser;
+
+    try {
+      // Update emailVerified field in Firestore
+      await _firestore.collection("users").doc(uid).update({
+        'emailVerified': true,
+      });
+      print('Email verification status updated in Firestore');
+    } catch (e) {
+      print('Error updating emailVerified: $e');
+      throw e;
+    }
+  }
+
 }

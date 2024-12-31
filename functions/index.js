@@ -1,14 +1,15 @@
-// const moment = require("moment");
+const moment = require("moment-timezone");
 const functions = require("firebase-functions/v1");
 const {initializeApp} = require("firebase-admin/app");
-// const admin = require("firebase-admin");
+const admin = require("firebase-admin");
 const Twilio = require("twilio");
 require("dotenv").config();
+const nodemailer = require("nodemailer");
 
 // Initialize Firebase Admin
 initializeApp();
 
-// const db = admin.firestore();
+const db = admin.firestore();
 
 const client = new Twilio(
     process.env.TWILIO_ACCOUNT_SID,
@@ -70,5 +71,95 @@ exports.sendWelcomeMessage = functions
       } catch (error) {
         console.error("Unexpected error occurred:", error.message);
         console.error(error.stack);
+      }
+    });
+
+const transporter = nodemailer.createTransport({
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  auth: {
+    user: process.env.BREVO_USER,
+    pass: process.env.BREVO_PASS,
+  },
+});
+
+// Cloud Function to handle user updates
+exports.sendQuizDetails = functions
+    .runWith({timeoutSeconds: 540})
+    .firestore.document("users/{userId}")
+    .onUpdate(async (change, context) => {
+      const before = change.before.data();
+      const after = change.after.data();
+
+      // Check if emailVerified changed to true
+      if (!before.emailVerified && after.emailVerified) {
+        const email = after.email;
+        const phoneNumber = after.contactNumber;
+
+        try {
+          // Fetch quiz details
+          const quizDoc =
+            await db.collection("quiz").doc("ABtnjLUjNyz1OWTB5DlE").get();
+
+          if (!quizDoc.exists) {
+            console.error("Quiz document not found!");
+            return;
+          }
+
+          const {quizDate, startTime, endTime} = quizDoc.data();
+
+          const formattedDate = moment(quizDate.toDate())
+              .tz("Asia/Kolkata") // Set to the correct time zone
+              .format("MMMM Do YYYY");
+
+          const formattedStartTime = moment(startTime.toDate())
+              .tz("Asia/Kolkata") // Set to the correct time zone
+              .format("hh:mm A");
+
+          const formattedEndTime = moment(endTime.toDate())
+              .tz("Asia/Kolkata") // Set to the correct time zone
+              .format("hh:mm A");
+
+          // Email content
+          const message = `
+            Lenovo Quiz will start at ${formattedStartTime} and
+            end at ${formattedEndTime} on ${formattedDate}.
+            Visit the quiz platform here: https://lenovo-hiring.web.app/#/login
+          `;
+
+          const mailOptions = {
+            from: "'Lenovo Hiring Quiz' <noreply@tempdevdomain.com>",
+            to: email,
+            subject: "Welcome to Lenovo Hiring Quiz!",
+            text: message,
+          };
+
+          // Send email
+          await transporter.sendMail(mailOptions);
+          console.log(`Welcome email sent to ${email}`);
+          // Send SMS
+          if (phoneNumber) {
+            const formattedPhoneNumberForSMS = `+91${phoneNumber}`;
+
+            try {
+              const smsResponse = await client.messages.create({
+                body: message,
+                from: "+19785810811", // Your Twilio number
+                to: formattedPhoneNumberForSMS,
+              });
+
+              console.log(
+                  `Quiz details SMS sent to ${phoneNumber} (SID: ${smsResponse.sid})`,
+              );
+            } catch (smsError) {
+              console.error(`Error sending SMS: ${smsError.message}`);
+            }
+          } else {
+            console.error("Phone number not found in the user document!");
+          }
+        } catch (error) {
+          console.error("Error sending welcome email:", error.message);
+          console.error(error.stack);
+        }
       }
     });
