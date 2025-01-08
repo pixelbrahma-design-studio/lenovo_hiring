@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lenovo_hiring/Count_Down/coundown_state.dart';
-//import 'package:lenovo_hiring/CampusHiring2025.dart';
 import 'package:lenovo_hiring/LandingPage/AboutSmartSprint.dart';
 import 'package:lenovo_hiring/LandingPage/LandingPage.dart';
 import 'package:lenovo_hiring/LandingPage/rules.dart';
@@ -21,7 +20,6 @@ import 'package:lenovo_hiring/repository/auth/auth_state.dart';
 import 'package:lenovo_hiring/leader_board_screen/leader_board_list.dart';
 import 'package:lenovo_hiring/repository/leader_board/leader_board_state.dart';
 import 'package:lenovo_hiring/repository/quiz/quiz_state.dart';
-import 'package:lenovo_hiring/demos_check/quize_question_random_check.dart';
 import 'package:lenovo_hiring/firebase_options.dart';
 import 'package:lenovo_hiring/count_down.dart';
 import 'package:lenovo_hiring/footer/footer.dart';
@@ -35,12 +33,9 @@ import 'package:go_router/go_router.dart';
 import 'package:lenovo_hiring/splash_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
-//import 'smartsprint.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  //setupSmartsprint();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => QuizState()),
     ChangeNotifierProvider(create: (context) => AuthState()),
@@ -141,10 +136,6 @@ class MyApp extends StatelessWidget {
               }
               return null;
             }),
-        // GoRoute(
-        //   path: '/about-lenovo',
-        //   builder: (context, state) => const AboutLenovoPage(),
-        // ),
         GoRoute(
             path: '/quiz',
             builder: (context, state) {
@@ -181,10 +172,6 @@ class MyApp extends StatelessWidget {
               }
               return null;
             }),
-        // GoRoute(
-        //   path: '/check',
-        //   builder: (context, state) => QuizeQuestionRandomCheck(),
-        // ),
         GoRoute(
             path: '/add-admin',
             builder: (context, state) => AddAdminScreen(),
@@ -219,7 +206,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routerConfig: _router,
-      //home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
