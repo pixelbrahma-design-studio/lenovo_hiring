@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -488,63 +489,198 @@ class _AddQuizState extends State<AddQuiz> {
                                 builder: (context, ref, child) {
                                   return ref.fetchLoading
                                       ? CircularProgressIndicator()
-                                      : ListView.builder(
-                                          shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          itemCount: ref.quizModelList.length,
-                                          itemBuilder: (c, i) {
-                                            QuizModel quiz =
-                                                ref.quizModelList[i];
-                                            return ListTile(
-                                              leading: Text(
-                                                "${i + 1}",
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
-                                                  //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
-                                                ),
-                                              ),
-                                              trailing: IconButton(
-                                                icon: Icon(
-                                                  Icons.delete,
-                                                  color: Colors.red,
-                                                ),
-                                                onPressed: () async {
-                                                  try {
-                                                    await _quizRepository
-                                                        .deleteQuiz(quiz.uid!);
-                                                    ref.getQuizList();
-                                                  } catch (e) {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(SnackBar(
-                                                            content: Text(
-                                                                e.toString())));
-                                                  }
-                                                },
-                                              ),
-                                              subtitle: Text(
-                                                "No of Questions: ${quiz.numberOfQuestions} , Point: ${quiz.point} , Count Down: ${quiz.coundown}",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
-                                                  //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
-                                                ),
-                                              ),
+                                      : ref.quizModelList.length != 0
+                                          ? ListView.builder(
+                                              shrinkWrap: true,
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              itemCount:
+                                                  ref.quizModelList.length,
+                                              itemBuilder: (c, i) {
+                                                QuizModel quiz =
+                                                    ref.quizModelList[i];
+                                                return ListTile(
+                                                  leading: Text(
+                                                    "${i + 1}",
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                      //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
+                                                    ),
+                                                  ),
+                                                  // trailing: IconButton(
+                                                  //   icon: Icon(
+                                                  //     Icons.delete,
+                                                  //     color: Colors.red,
+                                                  //   ),
+                                                  //   onPressed: () async {
+                                                  //     try {
+                                                  //       await _quizRepository
+                                                  //           .deleteQuiz(quiz.uid!);
+                                                  //       ref.getQuizList();
+                                                  //     } catch (e) {
+                                                  //       ScaffoldMessenger.of(
+                                                  //               context)
+                                                  //           .showSnackBar(SnackBar(
+                                                  //               content: Text(
+                                                  //                   e.toString())));
+                                                  //     }
+                                                  //   },
+                                                  // ),
+                                                  subtitle: Column(
+                                                    children: [
+                                                      Text(
+                                                        "No of Questions: ${quiz.numberOfQuestions} , Point: ${quiz.point} , Count Down: ${quiz.coundown}",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.white,
+                                                          //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 16,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          ElevatedButton(
+                                                            onPressed:
+                                                                () async {
+                                                              showCupertinoDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return CupertinoAlertDialog(
+                                                                    title: Text(
+                                                                        "Confirm Deletion"),
+                                                                    content: Text(
+                                                                        "Are you sure you want to delete this quiz?"),
+                                                                    actions: [
+                                                                      CupertinoDialogAction(
+                                                                        child: Text(
+                                                                            "Cancel"),
+                                                                        onPressed:
+                                                                            () {
+                                                                          Navigator.of(context)
+                                                                              .pop(); // Close the dialog
+                                                                        },
+                                                                      ),
+                                                                      CupertinoDialogAction(
+                                                                        child: Text(
+                                                                            "Delete"),
+                                                                        isDestructiveAction:
+                                                                            true,
+                                                                        onPressed:
+                                                                            () async {
+                                                                          Navigator.of(context)
+                                                                              .pop(); // Close the dialog
+                                                                          try {
+                                                                            await _quizRepository.deleteQuiz(quiz.uid!);
+                                                                            ref.getQuizList();
+                                                                          } catch (e) {
+                                                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                                              SnackBar(content: Text(e.toString())),
+                                                                            );
+                                                                          }
+                                                                        },
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              );
+                                                            },
+                                                            child:
+                                                                Text('Delete'),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 16,
+                                                          ),
+                                                          ElevatedButton(
+                                                            onPressed:
+                                                                () async {
+                                                              showCupertinoDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return CupertinoAlertDialog(
+                                                                    title: Text(
+                                                                        "Confirm ${quiz.isPublished ? "Unpublish" : "Publish"}"),
+                                                                    content: Text(
+                                                                        "Are you sure you want to ${quiz.isPublished ? "Unpublish".toLowerCase() : "Publish".toLowerCase()} this quiz?"),
+                                                                    actions: [
+                                                                      CupertinoDialogAction(
+                                                                        child: Text(
+                                                                            "Cancel"),
+                                                                        onPressed:
+                                                                            () {
+                                                                          Navigator.of(context)
+                                                                              .pop(); // Close the dialog
+                                                                        },
+                                                                      ),
+                                                                      CupertinoDialogAction(
+                                                                        child: Text(quiz.isPublished
+                                                                            ? "Unpublish"
+                                                                            : "Publish"),
+                                                                        isDestructiveAction:
+                                                                            true,
+                                                                        onPressed:
+                                                                            () async {
+                                                                          Navigator.of(context)
+                                                                              .pop(); // Close the dialog
+                                                                          try {
+                                                                            // await _quizRepository.deleteQuiz(quiz.uid!);
+                                                                            // ref.getQuizList();
+                                                                          } catch (e) {
+                                                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                                              SnackBar(content: Text(e.toString())),
+                                                                            );
+                                                                          }
+                                                                        },
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              );
+                                                            },
+                                                            child:
+                                                                Text(quiz.isPublished
+                                                                    ? "Unpublish"
+                                                                    : "Publish"),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  title: Text(
+                                                    "Theme: ${quiz.theme} , Date: ${DateFormat.yMMMd().format(quiz.quizDate.toDate())} , Start Time: ${DateFormat.jm().format(quiz.startTime.toDate())} , End Time: ${DateFormat.jm().format(quiz.endTime.toDate())} , Order: ${quiz.order}",
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                      //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
+                                                    ),
+                                                  ),
+                                                );
+                                              })
+                                          : ListTile(
                                               title: Text(
-                                                "Theme: ${quiz.theme} , Date: ${DateFormat.yMMMd().format(quiz.quizDate.toDate())} , Start Time: ${DateFormat.jm().format(quiz.startTime.toDate())} , End Time: ${DateFormat.jm().format(quiz.endTime.toDate())} , Order: ${quiz.order}",
+                                                'No Quiz Found.',
                                                 style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
                                                   color: Colors.white,
-                                                  //backgroundColor: Color.fromRGBO(28, 10, 103, 1.0),
                                                 ),
                                               ),
                                             );
-                                          });
                                 },
                               ),
                             ),
