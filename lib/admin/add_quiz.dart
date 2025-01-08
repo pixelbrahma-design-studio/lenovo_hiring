@@ -401,6 +401,7 @@ class _AddQuizState extends State<AddQuiz> {
                                           state.setAddLoading();
                                           QuizModel quizModel = QuizModel(
                                               completed: false,
+                                              isPublished: false,
                                               numberOfQuestions: int.tryParse(state
                                                   .noOfquestionController.text
                                                   .trim())!,
