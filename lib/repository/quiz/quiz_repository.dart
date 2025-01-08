@@ -107,6 +107,15 @@ class QuizRepository {
   }
 
   // delte quiz
+  Future<void> publishQuiz(String uid, bool isPublished) async {
+    try {
+      await _firestore.collection("quiz").doc(uid).update({'isPublished': isPublished ? true : false});
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  // delte quiz
   Future<void> deleteQuiz(String uid) async {
     try {
       await _firestore.collection("quiz").doc(uid).delete();

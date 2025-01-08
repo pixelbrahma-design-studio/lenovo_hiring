@@ -638,8 +638,8 @@ class _AddQuizState extends State<AddQuiz> {
                                                                           Navigator.of(context)
                                                                               .pop(); // Close the dialog
                                                                           try {
-                                                                            // await _quizRepository.deleteQuiz(quiz.uid!);
-                                                                            // ref.getQuizList();
+                                                                            await _quizRepository.publishQuiz(quiz.uid!, !quiz.isPublished);
+                                                                            ref.getQuizList();
                                                                           } catch (e) {
                                                                             ScaffoldMessenger.of(context).showSnackBar(
                                                                               SnackBar(content: Text(e.toString())),
