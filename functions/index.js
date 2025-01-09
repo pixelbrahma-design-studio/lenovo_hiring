@@ -104,7 +104,7 @@ exports.sendQuizDetails = functions
             await db.collection("quiz").doc(quizId).get();
 
           if (!quizDoc.exists) {
-            console.error("Quiz document not found!");
+            console.error(`Quiz document not found! ${quizId}`);
             return;
           }
 
