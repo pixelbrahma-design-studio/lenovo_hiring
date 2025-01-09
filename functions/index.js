@@ -174,15 +174,11 @@ exports.quizPublishMail = functions
       const before = change.before.data();
       const after = change.after.data();
 
-      // Check if emailVerified changed to true
+      // Check if isPublished changed to true
       if (!before.isPublished && after.isPublished) {
-        const email = "hareesh@pixelbrahma.com"; // after.email;
-        const phoneNumber = "7012601270"; // after.contactNumber;
-
         try {
           // Fetch quiz details
-          const quizDoc =
-            await db.collection("quiz").doc(quizId).get();
+          const quizDoc = await db.collection("quiz").doc(quizId).get();
 
           if (!quizDoc.exists) {
             console.error("Quiz document not found!");
@@ -203,45 +199,79 @@ exports.quizPublishMail = functions
               .tz("Asia/Kolkata") // Set to the correct time zone
               .format("hh:mm A");
 
-          // Email content
           const message = `
             Lenovo Quiz will start at ${formattedStartTime} and
             end at ${formattedEndTime} on ${formattedDate}.
             Visit the quiz platform here: https://lenovo-hiring.web.app/#/login
           `;
 
-          const mailOptions = {
-            from: "'Lenovo Hiring Quiz' <noreply@tempdevdomain.com>",
-            to: email,
-            subject: "Welcome to Lenovo Hiring Quiz!",
-            text: message,
-          };
+          // Fetch all users with role "user"
+          const usersSnapshot = await db
+              .collection("users")
+              // .where("role", "==", "user")
+              .get();
 
-          // Send email
-          await transporter.sendMail(mailOptions);
-          console.log(`Welcome email sent to ${email}`);
-          // Send SMS
-          if (phoneNumber) {
-            const formattedPhoneNumberForSMS = `+91${phoneNumber}`;
-
-            try {
-              const smsResponse = await client.messages.create({
-                body: message,
-                from: "+19785810811", // Your Twilio number
-                to: formattedPhoneNumberForSMS,
-              });
-
-              console.log(
-                  `Quiz details SMS sent to ${phoneNumber} (SID: ${smsResponse.sid})`,
-              );
-            } catch (smsError) {
-              console.error(`Error sending SMS: ${smsError.message}`);
-            }
-          } else {
-            console.error("Phone number not found in the user document!");
+          if (usersSnapshot.empty) {
+            console.log("No users found with role 'user'.");
+            return;
           }
+
+          // Send email and SMS to each user
+          const emailPromises = [];
+          const smsPromises = [];
+
+          usersSnapshot.forEach((doc) => {
+            const {email, contactNumber} = doc.data();
+
+            // Send email
+            const mailOptions = {
+              from: "'Lenovo Hiring Quiz' <noreply@tempdevdomain.com>",
+              to: email,
+              subject: "Welcome to Lenovo Hiring Quiz!",
+              text: message,
+            };
+
+            emailPromises.push(
+                transporter.sendMail(mailOptions)
+                    .then(() => {
+                      console.log(`Email sent to ${email}`);
+                    })
+                    .catch((error) => {
+                      console.error(`Error sending email to ${email}:`, error.message);
+                    }),
+            );
+
+            // Send SMS if phone number is available
+            if (contactNumber) {
+              const formattedPhoneNumberForSMS = `+91${contactNumber}`;
+
+              smsPromises.push(
+                  client.messages.create({
+                    body: message,
+                    from: "+19785810811", // Your Twilio number
+                    to: formattedPhoneNumberForSMS,
+                  })
+                      .then((smsResponse) => {
+                        console.log(
+                            `SMS sent to ${contactNumber} (SID: ${smsResponse.sid})`,
+                        );
+                      })
+                      .catch((smsError) => {
+                        console.error(
+                            `Error sending SMS to ${contactNumber}: ${smsError.message}`,
+                        );
+                      }),
+              );
+            } else {
+              console.error(`Phone number not found for user: ${email}`);
+            }
+          });
+
+          // Wait for all emails and SMS to be sent
+          await Promise.all([...emailPromises, ...smsPromises]);
+          console.log("All notifications sent.");
         } catch (error) {
-          console.error("Error sending welcome email:", error.message);
+          console.error("Error sending notifications:", error.message);
           console.error(error.stack);
         }
       }
