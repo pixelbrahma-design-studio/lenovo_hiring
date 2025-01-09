@@ -16,6 +16,8 @@ const client = new Twilio(
     process.env.TWILIO_AUTH_TOKEN,
 );
 
+const quizId = "6qMFQGoEMuuwoEMEcCws";
+
 exports.sendWelcomeMessage = functions
     .runWith({timeoutSeconds: 540})
     .firestore
@@ -99,7 +101,88 @@ exports.sendQuizDetails = functions
         try {
           // Fetch quiz details
           const quizDoc =
-            await db.collection("quiz").doc("ABtnjLUjNyz1OWTB5DlE").get();
+            await db.collection("quiz").doc(quizId).get();
+
+          if (!quizDoc.exists) {
+            console.error("Quiz document not found!");
+            return;
+          }
+
+          const {quizDate, startTime, endTime} = quizDoc.data();
+
+          const formattedDate = moment(quizDate.toDate())
+              .tz("Asia/Kolkata") // Set to the correct time zone
+              .format("MMMM Do YYYY");
+
+          const formattedStartTime = moment(startTime.toDate())
+              .tz("Asia/Kolkata") // Set to the correct time zone
+              .format("hh:mm A");
+
+          const formattedEndTime = moment(endTime.toDate())
+              .tz("Asia/Kolkata") // Set to the correct time zone
+              .format("hh:mm A");
+
+          // Email content
+          const message = `
+            Lenovo Quiz will start at ${formattedStartTime} and
+            end at ${formattedEndTime} on ${formattedDate}.
+            Visit the quiz platform here: https://lenovo-hiring.web.app/#/login
+          `;
+
+          const mailOptions = {
+            from: "'Lenovo Hiring Quiz' <noreply@tempdevdomain.com>",
+            to: email,
+            subject: "Welcome to Lenovo Hiring Quiz!",
+            text: message,
+          };
+
+          // Send email
+          await transporter.sendMail(mailOptions);
+          console.log(`Welcome email sent to ${email}`);
+          // Send SMS
+          if (phoneNumber) {
+            const formattedPhoneNumberForSMS = `+91${phoneNumber}`;
+
+            try {
+              const smsResponse = await client.messages.create({
+                body: message,
+                from: "+19785810811", // Your Twilio number
+                to: formattedPhoneNumberForSMS,
+              });
+
+              console.log(
+                  `Quiz details SMS sent to ${phoneNumber} (SID: ${smsResponse.sid})`,
+              );
+            } catch (smsError) {
+              console.error(`Error sending SMS: ${smsError.message}`);
+            }
+          } else {
+            console.error("Phone number not found in the user document!");
+          }
+        } catch (error) {
+          console.error("Error sending welcome email:", error.message);
+          console.error(error.stack);
+        }
+      }
+    });
+
+// Cloud Function to handle user updates
+exports.quizPublishMail = functions
+    .runWith({timeoutSeconds: 540})
+    .firestore.document("quiz/{quizId}")
+    .onUpdate(async (change, context) => {
+      const before = change.before.data();
+      const after = change.after.data();
+
+      // Check if emailVerified changed to true
+      if (!before.isPublished && after.isPublished) {
+        const email = "hareesh@pixelbrahma.com"; // after.email;
+        const phoneNumber = "7012601270"; // after.contactNumber;
+
+        try {
+          // Fetch quiz details
+          const quizDoc =
+            await db.collection("quiz").doc(quizId).get();
 
           if (!quizDoc.exists) {
             console.error("Quiz document not found!");
