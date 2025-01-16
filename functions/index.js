@@ -16,7 +16,7 @@ const client = new Twilio(
     process.env.TWILIO_AUTH_TOKEN,
 );
 
-const quizId = "6qMFQGoEMuuwoEMEcCws";
+const quizId = "CCxsHV2AialAOOvloquR";
 
 exports.sendWelcomeMessage = functions
     .runWith({timeoutSeconds: 540})
@@ -33,8 +33,7 @@ exports.sendWelcomeMessage = functions
 
       try {
         const message =
-            `Welcome to Lenovo! We are excited to have you on board.
-            Please check ${userData.email} and verify`;
+            `Welcome to Lenovo! We are excited to have you on board. Please check ${userData.email} and verify`;
 
         const formattedPhoneNumberForWhatsApp = `whatsapp:+91${phoneNumber}`;
         const formattedPhoneNumberForSMS = `+91${phoneNumber}`;
@@ -123,11 +122,7 @@ exports.sendQuizDetails = functions
               .format("hh:mm A");
 
           // Email content
-          const message = `
-            Lenovo Quiz will start at ${formattedStartTime} and
-            end at ${formattedEndTime} on ${formattedDate}.
-            Visit the quiz platform here: https://lenovo-hiring.web.app/#/login
-          `;
+          const message = `Lenovo Quiz will start at ${formattedStartTime} and end at ${formattedEndTime} on ${formattedDate}. Visit the quiz here: https://lenovo-hiring.web.app/#/login`;
 
           const mailOptions = {
             from: "'Lenovo Hiring Quiz' <noreply@tempdevdomain.com>",
@@ -199,11 +194,7 @@ exports.quizPublishMail = functions
               .tz("Asia/Kolkata") // Set to the correct time zone
               .format("hh:mm A");
 
-          const message = `
-            Lenovo Quiz will start at ${formattedStartTime} and
-            end at ${formattedEndTime} on ${formattedDate}.
-            Visit the quiz platform here: https://lenovo-hiring.web.app/#/login
-          `;
+          const message = `Lenovo Quiz is live at ${formattedStartTime} and end at ${formattedEndTime} on ${formattedDate}. Visit the quiz here: https://lenovo-hiring.web.app/#/login`;
 
           // Fetch all users with role "user"
           const usersSnapshot = await db

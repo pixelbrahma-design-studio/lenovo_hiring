@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -157,7 +156,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               ),
                               validator: (value) {
                                 if (value == null || value!.trim().isEmpty) {
-                                  return "Please Enter Valid Name As Per Aadharcard";
+                                  return "Please Enter Valid Name As Per Aadhar Card";
                                 }
                                 return null;
                               },
@@ -507,8 +506,12 @@ class _RegisterFormState extends State<RegisterForm> {
                                         BorderSide(color: Colors.white)),
                               ),
                               selectedItemBuilder: (BuildContext context) {
-                                return <String>['BE/Btech', 'Others']
-                                    .map<Widget>((String value) {
+                                return <String>[
+                                  'BE/Btech',
+                                  'BCA',
+                                  'BSc',
+                                  'Others'
+                                ].map<Widget>((String value) {
                                   return Text(
                                     value,
                                     style: TextStyle(
@@ -522,6 +525,8 @@ class _RegisterFormState extends State<RegisterForm> {
                               },
                               items: <String>[
                                 'BE/Btech',
+                                'BCA',
+                                'BSc',
                                 'Others'
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
@@ -990,7 +995,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       iAgree: _checkbox1,
                                       acceptPrivacyPolicy: _checkbox2,
                                       understoodRules: _checkbox3,
-                                  emailVerified: false);
+                                      emailVerified: false);
                                   try {
                                     setState(() {
                                       loading = true;
@@ -1012,7 +1017,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                               ElevatedButton(
                                                   onPressed: () {
                                                     c.pop();
-                                                    context.go('/splash_screen');
+                                                    context
+                                                        .go('/splash_screen');
                                                     //context.go('/login');
                                                   },
                                                   child: Text("OK"))
