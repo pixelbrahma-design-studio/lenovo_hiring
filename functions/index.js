@@ -16,8 +16,6 @@ const client = new Twilio(
     process.env.TWILIO_AUTH_TOKEN,
 );
 
-const quizId = "CCxsHV2AialAOOvloquR";
-
 exports.sendWelcomeMessage = functions
     .runWith({timeoutSeconds: 540})
     .firestore
@@ -98,15 +96,18 @@ exports.sendQuizDetails = functions
         const phoneNumber = after.contactNumber;
 
         try {
-          // Fetch quiz details
-          const quizDoc =
-            await db.collection("quiz").doc(quizId).get();
+          // Fetch the latest quiz document based on createdAt
+          const latestQuizSnapshot = await db
+              .collection("quiz")
+              .orderBy("createdAt", "desc") // Order by createdAt in descending order
+              .limit(1) // Limit to the latest document
+              .get();
 
-          if (!quizDoc.exists) {
-            console.error(`Quiz document not found! ${quizId}`);
+          if (latestQuizSnapshot.empty) {
+            console.error("No quiz document found!");
             return;
           }
-
+          const quizDoc = latestQuizSnapshot.docs[0]; // Get the first document
           const {quizDate, startTime, endTime} = quizDoc.data();
 
           const formattedDate = moment(quizDate.toDate())
