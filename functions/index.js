@@ -74,11 +74,11 @@ exports.sendWelcomeMessage = functions
     });
 
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
+  host: "email-smtp.ap-south-1.amazonaws.com",
   port: 587,
   auth: {
-    user: process.env.BREVO_USER,
-    pass: process.env.BREVO_PASS,
+    user: process.env.AWS_USER,
+    pass: process.env.AWS_PASS,
   },
 });
 
@@ -126,7 +126,7 @@ exports.sendQuizDetails = functions
           const message = `Lenovo Quiz will start at ${formattedStartTime} and end at ${formattedEndTime} on ${formattedDate}. Visit the quiz here: https://lenovo-hiring.web.app/#/login`;
 
           const mailOptions = {
-            from: "'Lenovo Hiring Quiz' <noreply@tempdevdomain.com>",
+            from: "'Lenovo Hiring Quiz' <noreply@lenovosmartsprint.com>",
             to: email,
             subject: "Welcome to Lenovo Hiring Quiz!",
             text: message,
@@ -221,7 +221,7 @@ exports.quizPublishMail = functions
 
             // Send email
             const mailOptions = {
-              from: "'Lenovo Hiring Quiz' <noreply@tempdevdomain.com>",
+              from: "'Lenovo Hiring Quiz' <noreply@lenovosmartsprint.com>",
               to: email,
               subject: "Welcome to Lenovo Hiring Quiz!",
               text: message,
