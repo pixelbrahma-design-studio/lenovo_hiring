@@ -16,6 +16,7 @@ const client = new Twilio(
     process.env.TWILIO_AUTH_TOKEN,
 );
 
+// this will send sms when user first registers
 exports.sendWelcomeMessage = functions
     .runWith({timeoutSeconds: 540})
     .firestore
@@ -82,7 +83,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Cloud Function to handle user updates
+// this will send quiz details when user successfully verify his account
 exports.sendQuizDetails = functions
     .runWith({timeoutSeconds: 540})
     .firestore.document("users/{userId}")
@@ -123,7 +124,7 @@ exports.sendQuizDetails = functions
               .format("hh:mm A");
 
           // Email content
-          const message = `Lenovo Quiz will start at ${formattedStartTime} and end at ${formattedEndTime} on ${formattedDate}. Visit the quiz here: https://lenovo-hiring.web.app/#/login`;
+          const message = `Dear Student,\n\nThe Lenovo Quiz will be live soon.\n\n🕛 Start Time: ${formattedStartTime}, ${formattedDate}\n⏳ End Time: ${formattedEndTime}, ${formattedDate}\n\nDon't miss this opportunity to participate and test your knowledge. Click the link below to access the quiz:\n\n🔗 Lenovo Quiz Portal: https://lenovosmartsprint.com/#/login\n\nBest of luck!\n\nBest regards,\nLenovo Team`;
 
           const mailOptions = {
             from: "'Lenovo Hiring Quiz' <noreply@lenovosmartsprint.com>",
@@ -162,7 +163,7 @@ exports.sendQuizDetails = functions
       }
     });
 
-// Cloud Function to handle user updates
+// this will send mail when admin publishes quiz
 exports.quizPublishMail = functions
     .runWith({timeoutSeconds: 540})
     .firestore.document("quiz/{quizId}")
@@ -199,7 +200,7 @@ exports.quizPublishMail = functions
               .tz("Asia/Kolkata") // Set to the correct time zone
               .format("hh:mm A");
 
-          const message = `Lenovo Quiz is live at ${formattedStartTime} and end at ${formattedEndTime} on ${formattedDate}. Visit the quiz here: https://lenovo-hiring.web.app/#/login`;
+          const message = `Dear Student,\n\nThe Lenovo Quiz is now live!\n\n🕛 Start Time: ${formattedStartTime}, ${formattedDate}\n⏳ End Time: ${formattedEndTime}, ${formattedDate}\n\nDon't miss this opportunity to participate and test your knowledge. Click the link below to access the quiz:\n\n🔗 Lenovo Quiz Portal: https://lenovosmartsprint.com/#/login\n\nBest of luck!\n\nBest regards,\nLenovo Team`;
 
           // Fetch all users with role "user"
           const usersSnapshot = await db
@@ -223,7 +224,7 @@ exports.quizPublishMail = functions
             const mailOptions = {
               from: "'Lenovo Hiring Quiz' <noreply@lenovosmartsprint.com>",
               to: email,
-              subject: "Welcome to Lenovo Hiring Quiz!",
+              subject: `Reminder: Lenovo Quiz is Live on ${formattedDate} from ${formattedStartTime} – ${formattedEndTime}`,
               text: message,
             };
 
